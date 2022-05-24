@@ -1,0 +1,29 @@
+{#login/templates/login/login.html#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+     <div style="margin: 15% 40%;">
+        <h1>Welcome！</h1>
+       <form action="/login/" method="post">
+            <p>
+                <label for="id_username">user：</label>
+                <input type="text" id="id_username" name="username" placeholder="user" autofocus required />
+            </p>
+
+            <p>
+                <label for="id_password">pwd：</label>
+                <input type="password" id="id_password" placeholder="pwd" name="password" required >
+            </p>
+            <input type="submit" value="login">
+        </form>
+    </div>
+
+
+
+</body>
+</html>

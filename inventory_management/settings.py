@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'inventory_management',
         'USER': 'root',
         'PASSWORD': 'Pass.crrc.2019',
-        'HOST': '127.0.0.1',
+        'HOST': '49.176.154.111',
         'PORT': '3306',
     }
 }
@@ -116,9 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'AEST'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
