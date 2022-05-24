@@ -2,15 +2,15 @@ from django.shortcuts import render,redirect
 
 def index(request):
     pass
-    return render(request,'login/templates/index.html')
+    return render(request,'login/index.html')
 
 def login(request):
     pass
-    return render(request,'login/templates/login.html')
+    return render(request,'login/login.html')
 
 def register(request):
     pass
-    return render(request,'login/templates/register.html')
+    return render(request,'login/register.html')
 
 def logout(request):
     pass
