@@ -1,5 +1,4 @@
 """inventory_management URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
@@ -22,8 +21,13 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('', views.login, name='login'),
     path('login/', views.login, name='login'),
-    path('register/', views.register, name='register'),
+    # path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('add_product/', views.add_product, name='add_product'),
-    path(r'del_product/<int:id>', views.del_product, name='del_product'),
+    path('del_fix_tr_product/<int:id>', views.del_fix_tr_product, name='del_fix_tr_product'),
+    path('del_fix_tp_product/<int:id>', views.del_fix_tp_product, name='del_fix_tp_product'),
+    path('index/modify/<int:id>',views.Modify_fix,name='modify_fix'),
+    path('TrSubpage/', views.TrSubpage, name='TrSubpage'),
+    path('TrProductList/', views.TrProductList, name='TrProductList')
+
 ]

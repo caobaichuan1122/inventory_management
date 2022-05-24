@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<script>
+    $(document).ready(function () {
+        $('#repair-table').DataTable();
+    });
+</script>
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                    <div>
+                        <h4 class="mb-3">Product List</h4>
+                        <p class="mb-0">All product information showing in below</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-responsive rounded mb-3">
+                    <table id="repair-table" class="data-table table table-striped mb-0 tbl-server-info"
+                           style="width:100%;">
+                        <thead class="bg-white text-uppercase">
+                        <tr class="ligth ligth-data">
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Product Quantity</th>
+                            <th>Product Price</th>
+                            <th>Data</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="ligth-body">
+                        {% for item in Trdatabase %}
+                        <tr>
+                            <td>{{ item.tr_product_id}}</td>
+                            <td>{{ item.tr_product_name }}</td>
+                            <td>{{ item.tr_product_num }}</td>
+                            <td>{{ item.tr_product_price  }}</td>
+                            <td>{{ item.tr_product_time|date:"d-m-Y" }}</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Complete"
+                                       href="#"><i class="las la-list-alt mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
+                                       title=""
+                                       data-original-title="Edit" data-target="#Edit-text"><i
+                                            class="ri-pencil-line mr-0"></i></a>
+                                    <div class="modal fade" id="Edit-text" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div class="popup text-center">
+                                                        <h4 class="mb-3">Modify Detail</h4>
+                                                        <div class="content create-workform bg-body">
+                                                            <div class="pb-3">
+                                                                <form class='form-addnewproduct' action="#" data-toggle="validator" method="post" style="text-align:center; margin: 2rem; padding:2rem;">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                {{ modify_form.Product_id.label_tag }}
+                                                                                {{ modify_form.Product_id}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                {{ modify_form.Product_name.label_tag }}
+                                                                                {{ modify_form.Product_name}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                {{ modify_form.Product_num.label_tag }}
+                                                                                {{ modify_form.Product_num}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                {{ modify_form.Product_Price.label_tag }}
+                                                                                {{ modify_form.Product_Price}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                {{ modify_form.Product_time.label_tag }}
+                                                                                {{ modify_form.Product_time}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-lg-12 mt-4">
+                                                                <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                                                    <a class="btn btn-danger mr-4"
+                                                                        data-dismiss="modal">Cancel</a>
+                                                                    <div class="btn btn-primary mr-4"
+                                                                        href="#" >Confirm
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a class="badge bg-warning mr-2" data-placement="top" title=""
+                                       data-original-title="Hidden" data-toggle="modal" data-target="#ensure-del">
+                                        <i class="las la-eye-slash mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit-note" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup text-left">
+                        <div class="media align-items-top justify-content-between">
+                            <h3 class="mb-3">Product</h3>
+                            <div class="btn-cancel p-0" data-dismiss="modal"><i class="las la-times"></i></div>
+                        </div>
+                        <div class="content edit-notes">
+                            <div class="card card-transparent card-block card-stretch event-note mb-0">
+                                <div class="card-body px-0 bukmark">
+                                    <div class="d-flex align-items-center justify-content-between pb-2 mb-3 border-bottom">
+                                        <div class="quill-tool">
+                                        </div>
+                                    </div>
+                                    <div id="quill-toolbar1">
+                                        <p>Virtual Digital Marketing Course every week on Monday, Wednesday and
+                                            Saturday.Virtual Digital Marketing Course every week on Monday</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer border-0">
+                                    <div class="d-flex flex-wrap align-items-ceter justify-content-end">
+                                        <div class="btn btn-primary mr-3" data-dismiss="modal">Cancel</div>
+                                        <div class="btn btn-outline-primary" data-dismiss="modal">Save</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<h1>Please login!</h1>
+{% endif %}
+{% endblock %}
