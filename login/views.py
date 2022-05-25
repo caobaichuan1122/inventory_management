@@ -5,8 +5,11 @@ def index(request):
     return render(request,'login/index.html')
 
 def login(request):
-    pass
-    return render(request,'login/login.html')
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        return redirect('/index/')
+    return render(request, 'login/login.html')
 
 def register(request):
     pass
