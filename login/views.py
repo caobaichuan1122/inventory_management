@@ -9,7 +9,7 @@ def index(request):
 
 def login(request):
     # if request.session.get('is_login',None):
-    #     return redirect('/control/') #sing in page
+    #     return redirect('/index/') #sing in page
 
     if request.method == "POST":
         login_form = UserForm(request.POST)
@@ -39,8 +39,13 @@ def register(request):
     return render(request,'login/register.html')
 
 def logout(request):
-    pass
-    return redirect('/index/')
+    if not request.session.get('is_login', None):
+        return redirect("/login/")
+    # request.session.flush()
+    del request.session['is_login']
+    del request.session['user_id']
+    del request.session['user_name']
+    return redirect("/login/")
 
 def control(request):
     pass
