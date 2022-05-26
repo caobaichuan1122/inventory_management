@@ -1,4 +1,7 @@
 from django.shortcuts import render,redirect
+from .froms import UserForm
+from login import models
+
 
 def index(request):
     pass
@@ -6,10 +9,23 @@ def index(request):
 
 def login(request):
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        return redirect('/index/')
-    return render(request, 'login/login.html')
+        login_form = UserForm(request.POST)
+        message = "Please check！"
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+            try:
+                user = models.User.objects.get(name=username)
+                if user.password == password:
+                    return redirect('/index/')
+                else:
+                    message = "password error！"
+            except:
+                message = "account error！"
+        return render(request, 'login/login.html', locals())
+
+    login_form = UserForm()
+    return render(request, 'login/login.html', locals())
 
 def register(request):
     pass
