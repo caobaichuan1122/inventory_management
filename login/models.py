@@ -32,7 +32,6 @@ class Prproduct(models.Model):
     pr_product = models.CharField(max_length=256)
     pr_product_name = models.CharField(max_length=256)
     pr_product_description = models.CharField(max_length=256)
-    pr_product_state = models.CharField(max_length=256)
 
 
 
