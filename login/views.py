@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .froms import UserForm
 from . import models
+from .models import Trproduct
 
 
 def index(request):
@@ -23,7 +24,7 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
-                    return redirect('/index/')  #sing in page
+                    return redirect('/index/')  #s in page
                 else:
                     message = "password error！"
             except:
@@ -47,6 +48,16 @@ def logout(request):
     del request.session['user_name']
     return redirect("/login/")
 
-def control(request):
-    pass
-    return redirect('/control/control.html')
+# def Trcheck(request):
+#     if request.method == 'POST':
+#         tr_product = request.POST['Product ID']
+#         tr_product_name = request.POST['Product Name']
+#         tr_product_description = request.POST['Product State']
+#
+#         #Trproduct write
+#         Trproduct.objects.create(tr_product = tr_product, tr_product_name = tr_product_name, tr_product_description = tr_product_description)
+
+
+def datacheck(request):
+    data = Trproduct.objects.all()
+    return render(request,'login/index.html',context={'data':data})
