@@ -22,7 +22,8 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('', views.login, name='login'),
     path('login/', views.login, name='login'),
+    path('datacheck/', views.datacheck, name='datacheck'),
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
-    path('control/', views.control, name='control'),
+    # path('control/', views.control, name='control'),
 ]
