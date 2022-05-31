@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect
 from .froms import UserForm
 from . import models
-from .models import Trproduct
+from .models import Trproduct, Tproduct, Prproduct
 
 
-def index(request):
-    pass
-    return render(request,'login/index.html')
+# def index(request):
+#     data = Trproduct.objects.all()
+#     return render(request,'login/index.html',context={'data':data})
 
 def login(request):
     # if request.session.get('is_login',None):
@@ -57,7 +57,13 @@ def logout(request):
 #         #Trproduct write
 #         Trproduct.objects.create(tr_product = tr_product, tr_product_name = tr_product_name, tr_product_description = tr_product_description)
 
+#
+# def datacheck(request):
+#     data = Trproduct.objects.all()
+#     return render(request,'login/index.html',context={'data':data})
 
-def datacheck(request):
+def index(request):
     data = Trproduct.objects.all()
-    return render(request,'login/index.html',context={'data':data})
+    data1 = Tproduct.objects.all()
+    data2 = Prproduct.objects.all()
+    return render(request,'login/index.html',context={'data':data,'data1':data1,'data2':data2})
