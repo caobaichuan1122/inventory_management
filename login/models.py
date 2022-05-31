@@ -3,8 +3,6 @@ from django.db import models
 
 class User(models.Model):
 
-
-
     name = models.CharField(max_length=128,unique=True)
     password = models.CharField(max_length=256)
     # email = models.EmailField(unique=True)
@@ -18,3 +16,23 @@ class User(models.Model):
         ordering = ['c_time']
         verbose_name = 'user'
         verbose_name_plural = 'user'
+
+class Tproduct(models.Model):
+    tp_product = models.CharField(max_length=256)
+    tr_product = models.CharField(max_length=256)
+    pr_product = models.CharField(max_length=256)
+
+class Trproduct(models.Model):
+    tr_product = models.CharField(max_length=256)
+    tr_product_name = models.CharField(max_length=256)
+    tr_product_description = models.CharField(max_length=256)
+
+
+class Prproduct(models.Model):
+    pr_product = models.CharField(max_length=256)
+    pr_product_name = models.CharField(max_length=256)
+    pr_product_description = models.CharField(max_length=256)
+    pr_product_state = models.CharField(max_length=256)
+
+
+
