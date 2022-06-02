@@ -13,13 +13,15 @@
             <th>&nbsp;&nbsp;tr product id&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;tr product name&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;tr product state&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;tr product description&nbsp;&nbsp;</th>
             <th><button type="button">add</button></th>
         </tr>
         </thead>
         {% for i in data %}
         <tr>
-            <td>{{ i.tr_product }}</td>
+            <td>{{ i.tr_product_id }}</td>
             <td>{{ i.tr_product_name }}</td>
+            <td>{{ i.tr_product }}</td>
             <td>{{ i.tr_product_description }}</td>
             <td><button type="button">modify</button></td>
             <td><button type="button">delete</button></td>
@@ -31,14 +33,16 @@
             <th>&nbsp;&nbsp;tp product id&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;tp product name&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;tp product state&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;tp product description&nbsp;&nbsp;</th>
             <th><button type="button">add</button></th>
         </tr>
         </thead>
         {% for i in data1 %}
         <tr>
+            <td>{{ i.tp_product_id }}</td>
+            <td>{{ i.tp_product_name }}</td>
             <td>{{ i.tp_product }}</td>
-            <td>{{ i.tr_product }}</td>
-            <td>{{ i.pr_product }}</td>
+            <td>{{ i.tp_product_description }}</td>
             <td><button type="button">modify</button></td>
             <td><button type="button">delete</button></td>
         </tr>
@@ -49,12 +53,14 @@
             <th>&nbsp;&nbsp;pr product id&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;pr product name&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;pr product state&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;pr product description&nbsp;&nbsp;</th>
             <th><button type="button">add</button></th>
         </tr>
         </thead>
         {% for i in data2 %}
         <tr>
             <td>{{ i.pr_product }}</td>
+            <td>{{ i.pr_product_state }}</td>
             <td>{{ i.pr_product_name }}</td>
             <td>{{ i.pr_product_description }}</td>
             <td><button type="button">modify</button></td>
@@ -67,6 +73,12 @@
     {% else %}
     <h1>Please login！</h1>
     {% endif %}
+
+
+            <button type="button">modify</button>
+            <button type="button">delete</button>
+            <button type="button">modify</button>
+            <button type="button">delete</button>
     <style>
     #product_info{margin:0 auto; width:700px}
     </style>

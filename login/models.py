@@ -18,20 +18,27 @@ class User(models.Model):
         verbose_name_plural = 'user'
 
 class Tproduct(models.Model):
-    tp_product = models.CharField(max_length=256)
-    tr_product = models.CharField(max_length=256)
-    pr_product = models.CharField(max_length=256)
+    tp_product_id = models.CharField(max_length=256)
+    tp_product_name = models.CharField(max_length=256)
+    tp_product_state = models.CharField(max_length=256)
+    tp_product_description = models.CharField(max_length=256)
 
 class Trproduct(models.Model):
-    tr_product = models.CharField(max_length=256)
+    tr_product_id = models.CharField(max_length=256)
     tr_product_name = models.CharField(max_length=256)
+    tr_product_state = models.CharField(max_length=256)
     tr_product_description = models.CharField(max_length=256)
 
 
 class Prproduct(models.Model):
-    pr_product = models.CharField(max_length=256)
+    pr_product_id = models.CharField(max_length=256)
     pr_product_name = models.CharField(max_length=256)
+    pr_product_state = models.CharField(max_length=256)
     pr_product_description = models.CharField(max_length=256)
+
+class customer(models.Model):
+    customer_id = models.CharField(max_length=256)
+    customer_name = models.CharField(max_length=256)
 
 
 
