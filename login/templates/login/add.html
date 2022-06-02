@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}home{% endblock %}
+{% block content %}
+    {% if request.session.is_login %}
+    <div id="product_info">
+        <h1>hello,{{ request.session.user_name }}！Welcome to ERP system！</h1>
+        <h1 align="center">LOGO</h1>
+        <br />
+        <br />
+    <table border="1",style ='margin:auto'>
+        <thead>
+        <tr>
+            <th>&nbsp;&nbsp;tr product id&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;tr product name&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;tr product state&nbsp;&nbsp;</th>
+        </tr>
+        </thead>
+        {% for i in data %}
+        <tr>
+            <td>{{ i.tr_product }}</td>
+            <td>{{ i.tr_product_name }}</td>
+            <td>{{ i.tr_product_description }}</td>
+            <td><button type="button">add</button></td>
+        </tr>
+        {% endfor %}
+        </thead>
+    </table>
+    </div>
+    {% else %}
+    <h1>Please login！</h1>
+    {% endif %}
+    <style>
+    #product_info{margin:0 auto; width:700px}
+    </style>
+{% endblock %}
