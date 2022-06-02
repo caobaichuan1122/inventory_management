@@ -57,13 +57,41 @@ def logout(request):
 #         #Trproduct write
 #         Trproduct.objects.create(tr_product = tr_product, tr_product_name = tr_product_name, tr_product_description = tr_product_description)
 
-#
-# def datacheck(request):
-#     data = Trproduct.objects.all()
-#     return render(request,'login/index.html',context={'data':data})
 
 def index(request):
     data = Trproduct.objects.all()
     data1 = Tproduct.objects.all()
     data2 = Prproduct.objects.all()
     return render(request,'login/index.html',context={'data':data,'data1':data1,'data2':data2})
+
+def add_product(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('tr product id')
+        product_name = request.POST.get('tr product name')
+        product_state = request.POST.get('tr product state')
+        if product_id == '' or product_name =='' or product_state=='':
+            return render(request,'login/add.html',{'ret':'error!'})
+        models.Trproduct.objects.create(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        return redirect('/login/index.html')
+    else:
+        return render(request, '/login/index.html')
+
+def del_product(request,id):
+    print(models.Trproduct.objects.filter(id=id))
+    models.Trproduct.objects.filter(id=id).delete()
+    return redirect('/login/index.html')
+
+def modify_product(request,id):
+    produt_obj = models.Trproduct.objects.filter(id=id).first()
+    print(produt_obj)
+    if request.method == 'POST':
+        product_id = request.POST.get('tr product id')
+        product_name = request.POST.get('tr product name')
+        product_state = request.POST.get('tr product state')
+        if product_id == '' or product_name == '' or product_state == '':
+            return render(request, 'login/add.html', {'ret': 'error!'})
+        models.Trproduct.objects.filter(id=id).update(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        return redirect('/login/index.html')
+    else:
+        return render(request, '/login/index.html')
+
