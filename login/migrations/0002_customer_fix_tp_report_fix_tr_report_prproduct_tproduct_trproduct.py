@@ -53,6 +53,8 @@ class Migration(migrations.Migration):
                 ('pr_product_id', models.CharField(max_length=256)),
                 ('pr_product_name', models.CharField(max_length=256)),
                 ('pr_product_num', models.CharField(max_length=256)),
+                ('pr_product_price', models.CharField(max_length=256)),
+                ('pr_product_time', models.DateField(max_length=6)),
             ],
         ),
         migrations.CreateModel(
@@ -62,6 +64,8 @@ class Migration(migrations.Migration):
                 ('tp_product_id', models.CharField(max_length=256)),
                 ('tp_product_name', models.CharField(max_length=256)),
                 ('tp_product_num', models.CharField(max_length=256)),
+                ('tp_product_price', models.CharField(max_length=256)),
+                ('tp_product_time', models.DateField(max_length=6)),
             ],
         ),
         migrations.CreateModel(
@@ -71,6 +75,8 @@ class Migration(migrations.Migration):
                 ('tr_product_id', models.CharField(max_length=256)),
                 ('tr_product_name', models.CharField(max_length=256)),
                 ('tr_product_num', models.CharField(max_length=256)),
+                ('tr_product_price', models.CharField(max_length=256)),
+                ('tr_product_time', models.DateField(max_length=6)),
             ],
         ),
     ]

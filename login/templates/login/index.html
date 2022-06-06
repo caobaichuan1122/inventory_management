@@ -12,74 +12,101 @@
         <tr>
             <th>&nbsp;&nbsp;tr product id&nbsp;&nbsp;</th>
             <th>&nbsp;&nbsp;tr product name&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;tr product state&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;tr product description&nbsp;&nbsp;</th>
-            <th><button type="button">add</button></th>
+            <th>&nbsp;&nbsp;tr product quantity&nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;tr product total &nbsp;&nbsp;</th>
+            <th>&nbsp;&nbsp;create time &nbsp;&nbsp;</th>
         </tr>
         </thead>
         {% for i in data %}
         <tr>
-            <td>{{ i.tr_product_id }}</td>
-            <td>{{ i.tr_product_name }}</td>
-            <td>{{ i.tr_product }}</td>
-            <td>{{ i.tr_product_description }}</td>
-            <td><button type="button">modify</button></td>
-            <td><button type="button">delete</button></td>
+            <td>&nbsp;&nbsp;{{ i.tr_product_id }}</td>
+            <td>&nbsp;&nbsp;{{ i.tr_product_name }}</td>
+            <td>&nbsp;&nbsp;{{ i.tr_product_num }}</td>
+            <td>&nbsp;&nbsp;{{ i.tr_product_price }}</td>
+            <td>&nbsp;&nbsp;{{ i.tr_product_time|date:"Y-m-d" }}</td>
+            <td><button class='btn btn-default modify_button' type="button" value='{{version.id }}'>modify</button></td>
+            <td><button class='btn btn-default delete_button' type="button" value='{{version.id }}'>delete</button></td>
         </tr>
         {% endfor %}
         </thead>
-        <thead>
-        <tr>
-            <th>&nbsp;&nbsp;tp product id&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;tp product name&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;tp product state&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;tp product description&nbsp;&nbsp;</th>
-            <th><button type="button">add</button></th>
-        </tr>
-        </thead>
-        {% for i in data1 %}
-        <tr>
-            <td>{{ i.tp_product_id }}</td>
-            <td>{{ i.tp_product_name }}</td>
-            <td>{{ i.tp_product }}</td>
-            <td>{{ i.tp_product_description }}</td>
-            <td><button type="button">modify</button></td>
-            <td><button type="button">delete</button></td>
-        </tr>
-        {% endfor %}
-        </thead>
-        <thead>
-        <tr>
-            <th>&nbsp;&nbsp;pr product id&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;pr product name&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;pr product state&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;pr product description&nbsp;&nbsp;</th>
-            <th><button type="button">add</button></th>
-        </tr>
-        </thead>
-        {% for i in data2 %}
-        <tr>
-            <td>{{ i.pr_product }}</td>
-            <td>{{ i.pr_product_state }}</td>
-            <td>{{ i.pr_product_name }}</td>
-            <td>{{ i.pr_product_description }}</td>
-            <td><button type="button">modify</button></td>
-            <td><button type="button">delete</button></td>
-        </tr>
-        {% endfor %}
-        </thead>
+        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="delModalLabel">操作提示:</h4>
+                </div>
+                <div class="modal-body">
+                    <h5 id="delBody">确定要删除选中的数据？</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="deleteIds">确定删除</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>&nbsp;&nbsp;tp product id&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tp product name&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tp product state&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tp product description&nbsp;&nbsp;</th>-->
+<!--            <th><button type="button">add</button></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        {% for i in data1 %}-->
+<!--        <tr>-->
+<!--            <td>{{ i.tp_product_id }}</td>-->
+<!--            <td>{{ i.tp_product_name }}</td>-->
+<!--            <td>{{ i.tp_product }}</td>-->
+<!--            <td>{{ i.tp_product_description }}</td>-->
+<!--            <td><button type="button">modify</button></td>-->
+<!--            <td><button type="button">delete</button></td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--        </thead>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>&nbsp;&nbsp;pr product id&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;pr product name&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;pr product state&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;pr product description&nbsp;&nbsp;</th>-->
+<!--            <th><button type="button">add</button></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        {% for i in data2 %}-->
+<!--        <tr>-->
+<!--            <td>{{ i.pr_product }}</td>-->
+<!--            <td>{{ i.pr_product_state }}</td>-->
+<!--            <td>{{ i.pr_product_name }}</td>-->
+<!--            <td>{{ i.pr_product_description }}</td>-->
+<!--            <td><button type="button">modify</button></td>-->
+<!--            <td><button type="button">delete</button></td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--        </thead>-->
     </table>
     </div>
     {% else %}
     <h1>Please login！</h1>
     {% endif %}
-
-
-            <button type="button">modify</button>
-            <button type="button">delete</button>
-            <button type="button">modify</button>
-            <button type="button">delete</button>
+    <script>
+    //删除表格数据
+    $("#btn_delete").click(function(){
+        var rows = $("#table").bootstrapTable('getSelections');
+        alert(JSON.stringify(rows));
+        if (rows.length == 0 ) {
+            alert("请至少选中一行删除!");
+        }
+        else {
+            //显示模态框
+            $("#delModal").modal('show');
+        }
+    });
+    </script>
     <style>
-    #product_info{margin:0 auto; width:700px}
+    #product_info{margin:0 auto; width:900px}
     </style>
+
 {% endblock %}
