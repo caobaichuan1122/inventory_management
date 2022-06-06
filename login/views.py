@@ -48,15 +48,6 @@ def logout(request):
     del request.session['user_name']
     return redirect("/login/")
 
-# def Trcheck(request):
-#     if request.method == 'POST':
-#         tr_product = request.POST['Product ID']
-#         tr_product_name = request.POST['Product Name']
-#         tr_product_description = request.POST['Product State']
-#
-#         #Trproduct write
-#         Trproduct.objects.create(tr_product = tr_product, tr_product_name = tr_product_name, tr_product_description = tr_product_description)
-
 
 def index(request):
     data = Trproduct.objects.all()
