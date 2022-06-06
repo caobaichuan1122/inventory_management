@@ -20,19 +20,22 @@ class User(models.Model):
 class Tproduct(models.Model):
     tp_product_id = models.CharField(max_length=256)
     tp_product_name = models.CharField(max_length=256)
+    tp_product_num = models.CharField(max_length=256)
     tp_product_state = models.CharField(max_length=256)
     tp_product_description = models.CharField(max_length=256)
 
 class Trproduct(models.Model):
     tr_product_id = models.CharField(max_length=256)
     tr_product_name = models.CharField(max_length=256)
-    tr_product_state = models.IntegerField(max_length=4)
+    tr_product_num = models.CharField(max_length=256)
+    tr_product_state = models.CharField(max_length=256)
     tr_product_description = models.CharField(max_length=256)
 
 
 class Prproduct(models.Model):
     pr_product_id = models.CharField(max_length=256)
     pr_product_name = models.CharField(max_length=256)
+    pr_product_num = models.CharField(max_length=256)
     pr_product_state = models.CharField(max_length=256)
 
 class customer(models.Model):
