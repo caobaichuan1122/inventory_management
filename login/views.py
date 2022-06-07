@@ -1,3 +1,4 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .froms import UserForm
 from . import models
@@ -68,9 +69,11 @@ def add_product(request):
         return render(request, '/login/index.html')
 
 def del_product(request,id):
-    print(models.Trproduct.objects.filter(id=id))
-    models.Trproduct.objects.filter(id=id).delete()
-    return redirect('/login/index.html')
+        print(id)
+        models.Trproduct.objects.filter(id=id).delete()
+        return redirect('/login/index.html')
+
+
 
 def modify_product(request,id):
     produt_obj = models.Trproduct.objects.filter(id=id).first()
