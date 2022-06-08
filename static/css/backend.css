@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 *
 * Template: Instadash - Responsive Bootstrap 4 Admin Dashboard Template
 * Author: iqonic.design
@@ -27260,11 +27260,11 @@ button.close-popup {
 
 .iq-icon-box-2 {
     height: 60px;
-    width: 60px;
+    width: 100px;
     line-height: 55px;
     text-align: center;
     margin-right: 20px;
-    font-size: 26px;
+    font-size: 30px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -27275,10 +27275,11 @@ button.close-popup {
 .card-total-sale{
     height:12rem;
     text-align:center;
+    font-size:26px;
 }
 
 .card-total-sale img {
-    max-height: 34px
+    max-height: 34px;
 }
 
 .layout-chart-1 {
