@@ -1,62 +1,310 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}base{% endblock %}</title>
+    {% block css %}
 
+    {% endblock %}
+    <!-- stylesheet-->
+    <link rel="shortcut icon" href="../static/images/favicon.ico"/>
+
+    <link rel="stylesheet" href="../static/css/backend-plugin.min.css">
+    <link rel="stylesheet" href="../static/css/backend.css?v=1.0.0">
+    <link rel="stylesheet" href="../static/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../static/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../static/vendor/remixicon/fonts/remixicon.css">
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    {% block css %}{% endblock %}
-  </head>
-  <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-            <span class="sr-only">Toggle navigation bar</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/index/">T-power</a>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center">
+    </div>
+</div>
+<div class="wrapper">
+    {% block nav %}
+    <div class="iq-sidebar  sidebar-default ">
+        <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
+            <a href="index.html" class="header-logo">
+                <img src="../static/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
+                <h5 class="logo-title light-logo ml-3">T-Power</h5>
+            </a>
+            <div class="iq-menu-bt-sidebar ml-5">
+                <i class="las la-bars wrapper-menu"></i>
+            </div>
         </div>
+        <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="">
+                        <a href="index.html" class="svg-icon">
+                            <svg class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                            <span class="ml-4">Toprail Services</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                            <span class="ml-4">T-Power</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="#category" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <span class="ml-4">Pranstek</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="#sale" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash4" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                                <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                            </svg>
+                            <span class="ml-4">Repair List</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                            <span class="ml-4">Add New Product</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="#return" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash6" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="4 14 10 14 10 20"></polyline>
+                                <polyline points="20 10 14 10 14 4"></polyline>
+                                <line x1="14" y1="10" x2="21" y2="3"></line>
+                                <line x1="3" y1="21" x2="10" y2="14"></line>
+                            </svg>
+                            <span class="ml-4">Add Repair Products</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="#people" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span class="ml-4">Add New Customer</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="p-3"></div>
+        </div>
+    </div>
+    <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="index.html" class="header-logo">
+                        <img src="../static/images/logo.png" class="img-fluid rounded-normal" alt="logo">
+                        <h5 class="logo-title ml-3">T-Power</h5>
+                    </a>
+                </div>
+                <div class="iq-search-bar device-search">
+                    <form action="#" class="searchbox">
+                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                        <input type="text" class="text search-input" placeholder="Search here...">
+                    </form>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li class="nav-item nav-icon search-content">
+                                <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="ri-search-line"></i>
+                                </a>
+                                <div class="iq-search-bar iq-sub-dropdown dropdown-menu"
+                                     aria-labelledby="dropdownSearch">
+                                    <form action="#" class="searchbox p-2">
+                                        <div class="form-group mb-0 position-relative">
+                                            <input type="text" class="text search-input font-size-12"
+                                                   placeholder="type here to search...">
+                                            <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item nav-icon dropdown"></li>
+                            <li class="nav-item nav-icon dropdown"></li>
+                            <li>
+                                <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block"
+                                   data-toggle="modal" data-target="#new-order"><i class="las la-plus mr-2"></i>New
+                                    Order</a>
+                            </li>
+                            <li class="nav-item nav-icon dropdown caption-content">
+                                <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user">
+                                </a>
+                                <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <div class="card shadow-none m-0">
+                                        <div class="card-body p-0 text-center">
+                                            <div class="media-body profile-detail text-center">
+                                                <img src="../static/images/page-img/profile-bg.jpg" alt="profile-bg"
+                                                     class="rounded-top img-fluid mb-4">
+                                                <img src="../static/images/user/1.png" alt="profile-img"
+                                                     class="rounded profile-img img-fluid avatar-70">
+                                            </div>
+                                            <div class="p-3">
+                                                <h5 class="mb-1"><a href="/cdn-cgi/l/email-protection"
+                                                                    class="__cf_email__"
+                                                                    data-cfemail="b5ffdad4dbf1c0daf5c5c7dac5d0c7c1cc9bd6dad8">User:
+                                                    {{ request.session.user_name }}</a>
+                                                </h5>
+                                                <div class="d-flex align-items-center justify-content-center mt-3">
+                                                    <a href="/logout/" class="btn border">Sign Out</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="modal fade" id="new-order" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup text-left">
+                        <h4 class="mb-3">New Order</h4>
+                        <div class="content create-workform bg-body">
+                            <div class="pb-3">
+                                <label class="mb-2">Email</label>
+                                <input type="text" class="form-control" placeholder="Enter Name or Email">
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                    <div class="btn btn-primary mr-4" data-dismiss="modal">Cancel</div>
+                                    <div class="btn btn-outline-primary" data-dismiss="modal">Create</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="my-nav">
-          <ul class="nav navbar-nav">
-            <!--<li class="active"><a href="/index/">主页</a></li>-->
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            {% if request.session.is_login %}
-              <li><a href="#">User：{{ request.session.user_name }}</a></li>
-              <li><a href="/logout/">logout</a></li>
-            {% else %}
-              <li><a href="/login/">sign in</a></li>
-            <!--<li><a href="/register/">register</a></li>-->
-            {% endif %}
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
 
-    {% block content %}{% endblock %}
+<!--<nav class="navbar navbar-default">-->
+<!--    <div class="container-fluid">-->
+<!--        &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+<!--        <div class="navbar-header">-->
+<!--            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav"-->
+<!--                    aria-expanded="false">-->
+<!--                <span class="sr-only">Toggle navigation bar</span>-->
+<!--                <span class="icon-bar"></span>-->
+<!--                <span class="icon-bar"></span>-->
+<!--                <span class="icon-bar"></span>-->
+<!--            </button>-->
+<!--            <a class="navbar-brand" href="/index/">T-power</a>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+<!--        <div class="collapse navbar-collapse" id="my-nav">-->
+<!--            <ul class="nav navbar-nav">-->
+<!--                &lt;!&ndash;<li class="active"><a href="/index/">主页</a></li>&ndash;&gt;-->
+<!--            </ul>-->
+<!--            <ul class="nav navbar-nav navbar-right">-->
+<!--                {% if request.session.is_login %}-->
+<!--                <li><a href="#">User：{{ request.session.user_name }}</a></li>-->
+<!--                <li><a href="/logout/">logout</a></li>-->
+<!--                {% else %}-->
+<!--                <li><a href="/login/">sign in</a></li>-->
+<!--                &lt;!&ndash;<li><a href="/register/">register</a></li>&ndash;&gt;-->
+<!--                {% endif %}-->
+<!--            </ul>-->
+<!--        </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+<!--    </div>&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+<!--</nav>-->
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
-  </body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+<script src="../static/js/backend-bundle.min.js"></script>
+
+<!-- Table Treeview JavaScript -->
+<script src="../static/js/table-treeview.js"></script>
+
+<!-- Chart Custom JavaScript -->
+<script src="../static/js/customizer.js"></script>
+
+<!-- Chart Custom JavaScript -->
+<script async src="../static/js/chart-custom.js"></script>
+
+<!-- app JavaScript -->
+<script src="../static/js/app.js"></script>
+
+</body>
 </html>

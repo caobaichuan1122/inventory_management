@@ -1,28 +1,621 @@
 {% extends 'base.html' %}
 {% block title %}home{% endblock %}
 {% block content %}
-    {% if request.session.is_login %}
-    <h1>hello,{{ request.session.user_name }}！Welcome back！</h1>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>加数1</th>
-            <th>加数2</th>
-            <th>和</th>
-        </tr>
-        <p>{{ data }}</p>
-        </thead>
-        {% for i in data %}
-        <tr>
-            <td>{{ i.tr_product }}</td>
-            <td>{{ i.tr_product_name }}</td>
-            <td>{{ i.tr_product_description }}</td>
-        </tr>
-        {% endfor %}
-        </thead>
-    </table>
-    {% else %}
-    <p>{{ data }}</p>
-    <h1>Please login！</h1>
-    {% endif %}
+<!--<link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
+<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">-->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
+<!--<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>-->
+<!--<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>-->
+<script>
+$(document).ready(function () {
+    $('#repair-table').DataTable();
+});
+</script>
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" style="margin-top: 8rem;">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4 card-total-sale">
+                                    <div class="icon iq-icon-box-2 bg-info-light">
+                                        <img src="../static/images/product/1.png" class="img-fluid" alt="image">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2">Toprail Services</p>
+                                        <h4>$31.50</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4 card-total-sale">
+                                    <div class="icon iq-icon-box-2 bg-danger-light">
+                                        <img src="../static/images/product/2.png" class="img-fluid" alt="image">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2">T-Power</p>
+                                        <h4>$4598</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4 card-total-sale">
+                                    <div class="icon iq-icon-box-2 bg-success-light">
+                                        <img src="../static/images/product/3.png" class="img-fluid" alt="image">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2">Pranstek</p>
+                                        <h4>$4589</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                    <div>
+                        <h4 class="mb-3">Repair List</h4>
+                        <p class="mb-0">to list your products and offering in the most appealing way.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-responsive rounded mb-3">
+                    <table id="repair-table" class="data-table table table-striped mb-0 tbl-server-info" style="width:100%;">
+                        <thead class="bg-white text-uppercase">
+                        <tr class="ligth ligth-data">
+                            <th>Product</th>
+                            <th>Code</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Brand Name</th>
+                            <th>Cost</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="ligth-body">
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        Organic Cream
+                                        <p class="mb-0"><small>This is test Product</small></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>CREM01</td>
+                            <td>Beauty</td>
+                            <td>$25.00</td>
+                            <td>Lakme</td>
+                            <td>$10.00</td>
+                            <td>10.0</td>
+                            <td>
+                                <div class="d-flex align-items-center list-action">
+                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="View"
+                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit"
+                                       href="#"><i class="ri-pencil-line mr-0"></i></a>
+                                    <a class="badge bg-warning mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete"
+                                       href="#"><i class="ri-delete-bin-line mr-0"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit-note" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup text-left">
+                        <div class="media align-items-top justify-content-between">
+                            <h3 class="mb-3">Product</h3>
+                            <div class="btn-cancel p-0" data-dismiss="modal"><i class="las la-times"></i></div>
+                        </div>
+                        <div class="content edit-notes">
+                            <div class="card card-transparent card-block card-stretch event-note mb-0">
+                                <div class="card-body px-0 bukmark">
+                                    <div class="d-flex align-items-center justify-content-between pb-2 mb-3 border-bottom">
+                                        <div class="quill-tool">
+                                        </div>
+                                    </div>
+                                    <div id="quill-toolbar1">
+                                        <p>Virtual Digital Marketing Course every week on Monday, Wednesday and
+                                            Saturday.Virtual Digital Marketing Course every week on Monday</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer border-0">
+                                    <div class="d-flex flex-wrap align-items-ceter justify-content-end">
+                                        <div class="btn btn-primary mr-3" data-dismiss="modal">Cancel</div>
+                                        <div class="btn btn-outline-primary" data-dismiss="modal">Save</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<!--    <div id="product_info">-->
+<!--        <h1>hello,{{ request.session.user_name }}！Welcome to ERP system！</h1>-->
+<!--        <h1 align="center">LOGO</h1>-->
+<!--        <br />-->
+<!--        <br />-->
+<!--    </div>-->
+<!--    <table border="1",style ='margin:auto'>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>&nbsp;&nbsp;tr product id&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tr product name&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tr product state&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tr product description&nbsp;&nbsp;</th>-->
+<!--            <th><button type="button">add</button></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        {% for i in data %}-->
+<!--        <tr>-->
+<!--            <td>{{ i.tr_product_id }}</td>-->
+<!--            <td>{{ i.tr_product_name }}</td>-->
+<!--            <td>{{ i.tr_product }}</td>-->
+<!--            <td>{{ i.tr_product_description }}</td>-->
+<!--            <td><button type="button">modify</button></td>-->
+<!--            <td><button type="button">delete</button></td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--        </thead>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>&nbsp;&nbsp;tp product id&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tp product name&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tp product state&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;tp product description&nbsp;&nbsp;</th>-->
+<!--            <th><button type="button">add</button></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        {% for i in data1 %}-->
+<!--        <tr>-->
+<!--            <td>{{ i.tp_product_id }}</td>-->
+<!--            <td>{{ i.tp_product_name }}</td>-->
+<!--            <td>{{ i.tp_product }}</td>-->
+<!--            <td>{{ i.tp_product_description }}</td>-->
+<!--            <td><button type="button">modify</button></td>-->
+<!--            <td><button type="button">delete</button></td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--        </thead>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>&nbsp;&nbsp;pr product id&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;pr product name&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;pr product state&nbsp;&nbsp;</th>-->
+<!--            <th>&nbsp;&nbsp;pr product description&nbsp;&nbsp;</th>-->
+<!--            <th><button type="button">add</button></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        {% for i in data2 %}-->
+<!--        <tr>-->
+<!--            <td>{{ i.pr_product }}</td>-->
+<!--            <td>{{ i.pr_product_state }}</td>-->
+<!--            <td>{{ i.pr_product_name }}</td>-->
+<!--            <td>{{ i.pr_product_description }}</td>-->
+<!--            <td><button type="button">modify</button></td>-->
+<!--            <td><button type="button">delete</button></td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--        </thead>-->
+<!--    </table>-->
+<!--    </div>-->
+{% else %}
+<h1>Please login！</h1>
+{% endif %}
+<!--            <button type="button">modify</button>-->
+<!--            <button type="button">delete</button>-->
+<!--            <button type="button">modify</button>-->
+<!--            <button type="button">delete</button>-->
+<!--    <style>-->
+<!--    #product_info{margin:0 auto; width:700px}-->
+<!--    </style>-->
 {% endblock %}
