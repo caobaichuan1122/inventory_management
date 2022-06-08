@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}home{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid add-form-list">
+        <div class="row" style="margin-top: 5rem;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Add New Product</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class='form-addnewproduct' action="/add_product/" data-toggle="validator" method="post" style="align-items: center;">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ product_form.Product_name.label_tag }}
+                                        {{ product_form.Product_name}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ product_form.Product_id.label_tag }}
+                                        {{ product_form.Product_id}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ product_form.Product_no.label_tag }}
+                                        {{ product_form.Product_no}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ product_form.Product_Price.label_tag }}
+                                        {{ product_form.Product_Price}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ product_form.Product_time.label_tag }}
+                                        {{ product_form.Product_time}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ product_form.Product_Company.label_tag }}
+                                        {{ product_form.Product_Company}}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Add Product</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+</div>
+
+{% else %}
+<h1>Please login！</h1>
+{% endif %}
+{% endblock %}
