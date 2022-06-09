@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .froms import UserForm,AddNewProduct,Modify_fix
 from . import models
-from .models import Trproduct, Tproduct, Prproduct,fix_tr_report
+from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
 
 
 # def index(request):
@@ -55,7 +55,8 @@ def index(request):
     Tdatabase = Tproduct.objects.all()
     Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.all()
-    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase})
+    FixTpDatabase = fix_tp_report.objects.all()
+    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase})
 
 def add_product(request):
     # if request.method == 'POST':
@@ -75,7 +76,9 @@ def del_fix_tr_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
     return redirect('/index/')
 
-
+def del_fix_tp_product(request,id):
+    models.fix_tp_report.objects.filter(id=id).delete()
+    return redirect('/index/')
 
 def modify_product(request,id):
     produt_obj = models.Trproduct.objects.filter(id=id).first()
