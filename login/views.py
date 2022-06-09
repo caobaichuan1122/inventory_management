@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .froms import UserForm
 from . import models
-from .models import Trproduct, Tproduct, Prproduct
+from .models import Trproduct, Tproduct, Prproduct,fix_tr_report
 
 
 # def index(request):
@@ -51,10 +51,11 @@ def logout(request):
 
 
 def index(request):
-    data = Trproduct.objects.all()
-    data1 = Tproduct.objects.all()
-    data2 = Prproduct.objects.all()
-    return render(request,'login/index.html',context={'data':data,'data1':data1,'data2':data2})
+    Trdatabase = Trproduct.objects.all()
+    Tdatabase = Tproduct.objects.all()
+    Prdatabase = Prproduct.objects.all()
+    FixTrDatabase = fix_tr_report.objects.all()
+    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase})
 
 def add_product(request):
     if request.method == 'POST':
@@ -68,10 +69,9 @@ def add_product(request):
     else:
         return render(request, '/login/index.html')
 
-def del_product(request,id):
-        print(id)
-        models.Trproduct.objects.filter(id=id).delete()
-        return redirect('/login/index.html')
+def del_fix_tr_product(request,id):
+    models.fix_tr_report.objects.filter(id=id).delete()
+    return redirect('/index/')
 
 
 
