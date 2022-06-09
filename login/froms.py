@@ -15,6 +15,6 @@ class AddNewProduct(forms.Form):
     Product_time = forms.DateTimeField(label="Time",widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type':'date'}))
     Product_Company = forms.ChoiceField(choices=company_name,widget=forms.Select(attrs={'class':'form-control'}))
 
-class ModifyFix(forms.Form):
+class Modify_fix(forms.Form):
     Fixed_State = forms.CharField(label="Fixed State", max_length=256, widget=forms.TextInput(attrs={'class':'form-control'}))
-    fixed_Record = forms.CharField(label="Fixed Record", max_length=256, widget=forms.TextInput(attrs={'class':'form-control'}))
+    fixed_Record = forms.CharField(label="Fixed Record", max_length=256, widget=forms.Textarea(attrs={'class':'form-control'}))
