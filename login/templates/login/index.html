@@ -101,27 +101,42 @@
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="View"
                                        href="#"><i class="ri-eye-line mr-0"></i></a>
-                                    <button class="badge bg-success mr-2" data-toggle="model" data-placement="top" title=""
-                                       data-original-title="Edit" href="#Edit-text" data-target="#Edit-text"><i
-                                            class="ri-pencil-line mr-0"></i></button>
+                                    <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
+                                       title=""
+                                       data-original-title="Edit" data-target="#Edit-text"><i
+                                            class="ri-pencil-line mr-0"></i></a>
                                     <div class="modal fade" id="Edit-text" tabindex="-1" role="dialog"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <div class="popup text-center">
-                                                        <h4 class="mb-3">Attention!</h4>
+                                                        <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <p>Are you sure you want to delete the current repair
-                                                                    record?</p>
+                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
+                                                                    <div class="row">
+                                                                        <div class="col-md-10">
+                                                                            <div class="form-group">
+                                                                                {{ edit_form_fix.Fixed_State.label_tag }}
+                                                                                {{ edit_form_fix.Fixed_State}}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-10">
+                                                                            <div class="form-group">
+                                                                                {{ edit_form_fix.Fixed_Record.label_tag }}
+                                                                                {{ edit_form_fix.Fixed_Record}}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                             <div class="col-lg-12 mt-4">
                                                                 <div class="d-flex flex-wrap align-items-ceter justify-content-center">
                                                                     <a class="btn btn-danger mr-4"
-                                                                       href="/del_fix_tr_product/{{ item.id }}">Delete</a>
+                                                                        data-dismiss="modal">Cancel</a>
                                                                     <div class="btn btn-primary mr-4"
-                                                                         data-dismiss="modal">Cancel
+                                                                        href="#" >Confirm
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -131,9 +146,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="badge bg-warning mr-2" data-placement="top" title=""
-                                       data-original-title="Delete" data-toggle="modal" data-target="#ensure-del"><i
-                                            class="ri-delete-bin-line mr-0" id="Delete"></i></button>
+
+                                    <a class="badge bg-warning mr-2" data-placement="top" title=""
+                                       data-original-title="Delete" data-toggle="modal" data-target="#ensure-del">
+                                        <i
+                                                class="ri-delete-bin-line mr-0"></i></a>
                                     <div class="modal fade" id="ensure-del" tabindex="-1" role="dialog"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">

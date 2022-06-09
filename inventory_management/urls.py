@@ -21,8 +21,9 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('', views.login, name='login'),
     path('login/', views.login, name='login'),
-    path('register/', views.register, name='register'),
+    # path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('add_product/', views.add_product, name='add_product'),
     path('del_fix_tr_product/<int:id>', views.del_fix_tr_product, name='del_fix_tr_product'),
+    path('index/modify/<int:id>',views.Modify_fix,name='modify_fix')
 ]

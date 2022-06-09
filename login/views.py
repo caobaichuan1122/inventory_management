@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
-from .froms import UserForm
+from .froms import UserForm,AddNewProduct,Modify_fix
 from . import models
 from .models import Trproduct, Tproduct, Prproduct,fix_tr_report
 
@@ -58,16 +58,18 @@ def index(request):
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase})
 
 def add_product(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('tr product id')
-        product_name = request.POST.get('tr product name')
-        product_state = request.POST.get('tr product state')
-        if product_id == '' or product_name =='' or product_state=='':
-            return render(request,'login/add.html',{'ret':'error!'})
-        models.Trproduct.objects.create(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
-        return redirect('/login/index.html')
-    else:
-        return render(request, '/login/index.html')
+    # if request.method == 'POST':
+    #     product_id = request.POST.get('tr product id')
+    #     product_name = request.POST.get('tr product name')
+    #     product_state = request.POST.get('tr product state')
+    #     if product_id == '' or product_name =='' or product_state=='':
+    #         return render(request,'login/add.html',{'ret':'error!'})
+    #     models.Trproduct.objects.create(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
+    #     return redirect('/login/index.html')
+    # else:
+    #     return render(request, '/login/index.html')
+    product_form = AddNewProduct()
+    return render(request,'login/addnewproduct.html')
 
 def del_fix_tr_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
@@ -89,3 +91,6 @@ def modify_product(request,id):
     else:
         return render(request, '/login/index.html')
 
+def edit_fix(request,id):
+    edit_form_fix = Modify_fix()
+    return render(request,'/login/index.html')
