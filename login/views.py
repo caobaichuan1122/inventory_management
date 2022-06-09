@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
-from .froms import UserForm,AddNewProduct,Modify_fix
+from .froms import UserForm,AddNewProduct,ModifyFix
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
 
@@ -56,8 +56,7 @@ def index(request):
     Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.all()
     FixTpDatabase = fix_tp_report.objects.all()
-    edit_form_fix = Modify_fix()
-    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix': edit_form_fix})
+    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase})
 
 def add_product(request):
     # if request.method == 'POST':
@@ -95,7 +94,6 @@ def modify_product(request,id):
     else:
         return render(request, '/login/index.html')
 
-def edit_fix(request):
-    # edit_form = AddNewProduct(request.POST)
-    edit_form_fix = Modify_fix()
-    return render(request,'/login/index.html',context={'edit_form_fix': edit_form_fix})
+def edit_fix(request,id):
+    edit_form_fix = ModifyFix()
+    return render(request,'/login/index.html')

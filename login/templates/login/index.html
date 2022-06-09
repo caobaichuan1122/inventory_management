@@ -114,7 +114,7 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="/edit_fix/"  style="align-items: center;">
+                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
                                                                     <div class="row">
                                                                         <div class="col-md-10">
                                                                             <div class="form-group">
@@ -210,7 +210,7 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="/edit_fix/"  style="align-items: center;">
+                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
                                                                     <div class="row">
                                                                         <div class="col-md-10">
                                                                             <div class="form-group">
