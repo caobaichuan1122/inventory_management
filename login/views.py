@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
-from .froms import UserForm,AddNewProduct
+from .froms import UserForm
 from . import models
 from .models import Trproduct, Tproduct, Prproduct
 
@@ -57,23 +57,16 @@ def index(request):
     return render(request,'login/index.html',context={'data':data,'data1':data1,'data2':data2})
 
 def add_product(request):
-    # if request.method == 'POST':
-    #     product_form = AddNewProduct(request.POST)
-    #     message ="Please Check Input!"
-    #     if product_form.is_valid():
-    #
-    #         product_id = request.POST.get('tr product id')
-    #         product_name = request.POST.get('tr product name')
-    #         product_state = request.POST.get('tr product state')
-    #         if product_id == '' or product_name =='' or product_state=='':
-    #             return render(request,'login/addnewproduct.html',{'ret':'error!'})
-    #     models.Trproduct.objects.create(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
-    #     return redirect('/login/index.html')
-    # else:
-    #     return render(request, '/login/index.html')
-
-    product_form = AddNewProduct()
-    return render(request, 'login/addnewproduct.html', locals())
+    if request.method == 'POST':
+        product_id = request.POST.get('tr product id')
+        product_name = request.POST.get('tr product name')
+        product_state = request.POST.get('tr product state')
+        if product_id == '' or product_name =='' or product_state=='':
+            return render(request,'login/add.html',{'ret':'error!'})
+        models.Trproduct.objects.create(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        return redirect('/login/index.html')
+    else:
+        return render(request, '/login/index.html')
 
 def del_product(request,id):
         print(id)
@@ -95,3 +88,4 @@ def modify_product(request,id):
         return redirect('/login/index.html')
     else:
         return render(request, '/login/index.html')
+
