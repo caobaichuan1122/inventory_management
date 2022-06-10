@@ -15,6 +15,7 @@
                     <div class="card-body">
                         <form class='form-addnewproduct' action="/add_product/" data-toggle="validator" method="post" style="align-items: center;">
                             <div class="row">
+                                {% csrf_token %}
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         {{ product_form.Product_name.label_tag }}
@@ -52,8 +53,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary mr-2">Add Product</button>
+                            <button type="submit" class="btn btn-primary" href="/add_product/">
+                                Add Product
+                            </button>
                             <button type="reset" class="btn btn-danger">Reset</button>
+                            {% if message %}
+                                <div class="alert alert-warning">{{ message }}</div>
+                                {% endif %}
                         </form>
                     </div>
                 </div>

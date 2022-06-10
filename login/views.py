@@ -60,13 +60,32 @@ def index(request):
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
-    # if request.method == 'POST':
-    #     product_id = request.POST.get('tr product id')
-    #     product_name = request.POST.get('tr product name')
-    #     product_state = request.POST.get('tr product state')
-    #     if product_id == '' or product_name =='' or product_state=='':
-    #         return render(request,'login/add.html',{'ret':'error!'})
-    #     models.Trproduct.objects.create(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
+    if request.method == 'POST':
+        product_id = request.POST.get('Product_id')
+        product_name = request.POST.get('Product_name')
+        Product_no = request.POST.get('Product_no')
+        Product_Price = request.POST.get('Product_Price')
+        Product_time = request.POST.get('Product_time')
+        company = request.POST.get('Product_Company')
+        if product_id == '' or product_name =='' or Product_no=='' or Product_Price=='' or Product_time=='':
+            return render(request,'login/addnewproduct.html',{'ret':'error!'})
+        if company == 'Trproduct':
+            models.Trproduct.objects.create(tr_product_id=product_id, tr_product_name=product_name,
+                                            tr_product_num=Product_no, tr_product_price=Product_Price,
+                                            tr_product_time=Product_time)
+            message = "add successful!"
+        elif company == 'Tproduct':
+            models.Tpproduct.objects.create(tp_product_id=product_id, tp_product_name=product_name,
+                                            tp_product_num=Product_no, tp_product_price=Product_Price,
+                                            tp_product_time=Product_time)
+            message = "add successful!"
+        elif company == 'Prproduct':
+            models.Prproduct.objects.create(pr_product_id=product_id, pr_product_name=product_name,
+                                            pr_product_num=Product_no, pr_product_price=Product_Price,
+                                            pr_product_time=Product_time)
+            message = "add successful!"
+        else:
+            message = "error!"
     #     return redirect('/login/index.html')
     # else:
     #     return render(request, '/login/index.html')
@@ -90,7 +109,7 @@ def modify_product(request,id):
         product_state = request.POST.get('tr product state')
         if product_id == '' or product_name == '' or product_state == '':
             return render(request, 'login/add.html', {'ret': 'error!'})
-        models.Trproduct.objects.filter(id=id).update(tr_product = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        models.Trproduct.objects.filter(id=id).update(tp_product_id = product_id, tr_product_name = product_name, tr_product_description = product_state)
         return redirect('/login/index.html')
     else:
         return render(request, '/login/index.html')
