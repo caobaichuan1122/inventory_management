@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}home{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
-<!--<link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">-->
-<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">-->
-<!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
-<!--<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>-->
-<!--<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>-->
 <script>
     $(document).ready(function () {
         $('#repair-table').DataTable();
@@ -326,86 +321,7 @@
         </div>
     </div>
 </div>
-
-<!--    <div id="product_info">-->
-<!--        <h1>hello,{{ request.session.user_name }}！Welcome to ERP system！</h1>-->
-<!--        <h1 align="center">LOGO</h1>-->
-<!--        <br />-->
-<!--        <br />-->
-<!--    </div>-->
-<!--    <table border="1",style ='margin:auto'>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>&nbsp;&nbsp;tr product id&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;tr product name&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;tr product state&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;tr product description&nbsp;&nbsp;</th>-->
-<!--            <th><button type="button">add</button></th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        {% for i in data %}-->
-<!--        <tr>-->
-<!--            <td>{{ i.tr_product_id }}</td>-->
-<!--            <td>{{ i.tr_product_name }}</td>-->
-<!--            <td>{{ i.tr_product }}</td>-->
-<!--            <td>{{ i.tr_product_description }}</td>-->
-<!--            <td><button type="button">modify</button></td>-->
-<!--            <td><button type="button">delete</button></td>-->
-<!--        </tr>-->
-<!--        {% endfor %}-->
-<!--        </thead>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>&nbsp;&nbsp;tp product id&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;tp product name&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;tp product state&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;tp product description&nbsp;&nbsp;</th>-->
-<!--            <th><button type="button">add</button></th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        {% for i in data1 %}-->
-<!--        <tr>-->
-<!--            <td>{{ i.tp_product_id }}</td>-->
-<!--            <td>{{ i.tp_product_name }}</td>-->
-<!--            <td>{{ i.tp_product }}</td>-->
-<!--            <td>{{ i.tp_product_description }}</td>-->
-<!--            <td><button type="button">modify</button></td>-->
-<!--            <td><button type="button">delete</button></td>-->
-<!--        </tr>-->
-<!--        {% endfor %}-->
-<!--        </thead>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>&nbsp;&nbsp;pr product id&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;pr product name&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;pr product state&nbsp;&nbsp;</th>-->
-<!--            <th>&nbsp;&nbsp;pr product description&nbsp;&nbsp;</th>-->
-<!--            <th><button type="button">add</button></th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        {% for i in data2 %}-->
-<!--        <tr>-->
-<!--            <td>{{ i.pr_product }}</td>-->
-<!--            <td>{{ i.pr_product_state }}</td>-->
-<!--            <td>{{ i.pr_product_name }}</td>-->
-<!--            <td>{{ i.pr_product_description }}</td>-->
-<!--            <td><button type="button">modify</button></td>-->
-<!--            <td><button type="button">delete</button></td>-->
-<!--        </tr>-->
-<!--        {% endfor %}-->
-<!--        </thead>-->
-<!--    </table>-->
-<!--    </div>-->
 {% else %}
-<div class="content-page">
-    <h1>Please login！</h1>
-</div>
+<h1>Please login!</h1>
 {% endif %}
-<!--            <button type="button">modify</button>-->
-<!--            <button type="button">delete</button>-->
-<!--            <button type="button">modify</button>-->
-<!--            <button type="button">delete</button>-->
-<!--    <style>-->
-<!--    #product_info{margin:0 auto; width:700px}-->
-<!--    </style>-->
 {% endblock %}

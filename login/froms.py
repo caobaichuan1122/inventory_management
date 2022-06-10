@@ -18,3 +18,10 @@ class AddNewProduct(forms.Form):
 class Modify_fix(forms.Form):
     Fixed_State = forms.CharField(label="Fixed State", max_length=256, widget=forms.TextInput(attrs={'class':'form-control'}))
     fixed_Record = forms.CharField(label="Fixed Record", max_length=256, widget=forms.Textarea(attrs={'class':'form-control'}))
+
+class Modify_Product(forms.Form):
+    Product_id = forms.CharField(label="Product Code",max_length=256,widget=forms.TextInput(attrs={'class':'form-control'}))
+    Product_name = forms.CharField(label="Product Name",max_length=256,widget=forms.TextInput(attrs={'class':'form-control'}))
+    Product_num = forms.IntegerField(label="Product Number",help_text="Enter Number",widget=forms.NumberInput(attrs={'class':'form-control'}))
+    Product_Price = forms.DecimalField(label="Product Price ($AU) ", max_digits=2, help_text="Enter Number",widget=forms.NumberInput(attrs={'class':'form-control'}))
+    Product_time = forms.DateTimeField(label="Time",widget=forms.DateTimeInput(attrs={'class':'form-control', 'type':'date'}))

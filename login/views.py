@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
-from .froms import UserForm,AddNewProduct,Modify_fix
+from .froms import UserForm,AddNewProduct,Modify_fix,Modify_Product
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
 
@@ -71,7 +71,7 @@ def add_product(request):
     # else:
     #     return render(request, '/login/index.html')
     product_form = AddNewProduct()
-    return render(request,'login/addnewproduct.html')
+    return render(request,'login/addnewproduct.html',locals())
 
 def del_fix_tr_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
@@ -95,6 +95,14 @@ def modify_product(request,id):
     else:
         return render(request, '/login/index.html')
 
-def edit_fix(request,id):
-    edit_form_fix = Modify_fix()
-    return render(request,'/login/index.html',locals())
+def TrSubpage(request):
+    return render(request,'login/TRsubpage.html',locals())
+
+def TrProductList(request):
+    Trdatabase = Trproduct.objects.all()
+    modify_form = Modify_Product
+    return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
+
+# def edit_fix(request,id):
+#     edit_form_fix = Modify_fix()
+#     return render(request,'/login/index.html',locals())

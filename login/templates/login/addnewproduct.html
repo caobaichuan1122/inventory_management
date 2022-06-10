@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}home{% endblock %}
+{% block title %}Add New Product{% endblock %}
 {% block content %}
 {% if request.session.is_login %}
 <div class="content-page">
@@ -64,6 +64,6 @@
 </div>
 
 {% else %}
-<h1>Please login！</h1>
+<h1>Please login</h1>
 {% endif %}
 {% endblock %}
