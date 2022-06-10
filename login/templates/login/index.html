@@ -99,8 +99,8 @@
                             <td>
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="View"
-                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                       data-original-title="Complete"
+                                       href="#"><i class="las la-list-alt mr-0"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
                                        data-original-title="Edit" data-target="#Edit-text"><i
@@ -114,18 +114,18 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
+                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="text-align:center; margin: 2rem; padding:2rem;">
                                                                     <div class="row">
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 {{ edit_form_fix.Fixed_State.label_tag }}
                                                                                 {{ edit_form_fix.Fixed_State}}
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-12">
                                                                             <div class="form-group">
-                                                                                {{ edit_form_fix.Fixed_Record.label_tag }}
-                                                                                {{ edit_form_fix.Fixed_Record}}
+                                                                                {{ edit_form_fix.fixed_Record.label_tag }}
+                                                                                {{ edit_form_fix.fixed_Record}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -196,7 +196,7 @@
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="View"
-                                       href="#"><i class="ri-eye-line mr-0"></i></a>
+                                       href="#"><i class="las la-list-alt mr-0"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
                                        data-original-title="Edit" data-target="#Edit-text_tp"><i
@@ -210,18 +210,18 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
+                                                                <form class='form-addnewproduct' action="/edit_fix/{{ item.id }}" data-toggle="validator" method="post" style="text-align:center; margin:2rem; padding:2rem;">
                                                                     <div class="row">
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-12">
                                                                             <div class="form-group">
                                                                                 {{ edit_form_fix.Fixed_State.label_tag }}
                                                                                 {{ edit_form_fix.Fixed_State}}
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-10">
+                                                                        <div class="col-md-12">
                                                                             <div class="form-group">
-                                                                                {{ edit_form_fix.Fixed_Record.label_tag }}
-                                                                                {{ edit_form_fix.Fixed_Record}}
+                                                                                {{ edit_form_fix.fixed_Record.label_tag }}
+                                                                                {{ edit_form_fix.fixed_Record}}
                                                                             </div>
                                                                         </div>
                                                                     </div>

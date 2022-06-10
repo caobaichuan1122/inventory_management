@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
-from .froms import UserForm,AddNewProduct,ModifyFix
+from .froms import UserForm,AddNewProduct,Modify_fix
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
 
@@ -56,7 +56,8 @@ def index(request):
     Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.all()
     FixTpDatabase = fix_tp_report.objects.all()
-    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase})
+    edit_form_fix = Modify_fix()
+    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
     # if request.method == 'POST':
@@ -95,5 +96,5 @@ def modify_product(request,id):
         return render(request, '/login/index.html')
 
 def edit_fix(request,id):
-    edit_form_fix = ModifyFix()
-    return render(request,'/login/index.html')
+    edit_form_fix = Modify_fix()
+    return render(request,'/login/index.html',locals())
