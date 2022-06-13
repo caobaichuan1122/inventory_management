@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Add Repair Products{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid add-form-list">
+        <div class="row" style="margin-top: 5rem;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Add Repair Products</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class='form-addrepairproduct' action="/addrepairproduct/" data-toggle="validator" method="post" style="align-items: center;">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.fix_id.label_tag }}
+                                        {{ repair_form.fix_id}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.fix_product_id.label_tag }}
+                                        {{ repair_form.fix_product_id}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.fix_product_name.label_tag }}
+                                        {{ repair_form.fix_product_name}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.fix_product_description.label_tag }}
+                                        {{ repair_form.fix_product_description}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.fix_state.label_tag }}
+                                        {{ repair_form.fix_state}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.fix_detail.label_tag }}
+                                        {{ repair_form.fix_detail}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.Product_Company.label_tag }}
+                                        {{ repair_form.Product_Company}}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Add Product</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+</div>
+
+{% else %}
+<h1>Please login</h1>
+{% endif %}
+{% endblock %}

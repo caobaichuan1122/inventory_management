@@ -33,10 +33,32 @@ class fix_tp_report(models.Model):
     fix_state = models.CharField(max_length=256)
     fixed_detail = models.CharField(max_length=256)
 
+class Send_product(models.Model):
+    tr_product_id = models.CharField(max_length=256)
+    tr_product_name = models.CharField(max_length=256)
+    tr_product_num = models.CharField(max_length=256)
+    tr_product_price = models.CharField(max_length=256)
+
 class Prproduct(models.Model):
     pr_product_id = models.CharField(max_length=256)
     pr_product_name = models.CharField(max_length=256)
     pr_product_num = models.CharField(max_length=256)
+    pr_product_price = models.CharField(max_length=256)
+    pr_product_time = models.DateField(max_length=6)
+
+class Tproduct(models.Model):
+    tp_product_id = models.CharField(max_length=256)
+    tp_product_name = models.CharField(max_length=256)
+    tp_product_num = models.CharField(max_length=256)
+    tp_product_price = models.CharField(max_length=256)
+    tp_product_time = models.DateField(max_length=6)
+
+class Trproduct(models.Model):
+    tr_product_id = models.CharField(max_length=256)
+    tr_product_name = models.CharField(max_length=256)
+    tr_product_num = models.CharField(max_length=256)
+    tr_product_price = models.CharField(max_length=256)
+    tr_product_time = models.DateField(max_length=6)
 
 class customer(models.Model):
     customer_id = models.CharField(max_length=256)
@@ -46,15 +68,9 @@ class customer(models.Model):
     customer_email = models.CharField(max_length=256)
     customer_type = models.CharField(max_length=256)
 
-class Tproduct(models.Model):
-    tp_product_id = models.CharField(max_length=256)
-    tp_product_name = models.CharField(max_length=256)
-    tp_product_num = models.CharField(max_length=256)
 
-class Trproduct(models.Model):
-    tr_product_id = models.CharField(max_length=256)
-    tr_product_name = models.CharField(max_length=256)
-    tr_product_num = models.CharField(max_length=256)
+
+
 
 
 

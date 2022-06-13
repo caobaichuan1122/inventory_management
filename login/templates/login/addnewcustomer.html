@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Add New Customers{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid add-form-list">
+        <div class="row" style="margin-top: 5rem;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Add New Customers</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class='form-addnewcustomer' action="/addnewcustomer/" data-toggle="validator" method="post" style="align-items: center;">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ customer_form.customer_id.label_tag }}
+                                        {{ customer_form.customer_id}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ customer_form.customer_name.label_tag }}
+                                        {{ customer_form.customer_name}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ customer_form.customer_phone.label_tag }}
+                                        {{ customer_form.customer_phone}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ customer_form.customer_address.label_tag }}
+                                        {{ customer_form.customer_address}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ customer_form.customer_email.label_tag }}
+                                        {{ customer_form.customer_email}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ customer_form.customer_type.label_tag }}
+                                        {{ customer_form.customer_type}}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Add New Customer</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+</div>
+
+{% else %}
+<h1>Please login</h1>
+{% endif %}
+{% endblock %}
