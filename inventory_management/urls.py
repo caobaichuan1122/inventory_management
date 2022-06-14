@@ -31,6 +31,7 @@ urlpatterns = [
     path('TrProductList/', views.TrProductList, name='TrProductList'),
     path('TrProductStockOut/', views.TrProductStockOut, name='TrProductStockOut'),
     path('add_repair_product/',views.addrepairproduct,name="add_repair_product"),
-    path('add_new_customer/',views.addnewcustomer,name='add_new_customer')
+    path('add_new_customer/',views.addnewcustomer,name='add_new_customer'),
+    path('generate_pdf/',views.generatePDF,name="generate_pdf")
 
 ]

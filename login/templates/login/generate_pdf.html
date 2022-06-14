@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delivery Note</title>
+    <link href="../static/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            /* ... the rest of the rules ... */
+        }
+    </style>
+</head>
+<body style="height:100%;">
+<div class="container">
+    <div class="row" style="display:inline; height:100px;">
+        <div class="col-md-6" style="bottom: 0;">
+            <h1 style="font-size:400%;">Delivery Note</h1>
+        </div>
+        <div class="col-md-4" id="logo" style="float:right; ">
+            <img src="../static/images/logo/trlogo.png" style="width:200px;height:100px;">
+        </div>
+    </div>
+    <hr style="border: 2px solid lightskyblue;">
+    <div class="row" style="display: inline; height:40rem;">
+        <div class="col-md-6">
+            <div>
+                <h4>Top Rail Services Pty Ltd.</h4>
+                <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                <p>ABN: 90 167 745 575</p>
+                <p>Email: ifo@toprailservices.com.au</p>
+                <p>Tel: 1300 772 678</p>
+                <p>Website: https://toprailservices.com.au</p>
+            </div>
+            <div>
+                <h3>To:</h3>
+                <h4>{{ customerifo.customer_name }}</h4>
+                <p>Address: {{ customerifo.customer_address }}</p>
+                <p>Phone: {{ customerifo.customer_phone }}</p>
+                <p>Email: {{ customerifo.customer_email }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="container-fluid" style="background: #dddddd; text-align: left;padding: 5px 5px 5px 5px;">
+                <p>Invoice No.: </p>
+                <p>Invoice Date: </p>
+                <p>Delivery Note No.: </p>
+                <p>Delivery Date: </p>
+                <p>Delivery Term: </p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="display: inline; margin-top: 3rem;">
+        <table class="table table-striped">
+            <tr>
+                <th>Product Code</th>
+                <th>Product Description</th>
+                <th>Unit</th>
+                <th>Quantity</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -9,13 +9,26 @@
 <style>
     input[type=button],
     input[type=submit] {
-        background-color: #62529c;
+        background-color: #9de0f6;
         border: none;
         color: #fff;
         padding: 15px 30px;
         text-decoration: none;
         margin: 4px 2px;
         cursor: pointer;
+        width:150px;
+        border-radius: 2px;
+    }
+    input[type=submit]:hover{
+        background: #0b4980;
+    }
+    #form-1 label{
+      width:40rem;
+    }
+    #form-1 input,select,textarea{
+        width: 30rem;
+        border: 1px solid #7b7c88;
+        border-radius: 5px;
     }
 </style>
 {% if request.session.is_login %}
@@ -76,7 +89,41 @@
 
                             </tbody>
                         </table>
-                        <input type="submit" value="submit">
+                        <div class="container-fluid" style="margin-top:30px; margin-left:40px; text-align: left; padding:10px 10px 10px 10px;" id="form-1">
+                            <div class="form-group">
+                                <label for="customer">Choose a Customer:</label>
+                                <select name="customer" id="customer">
+                                    {% for cu in Customerdatabase %}
+                                    <option value="{{ cu.customer_id }}">{{ cu.customer_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Invoicedate">Choose Invoice Date: </label>
+                                <input type="date" id="Invoicedate">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="Deliverydate">Choose Delivery Date: </label>
+                                <input type="date" id="Deliverydate">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="invoice_no">Enter Invoice Number: </label>
+                                <input type="text" id="invoice_no">
+                            </div>
+                            <div class="form-group">
+                                <label for="Note" style="float:top;">Enter Some Note: </label>
+                                <textarea
+                                        name="Note"
+                                        rows="5"
+                                        cols="30"
+                                        id="Note"
+                                ></textarea>
+
+                            </div>
+                        </div>
+                        <input type="submit" value="submit" style="margin-top:20px;">
                     </form>
                 </div>
             </div>

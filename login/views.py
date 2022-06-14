@@ -2,7 +2,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
 from . import models
-from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
+from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report,customer
+from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
+from datetime import datetime
+
 
 
 # def index(request):
@@ -131,8 +135,37 @@ def TrProductList(request):
 
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
-    return render(request, 'login/TRproductOut.html', context={'Trdatabase': Trdatabase})
+    Customerdatabase = customer.objects.all()
+    if request.method == "POST":
+        custom_info = {}
 
+        generatePDF(request,custom_info)
+    return render(request, 'login/TRproductOut.html', context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
+
+def pdfdownload(request):
+    # Create the HttpResponse object
+    response = HttpResponse(content_type='application/pdf')
+
+    # This line force a download
+    response['Content-Disposition'] = 'attachment; filename="1.pdf"'
+
+    # READ Optional GET param
+    get_param = request.GET.get('name', 'World')
+
+    # Generate unique timestamp
+    ts = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
+
+    p = canvas.Canvas(response)
+
+    # Write content on the PDF
+    p.drawString(100, 500, "Hello " + get_param + " (Dynamic PDF) - " + ts )
+
+    # Close the PDF object.
+    p.showPage()
+    p.save()
+
+    # Show the result to the user
+    return response
 
 # def edit_fix(request,id):
 #     edit_form_fix = Modify_fix()
@@ -145,3 +178,6 @@ def addrepairproduct(request):
 def addnewcustomer(request):
     customer_form = addNewCustomer()
     return render(request,'login/addnewcustomer.html',locals())
+
+def generatePDF(request,customerifo):
+    return redirect('login/generate_pdf.html',{'customerifo':customerifo})
