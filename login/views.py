@@ -102,36 +102,6 @@ def add_product(request):
     product_form = AddNewProduct()
     return render(request,'login/addnewproduct.html',locals())
 
-def add_repair_product(request):
-    if request.method == 'POST':
-        fix_id = request.POST.get('fix_id')
-        fix_product_id = request.POST.get('fix_product_id')
-        fix_product_name = request.POST.get('fix_product_name')
-        fix_product_description = request.POST.get('fix_product_description')
-        fix_state = request.POST.get('fix_state')
-        fix_detail = request.POST.get('fix_detail')
-        company = request.POST.get('Product_Company')
-        if fix_id == '' or fix_product_id =='' or fix_product_name=='' or fix_product_description=='' or fix_state=='' or fix_detail=='':
-            return render(request,'login/addnewproduct.html',{'ret':'error!'})
-        if company == 'fix_tr_report':
-            models.fix_tr_report.objects.create(fixed_id=fix_id, tr_product_id=fix_product_id,
-                                            tr_product_name=fix_product_name, tr_product_description=fix_product_description,
-                                            fix_state=fix_state,fixed_detail=fix_detail)
-            message = "add successful!"
-        elif company == 'fix_tp_report':
-            models.fix_tp_report.objects.create(fixed_id=fix_id, tp_product_id=fix_product_id,
-                                                tp_product_name=fix_product_name,
-                                                tp_product_description=fix_product_description,
-                                                fix_state=fix_state, fixed_detail=fix_detail)
-            message = "add successful!"
-        else:
-            message = "error!"
-    #     return redirect('/login/index.html')
-    # else:
-    #     return render(request, '/login/index.html')
-    repair_form = addRepairProduct()
-    return render(request,'login/addrepairproduct.html',locals())
-
 def del_fix_tr_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
     return redirect('/index/')
@@ -140,15 +110,19 @@ def del_fix_tp_product(request,id):
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
 
-def modify_fix_product(request,id):
+def modify_product(request,id):
+    produt_obj = models.Trproduct.objects.filter(id=id).first()
+    print(produt_obj)
     if request.method == 'POST':
-        product_record = request.POST.get('fixed_Record')
-        product_state = request.POST.get('Fixed_State')
-        models.fix_tr_report.objects.filter(id=id).update(fixed_detail = product_record, fix_state = product_state)
-        models.fix_tp_report.objects.filter(id=id).update(fixed_detail = product_record, fix_state = product_state)
-        return redirect('/index/')
+        product_id = request.POST.get('tr product id')
+        product_name = request.POST.get('tr product name')
+        product_state = request.POST.get('tr product state')
+        if product_id == '' or product_name == '' or product_state == '':
+            return render(request, 'login/add.html', {'ret': 'error!'})
+        models.Trproduct.objects.filter(id=id).update(tp_product_id = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        return redirect('/login/index.html')
     else:
-        return render(request, '/index/',locals())
+        return render(request, '/login/index.html')
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
@@ -163,10 +137,12 @@ def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
     if request.method == "POST":
-        custom_info = {}
-
-        generatePDF(request,custom_info)
-    return render(request, 'login/TRproductOut.html', context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
+        s = request.POST.getlist("check")
+        n = request.POST.getlist('quantity')
+        custom_info = request.POST.copy()
+        #generatePDF(request,custom_info )
+        #return redirect('/generate_pdf/', {'custom_info': custom_info})
+    return render(request, 'login/TRproductOut.html', custom_info,context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
 
 def pdfdownload(request):
     # Create the HttpResponse object
@@ -206,4 +182,4 @@ def addnewcustomer(request):
     return render(request,'login/addnewcustomer.html',locals())
 
 def generatePDF(request,customerifo):
-    return redirect('login/generate_pdf.html',{'customerifo':customerifo})
+    return render('login/generate_pdf.html',{'customerifo':customerifo})
