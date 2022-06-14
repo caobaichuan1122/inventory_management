@@ -28,6 +28,9 @@ urlpatterns = [
     path('del_fix_tp_product/<int:id>', views.del_fix_tp_product, name='del_fix_tp_product'),
     path('index/modify/<int:id>',views.Modify_fix,name='modify_fix'),
     path('TrSubpage/', views.TrSubpage, name='TrSubpage'),
-    path('TrProductList/', views.TrProductList, name='TrProductList')
+    path('TrProductList/', views.TrProductList, name='TrProductList'),
+    path('TrProductStockOut/', views.TrProductStockOut, name='TrProductStockOut'),
+    path('add_repair_product/',views.addrepairproduct,name="add_repair_product"),
+    path('add_new_customer/',views.addnewcustomer,name='add_new_customer')
 
 ]

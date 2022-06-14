@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Add New Product{% endblock %}
+{% block title %}Add Repair Products{% endblock %}
 {% block content %}
 {% if request.session.is_login %}
 <div class="content-page">
@@ -9,57 +9,57 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Add New Product</h4>
+                            <h4 class="card-title">Add Repair Products</h4>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class='form-addnewproduct' action="/add_product/" data-toggle="validator" method="post" style="align-items: center;">
+                        <form class='form-addrepairproduct' action="/addrepairproduct/" data-toggle="validator" method="post" style="align-items: center;">
                             <div class="row">
-                                {% csrf_token %}
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_name.label_tag }}
-                                        {{ product_form.Product_name}}
+                                        {{ repair_form.fix_id.label_tag }}
+                                        {{ repair_form.fix_id}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_id.label_tag }}
-                                        {{ product_form.Product_id}}
+                                        {{ repair_form.fix_product_id.label_tag }}
+                                        {{ repair_form.fix_product_id}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_no.label_tag }}
-                                        {{ product_form.Product_no}}
+                                        {{ repair_form.fix_product_name.label_tag }}
+                                        {{ repair_form.fix_product_name}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_Price.label_tag }}
-                                        {{ product_form.Product_Price}}
+                                        {{ repair_form.fix_product_description.label_tag }}
+                                        {{ repair_form.fix_product_description}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_time.label_tag }}
-                                        {{ product_form.Product_time}}
+                                        {{ repair_form.fix_state.label_tag }}
+                                        {{ repair_form.fix_state}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_Company.label_tag }}
-                                        {{ product_form.Product_Company}}
+                                        {{ repair_form.fix_detail.label_tag }}
+                                        {{ repair_form.fix_detail}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        {{ repair_form.Product_Company.label_tag }}
+                                        {{ repair_form.Product_Company}}
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" href="/add_product/">
-                                 Add Product
-                            </button>
+                            <button type="submit" class="btn btn-primary mr-2">Add Product</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
-                            {% if message %}
-                                <div class="alert alert-warning">{{ message }}</div>
-                            {% endif %}
                         </form>
                     </div>
                 </div>

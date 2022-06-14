@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render,redirect
-from .froms import UserForm,AddNewProduct,Modify_fix,Modify_Product
+from django.shortcuts import render, redirect
+from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
 
@@ -67,6 +67,12 @@ def add_product(request):
         Product_Price = request.POST.get('Product_Price')
         Product_time = request.POST.get('Product_time')
         company = request.POST.get('Product_Company')
+        # print(product_id)
+        # print(product_name)
+        # print(Product_time)
+        # print(Product_no)
+        # print(Product_Price)
+        # print(company)
         if product_id == '' or product_name =='' or Product_no=='' or Product_Price=='' or Product_time=='':
             return render(request,'login/addnewproduct.html',{'ret':'error!'})
         if company == 'Trproduct':
@@ -122,6 +128,20 @@ def TrProductList(request):
     modify_form = Modify_Product
     return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
 
+
+def TrProductStockOut(request):
+    Trdatabase = Trproduct.objects.all()
+    return render(request, 'login/TRproductOut.html', context={'Trdatabase': Trdatabase})
+
+
 # def edit_fix(request,id):
 #     edit_form_fix = Modify_fix()
 #     return render(request,'/login/index.html',locals())
+
+def addrepairproduct(request):
+    repair_form = addRepairProduct()
+    return render(request, 'login/addrepairproduct.html', locals())
+
+def addnewcustomer(request):
+    customer_form = addNewCustomer()
+    return render(request,'login/addnewcustomer.html',locals())

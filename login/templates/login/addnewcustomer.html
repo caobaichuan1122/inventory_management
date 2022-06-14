@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Add New Product{% endblock %}
+{% block title %}Add New Customers{% endblock %}
 {% block content %}
 {% if request.session.is_login %}
 <div class="content-page">
@@ -9,57 +9,51 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Add New Product</h4>
+                            <h4 class="card-title">Add New Customers</h4>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class='form-addnewproduct' action="/add_product/" data-toggle="validator" method="post" style="align-items: center;">
+                        <form class='form-addnewcustomer' action="/addnewcustomer/" data-toggle="validator" method="post" style="align-items: center;">
                             <div class="row">
-                                {% csrf_token %}
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_name.label_tag }}
-                                        {{ product_form.Product_name}}
+                                        {{ customer_form.customer_id.label_tag }}
+                                        {{ customer_form.customer_id}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_id.label_tag }}
-                                        {{ product_form.Product_id}}
+                                        {{ customer_form.customer_name.label_tag }}
+                                        {{ customer_form.customer_name}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_no.label_tag }}
-                                        {{ product_form.Product_no}}
+                                        {{ customer_form.customer_phone.label_tag }}
+                                        {{ customer_form.customer_phone}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_Price.label_tag }}
-                                        {{ product_form.Product_Price}}
+                                        {{ customer_form.customer_address.label_tag }}
+                                        {{ customer_form.customer_address}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_time.label_tag }}
-                                        {{ product_form.Product_time}}
+                                        {{ customer_form.customer_email.label_tag }}
+                                        {{ customer_form.customer_email}}
                                     </div>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        {{ product_form.Product_Company.label_tag }}
-                                        {{ product_form.Product_Company}}
+                                        {{ customer_form.customer_type.label_tag }}
+                                        {{ customer_form.customer_type}}
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" href="/add_product/">
-                                 Add Product
-                            </button>
+                            <button type="submit" class="btn btn-primary mr-2">Add New Customer</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
-                            {% if message %}
-                                <div class="alert alert-warning">{{ message }}</div>
-                            {% endif %}
                         </form>
                     </div>
                 </div>
