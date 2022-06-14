@@ -44,18 +44,20 @@
             </div>
             <div>
                 <h3>To:</h3>
-                <h4>{{ customerifo.customer_name }}</h4>
-                <p>Address: {{ customerifo.customer_address }}</p>
-                <p>Phone: {{ customerifo.customer_phone }}</p>
-                <p>Email: {{ customerifo.customer_email }}</p>
+                {% for ci in customer_info %}
+                <h4>{{ ci.customer_name }}</h4>
+                <p>Address: {{ ci.customer_address }}</p>
+                <p>Phone: {{ ci.customer_phone }} </p>
+                <p>Email: {{ ci.customer_email}}</p>
+                {% endfor %}
             </div>
         </div>
         <div class="col-md-6">
             <div class="container-fluid" style="background: #dddddd; text-align: left;padding: 5px 5px 5px 5px;">
-                <p>Invoice No.: </p>
-                <p>Invoice Date: </p>
+                <p>Invoice No.: {{ Invoice_no }}</p>
+                <p>Invoice Date: {{ Invoice_date }}</p>
                 <p>Delivery Note No.: </p>
-                <p>Delivery Date: </p>
+                <p>Delivery Date: {{ Delivery_date}}</p>
                 <p>Delivery Term: </p>
             </div>
         </div>
@@ -68,12 +70,14 @@
                 <th>Unit</th>
                 <th>Quantity</th>
             </tr>
+            {% for p in product_list %}
             <tr>
+                <td>{{ p.tr_product_id }}</td>
+                <td>{{ p.tr_product_name}}</td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ product_quantity.0 }}</td>
             </tr>
+            {% endfor %}
         </table>
     </div>
 </div>

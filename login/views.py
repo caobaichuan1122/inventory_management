@@ -136,13 +136,10 @@ def TrProductList(request):
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
-    if request.method == "POST":
-        s = request.POST.getlist("check")
-        n = request.POST.getlist('quantity')
-        custom_info = request.POST.copy()
+
         #generatePDF(request,custom_info )
         #return redirect('/generate_pdf/', {'custom_info': custom_info})
-    return render(request, 'login/TRproductOut.html', custom_info,context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
+    return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
 
 def pdfdownload(request):
     # Create the HttpResponse object
@@ -181,5 +178,21 @@ def addnewcustomer(request):
     customer_form = addNewCustomer()
     return render(request,'login/addnewcustomer.html',locals())
 
-def generatePDF(request,customerifo):
-    return render('login/generate_pdf.html',{'customerifo':customerifo})
+def generatePDF(request):
+    Trdatabase = Trproduct.objects.all()
+    Customerdatabase = customer.objects.all().values()
+    if request.method == "POST":
+        product_id = request.POST.getlist("check")
+        product_quantity = list(filter(None,request.POST.getlist('quantity')))
+        customerid = request.POST.get('customer')
+        Invoice_date = request.POST.get('Invoicedate')
+        Delivery_date = request.POST.get('Deliverydate')
+        Invoice_no = request.POST.get('invoice_no')
+        Note = request.POST.get('Note')
+        customer_info = customer.objects.filter(customer_id=customerid).values()
+        product_list = Trproduct.objects.filter(id__in=product_id).values()
+        print(product_quantity)
+        return render(request,'login/generate_pdf.html',context={'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+    else:
+        return render(request, 'login/TRproductOut.html',
+                      context={'Trdatabase': Trdatabase, 'Customerdatabase': Customerdatabase})

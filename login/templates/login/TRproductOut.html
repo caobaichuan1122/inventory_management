@@ -46,8 +46,9 @@
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive rounded mb-3">
-                    <form class='form-StockOut' action="#" data-toggle="validator" method="post"
+                    <form class='form-StockOut' action="/generate_pdf/" data-toggle="validator" method="post"
                           style="text-align:center; margin: 2rem; padding:2rem;">
+                        {% csrf_token %}
                         <table id="repair-table" class="data-table table table-striped mb-0 tbl-server-info"
                                style="width:100%;">
                             <thead class="bg-white text-uppercase">
@@ -67,9 +68,9 @@
                             <tr>
                                 <td>
                                     <div class="checkbox d-inline-block form-group">
-                                        <input type="checkbox" value="{{item.id}}" class="checkbox-input"
-                                               id="checkbox-{{item.id}}">
-                                        <label for="checkbox-{{item.id}}" class="mb-0"></label>
+                                        <input type="checkbox" value="{{ item.id }}" class="checkbox-input" name="check"
+                                               id="checkbox-{{ item.id }}">
+                                        <label for="checkbox-{{ item.id }}" class="mb-0"></label>
                                     </div>
                                 </td>
                                 <td>{{ item.tr_product_id}}</td>
@@ -79,9 +80,9 @@
                                 <td>{{ item.tr_product_time}}</td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="number" id="number-{{item.id}}" min="0"
-                                               max="{{item.tr_product_num}}">
-                                        <label for="number-{{item.id}}"></label>
+                                        <input type="number" id="number-{{ item.id }}" min="0"
+                                               max="{{ item.tr_product_num }}" name="quantity">
+                                        <label for="number-{{ item.id }}"></label>
                                     </div>
                                 </td>
                             </tr>
@@ -100,17 +101,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="Invoicedate">Choose Invoice Date: </label>
-                                <input type="date" id="Invoicedate">
+                                <input name="Invoicedate" type="date" id="Invoicedate">
 
                             </div>
                             <div class="form-group">
                                 <label for="Deliverydate">Choose Delivery Date: </label>
-                                <input type="date" id="Deliverydate">
+                                <input type="date" id="Deliverydate" name="Deliverydate">
 
                             </div>
                             <div class="form-group">
                                 <label for="invoice_no">Enter Invoice Number: </label>
-                                <input type="text" id="invoice_no">
+                                <input type="text" id="invoice_no" name="invoice_no">
                             </div>
                             <div class="form-group">
                                 <label for="Note" style="float:top;">Enter Some Note: </label>
