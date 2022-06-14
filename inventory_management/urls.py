@@ -30,7 +30,7 @@ urlpatterns = [
     path('TrSubpage/', views.TrSubpage, name='TrSubpage'),
     path('TrProductList/', views.TrProductList, name='TrProductList'),
     path('TrProductStockOut/', views.TrProductStockOut, name='TrProductStockOut'),
-    path('add_repair_product/',views.add_repair_product,name="add_repair_product"),
+    path('addrepairproduct/',views.addrepairproduct,name="addrepairproduct"),
     path('add_new_customer/',views.addnewcustomer,name='add_new_customer'),
     path('generate_pdf/',views.generatePDF,name="generate_pdf")
 

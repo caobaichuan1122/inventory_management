@@ -110,19 +110,17 @@ def del_fix_tp_product(request,id):
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
 
-def modify_product(request,id):
-    produt_obj = models.Trproduct.objects.filter(id=id).first()
-    print(produt_obj)
+def modify_fix_product(request,id):
     if request.method == 'POST':
-        product_id = request.POST.get('tr product id')
-        product_name = request.POST.get('tr product name')
-        product_state = request.POST.get('tr product state')
-        if product_id == '' or product_name == '' or product_state == '':
+        product_record = request.POST.get('fixed_Record')
+        product_state = request.POST.get('Fixed_State')
+        if  product_record == '' or product_state == '':
             return render(request, 'login/add.html', {'ret': 'error!'})
-        models.Trproduct.objects.filter(id=id).update(tp_product_id = product_id, tr_product_name = product_name, tr_product_description = product_state)
-        return redirect('/login/index.html')
+        models.fix_tr_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
+        models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
+        return redirect('/index/')
     else:
-        return render(request, '/login/index.html')
+        return render(request, '/index/',locals())
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
