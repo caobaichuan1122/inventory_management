@@ -13,8 +13,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class='form-addrepairproduct' action="/addrepairproduct/" data-toggle="validator" method="post" style="align-items: center;">
+                        <form class='form-addrepairproduct' action="/add_repair_product/" data-toggle="validator" method="post" style="align-items: center;">
                             <div class="row">
+                                {% csrf_token %}
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         {{ repair_form.fix_id.label_tag }}
@@ -60,6 +61,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Add Product</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
+                            {% if message %}
+                                <div class="alert alert-warning">{{ message }}</div>
+                            {% endif %}
                         </form>
                     </div>
                 </div>

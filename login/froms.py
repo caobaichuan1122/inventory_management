@@ -44,7 +44,7 @@ class Modify_Product(forms.Form):
 
 
 class addRepairProduct(forms.Form):
-    company_name=[('Trproduct','Toprail Services'),('Tproduct','T-Power'),('Prproduct','Pranstek')]
+    company_name=[('fix_tr_report','Toprail Services'),('fix_tp_report','T-Power')]
     fix_id = forms.CharField(label="Fixed Code", max_length=256,
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
     fix_product_id = forms.CharField(label="Fixed Product Code", max_length=256,
