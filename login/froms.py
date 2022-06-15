@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import NumberInput, Textarea
 
 
 class UserForm(forms.Form):
@@ -40,7 +39,7 @@ class Modify_Product(forms.Form):
     Product_Price = forms.DecimalField(label="Product Price ($AU) ", max_digits=2, help_text="Enter Number",
                                        widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_time = forms.DateTimeField(label="Time",
-                                       widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'date'}))
+                                       widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
 
 
 class addRepairProduct(forms.Form):

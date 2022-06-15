@@ -9,10 +9,6 @@ from datetime import datetime
 
 
 
-# def index(request):
-#     data = Trproduct.objects.all()
-#     return render(request,'login/index.html',context={'data':data})
-
 def login(request):
     # if request.session.get('is_login',None):
     #     return redirect('/index/') #sing in page
@@ -71,12 +67,6 @@ def add_product(request):
         Product_Price = request.POST.get('Product_Price')
         Product_time = request.POST.get('Product_time')
         company = request.POST.get('Product_Company')
-        # print(product_id)
-        # print(product_name)
-        # print(Product_time)
-        # print(Product_no)
-        # print(Product_Price)
-        # print(company)
         if product_id == '' or product_name =='' or Product_no=='' or Product_Price=='' or Product_time=='':
             return render(request,'login/addnewproduct.html',{'ret':'error!'})
         if company == 'Trproduct':
@@ -111,6 +101,7 @@ def del_fix_tp_product(request,id):
     return redirect('/index/')
 
 def modify_fix_product(request,id):
+    print(request)
     if request.method == 'POST':
         product_record = request.POST.get('fixed_Record')
         product_state = request.POST.get('Fixed_State')
@@ -120,14 +111,14 @@ def modify_fix_product(request,id):
         models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
         return redirect('/index/')
     else:
-        return render(request, '/index/',locals())
+        return render(request, '/index/')
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
 
 def TrProductList(request):
+    modify_form = Modify_Product()
     Trdatabase = Trproduct.objects.all()
-    modify_form = Modify_Product
     return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
 
 
@@ -169,6 +160,29 @@ def pdfdownload(request):
 #     return render(request,'/login/index.html',locals())
 
 def addrepairproduct(request):
+    if request.method == 'POST':
+        fix_id = request.POST.get('fix_id')
+        fix_product_id = request.POST.get('fix_product_id')
+        fix_product_name = request.POST.get('fix_product_name')
+        fix_product_description = request.POST.get('fix_product_description')
+        fix_state = request.POST.get('fix_state')
+        fix_detail = request.POST.get('fix_detail')
+        company = request.POST.get('Product_Company')
+        if fix_id == '' or fix_product_id =='' or fix_product_name=='' or fix_product_description=='' or fix_state=='' or fix_detail=='':
+            return render(request,'login/addnewproduct.html',{'ret':'error!'})
+        if company == 'fix_tr_report':
+            models.fix_tr_report.objects.create(fixed_id=fix_id, tr_product_id=fix_product_id,
+                                            tr_product_name=fix_product_name, tr_product_description=fix_product_description,
+                                            fix_state=fix_state,fixed_detail=fix_detail)
+            message = "add successful!"
+        elif company == 'fix_tp_report':
+                models.fix_tp_report.objects.create(fixed_id=fix_id, tp_product_id=fix_product_id,
+                                                    tp_product_name=fix_product_name,
+                                                    tp_product_description=fix_product_description,
+                                                    fix_state=fix_state, fixed_detail=fix_detail)
+                message = "add successful!"
+        else:
+            message = "error!"
     repair_form = addRepairProduct()
     return render(request, 'login/addrepairproduct.html', locals())
 
