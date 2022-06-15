@@ -16,7 +16,7 @@
                         <h4 class="mb-3">Product List</h4>
                         <p class="mb-0">All product information showing in below</p>
                     </div>
-                    <a href="/TrProductStockOut/" class="btn btn-primary add-list"><i class="las la-truck-loading"></i>Stock Out</a>
+                    <a href="/TpProductStockOut/" class="btn btn-primary add-list"><i class="las la-truck-loading"></i>Stock Out</a>
                 </div>
 
             </div>
@@ -35,13 +35,13 @@
                         </tr>
                         </thead>
                         <tbody class="ligth-body">
-                        {% for item in Trdatabase %}
+                        {% for item in Tpdatabase %}
                         <tr>
-                            <td>{{ item.tr_product_id}}</td>
-                            <td>{{ item.tr_product_name }}</td>
-                            <td>{{ item.tr_product_num }}</td>
-                            <td>{{ item.tr_product_price}}</td>
-                            <td>{{ item.tr_product_time}}</td>
+                            <td>{{ item.tp_product_id}}</td>
+                            <td>{{ item.tp_product_name }}</td>
+                            <td>{{ item.tp_product_num }}</td>
+                            <td>{{ item.tp_product_price}}</td>
+                            <td>{{ item.tp_product_time}}</td>
                             <td>
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"

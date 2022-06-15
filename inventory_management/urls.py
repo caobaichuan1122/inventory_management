@@ -28,10 +28,18 @@ urlpatterns = [
     path('del_fix_tp_product/<int:id>', views.del_fix_tp_product, name='del_fix_tp_product'),
     path('modify_fix_product/<int:id>',views.modify_fix_product,name='modify_fix_product'),
     path('TrSubpage/', views.TrSubpage, name='TrSubpage'),
+    path('TpSubpage/', views.TpSubpage, name='TpSubpage'),
+    path('PrSubpage/', views.PrSubpage, name='PrSubpage'),
     path('TrProductList/', views.TrProductList, name='TrProductList'),
     path('TrProductStockOut/', views.TrProductStockOut, name='TrProductStockOut'),
-    path('addrepairproduct/',views.addrepairproduct,name="addrepairproduct"),
+    path('TpProductStockOut/', views.TpProductStockOut, name='TpProductStockOut'),
+    path('PrProductStockOut/', views.PrProductStockOut, name='PrProductStockOut'),
+    path('add_repair_product/',views.addrepairproduct,name="add_repair_product"),
     path('add_new_customer/',views.addnewcustomer,name='add_new_customer'),
-    path('generate_pdf/',views.generatePDF,name="generate_pdf")
+    path('generate_pdf/',views.generatePDF,name="generate_pdf"),
+    path('generate_pdftp/', views.generatePDF_tp, name="generate_pdftp"),
+    path('generate_pdfpr/', views.generatePDF_pr, name="generate_pdfpr"),
+    path('TpProductList/',views.TpProductList,name="TpProductList"),
+    path('PrProductList/',views.PrProductList,name="PrProductList")
 
 ]

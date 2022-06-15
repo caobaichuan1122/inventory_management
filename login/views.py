@@ -43,7 +43,6 @@ def register(request):
 def logout(request):
     if not request.session.get('is_login', None):
         return redirect("/login/")
-    # request.session.flush()
     del request.session['is_login']
     del request.session['user_id']
     del request.session['user_name']
@@ -56,7 +55,7 @@ def index(request):
     Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.all()
     FixTpDatabase = fix_tp_report.objects.all()
-    edit_form_fix = Modify_fix(request.GET)
+    edit_form_fix = Modify_fix()
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
@@ -67,6 +66,12 @@ def add_product(request):
         Product_Price = request.POST.get('Product_Price')
         Product_time = request.POST.get('Product_time')
         company = request.POST.get('Product_Company')
+        # print(product_id)
+        # print(product_name)
+        # print(Product_time)
+        # print(Product_no)
+        # print(Product_Price)
+        # print(company)
         if product_id == '' or product_name =='' or Product_no=='' or Product_Price=='' or Product_time=='':
             return render(request,'login/addnewproduct.html',{'ret':'error!'})
         if company == 'Trproduct':
@@ -86,9 +91,6 @@ def add_product(request):
             message = "add successful!"
         else:
             message = "error!"
-    #     return redirect('/login/index.html')
-    # else:
-    #     return render(request, '/login/index.html')
     product_form = AddNewProduct()
     return render(request,'login/addnewproduct.html',locals())
 
@@ -101,33 +103,59 @@ def del_fix_tp_product(request,id):
     return redirect('/index/')
 
 def modify_fix_product(request,id):
+    produt_obj = models.Trproduct.objects.filter(id=id).first()
+    print(produt_obj)
     if request.method == 'POST':
-        product_record = request.POST.get('fixed_Record')
-        product_state = request.POST.get('Fixed_State')
-        if  product_record == '' or product_state == '':
+        product_id = request.POST.get('tr product id')
+        product_name = request.POST.get('tr product name')
+        product_state = request.POST.get('tr product state')
+        if product_id == '' or product_name == '' or product_state == '':
             return render(request, 'login/add.html', {'ret': 'error!'})
-        models.fix_tr_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
-        models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
-        return redirect('/index/')
+        models.Trproduct.objects.filter(id=id).update(tp_product_id = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        return redirect('/login/index.html')
     else:
-        return render(request, '/index/',locals())
+        return render(request, '/login/index.html')
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
 
+def TpSubpage(request):
+    return render(request,'login/TPsubpage.html',locals())
+
+def PrSubpage(request):
+    return render(request,'login/PRsubpage.html',locals())
+
 def TrProductList(request):
-    modify_form = Modify_Product()
     Trdatabase = Trproduct.objects.all()
+    modify_form = Modify_Product()
     return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
 
+def TpProductList(request):
+    Tpdatabase = Tproduct.objects.all()
+    modify_form = Modify_Product()
+    return render(request,'login/TPproductList.html',context={'Tpdatabase':Tpdatabase,'modify_form':modify_form})
+
+def PrProductList(request):
+    Prdatabase = Prproduct.objects.all()
+    modify_form = Modify_Product()
+    return render(request,'login/PRproductList.html',context={'Prdatabase':Prdatabase,'modify_form':modify_form})
 
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
-
-        #generatePDF(request,custom_info )
-        #return redirect('/generate_pdf/', {'custom_info': custom_info})
+    #generatePDF(request,custom_info )
+    #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
+
+def TpProductStockOut(request):
+    Tpdatabase = Tproduct.objects.all()
+    Customerdatabase = customer.objects.all()
+    return render(request, 'login/TRproductOut.html',context={'Tpdatabase': Tpdatabase,'Customerdatabase':Customerdatabase})
+
+def PrProductStockOut(request):
+    Prdatabase = Prproduct.objects.all()
+    Customerdatabase = customer.objects.all()
+    return render(request, 'login/PRproductOut.html',context={'Prdatabase': Prdatabase,'Customerdatabase':Customerdatabase})
 
 def pdfdownload(request):
     # Create the HttpResponse object
@@ -154,34 +182,8 @@ def pdfdownload(request):
     # Show the result to the user
     return response
 
-# def edit_fix(request,id):
-#     edit_form_fix = Modify_fix()
-#     return render(request,'/login/index.html',locals())
 
 def addrepairproduct(request):
-    if request.method == 'POST':
-        fix_id = request.POST.get('fix_id')
-        fix_product_id = request.POST.get('fix_product_id')
-        fix_product_name = request.POST.get('fix_product_name')
-        fix_product_description = request.POST.get('fix_product_description')
-        fix_state = request.POST.get('fix_state')
-        fix_detail = request.POST.get('fix_detail')
-        company = request.POST.get('Product_Company')
-        if fix_id == '' or fix_product_id =='' or fix_product_name=='' or fix_product_description=='' or fix_state=='' or fix_detail=='':
-            return render(request,'login/addnewproduct.html',{'ret':'error!'})
-        if company == 'fix_tr_report':
-            models.fix_tr_report.objects.create(fixed_id=fix_id, tr_product_id=fix_product_id,
-                                            tr_product_name=fix_product_name, tr_product_description=fix_product_description,
-                                            fix_state=fix_state,fixed_detail=fix_detail)
-            message = "add successful!"
-        elif company == 'fix_tp_report':
-                models.fix_tp_report.objects.create(fixed_id=fix_id, tp_product_id=fix_product_id,
-                                                    tp_product_name=fix_product_name,
-                                                    tp_product_description=fix_product_description,
-                                                    fix_state=fix_state, fixed_detail=fix_detail)
-                message = "add successful!"
-        else:
-            message = "error!"
     repair_form = addRepairProduct()
     return render(request, 'login/addrepairproduct.html', locals())
 
@@ -193,6 +195,7 @@ def generatePDF(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all().values()
     if request.method == "POST":
+        company_id = request.POST.get('company_id')
         product_id = request.POST.getlist("check")
         product_quantity = list(filter(None,request.POST.getlist('quantity')))
         customerid = request.POST.get('customer')
@@ -200,10 +203,53 @@ def generatePDF(request):
         Delivery_date = request.POST.get('Deliverydate')
         Invoice_no = request.POST.get('invoice_no')
         Note = request.POST.get('Note')
+        Delivery_No = request.POST.get('DeliveryNo')
+        Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = Trproduct.objects.filter(id__in=product_id).values()
-        print(product_quantity)
-        return render(request,'login/generate_pdf.html',context={'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+        sum_quantity = str(sum([int(n) for n in product_quantity]))
+        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
     else:
-        return render(request, 'login/TRproductOut.html',
-                      context={'Trdatabase': Trdatabase, 'Customerdatabase': Customerdatabase})
+        return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase, 'Customerdatabase': Customerdatabase})
+
+def generatePDF_tp(request):
+    Tpdatabase = Tproduct.objects.all()
+    Customerdatabase = customer.objects.all().values()
+    if request.method == "POST":
+        company_id = request.POST.get('company_id')
+        product_id = request.POST.getlist("check")
+        product_quantity = list(filter(None,request.POST.getlist('quantity')))
+        customerid = request.POST.get('customer')
+        Invoice_date = request.POST.get('Invoicedate')
+        Delivery_date = request.POST.get('Deliverydate')
+        Invoice_no = request.POST.get('invoice_no')
+        Note = request.POST.get('Note')
+        Delivery_No = request.POST.get('DeliveryNo')
+        Delivery_Term = request.POST.get('DeliveryTerm')
+        customer_info = customer.objects.filter(customer_id=customerid).values()
+        product_list = Tproduct.objects.filter(id__in=product_id).values()
+        sum_quantity = str(sum([int(n) for n in product_quantity]))
+        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
+    else:
+        return render(request, 'login/TPproductOut.html',context={'Tpdatabase': Tpdatabase, 'Customerdatabase': Customerdatabase})
+
+def generatePDF_pr(request):
+    Prdatabase = Prproduct.objects.all()
+    Customerdatabase = customer.objects.all().values()
+    if request.method == "POST":
+        company_id = request.POST.get('company_id')
+        product_id = request.POST.getlist("check")
+        product_quantity = list(filter(None,request.POST.getlist('quantity')))
+        customerid = request.POST.get('customer')
+        Invoice_date = request.POST.get('Invoicedate')
+        Delivery_date = request.POST.get('Deliverydate')
+        Invoice_no = request.POST.get('invoice_no')
+        Note = request.POST.get('Note')
+        Delivery_No = request.POST.get('DeliveryNo')
+        Delivery_Term = request.POST.get('DeliveryTerm')
+        customer_info = customer.objects.filter(customer_id=customerid).values()
+        product_list = Prproduct.objects.filter(id__in=product_id).values()
+        sum_quantity = str(sum([int(n) for n in product_quantity]))
+        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
+    else:
+        return render(request, 'login/TPproductOut.html',context={'Prdatabase': Prdatabase, 'Customerdatabase': Customerdatabase})

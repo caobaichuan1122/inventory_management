@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}home{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" style="margin-top: 8rem;">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card card-block card-stretch card-height" style="background: white; border-radius: 10px; box-shadow: 5px 5px 5px 5px #9ca3b1;">
+                            <div class="card-body" >
+                                <div class="d-flex align-items-center mb-4 card-total-sale" >
+                                    <div class="icon iq-icon-box-2 bg-info-light" style="height:100px; width:200px;">
+                                        <img src="../static/images/logo/tplogo.png" class="img-fluid" alt="image" style="object-fit:fill;">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2">T-Power</p>
+                                        <h4>Product List</h4>
+                                    </div>
+                                    <div>
+                                        <a href="/TpProductList/"><button type="button"  class="btn btn-info ml-4">Enter <i class="las la-chevron-circle-right"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card card-block card-stretch card-height" style="background: white; border-radius: 10px; box-shadow: 5px 5px 5px 5px #9ca3b1;">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4 card-total-sale" >
+                                    <div class="icon iq-icon-box-2 bg-danger-light" style="height:100px; width:200px;">
+                                        <img src="../static/images/logo/tplogo.png" class="img-fluid" alt="image" style="object-fit:fill;">
+                                    </div>
+                                    <div>
+                                        <p class="mb-2">T-Power</p>
+                                        <h4>Repair List</h4>
+                                    </div>
+                                    <div>
+                                        <button type="button" class="btn btn-info ml-4">Enter <i class="las la-chevron-circle-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="edit-note" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup text-left">
+                        <div class="media align-items-top justify-content-between">
+                            <h3 class="mb-3">Product</h3>
+                            <div class="btn-cancel p-0" data-dismiss="modal"><i class="las la-times"></i></div>
+                        </div>
+                        <div class="content edit-notes">
+                            <div class="card card-transparent card-block card-stretch event-note mb-0">
+                                <div class="card-body px-0 bukmark">
+                                    <div class="d-flex align-items-center justify-content-between pb-2 mb-3 border-bottom">
+                                        <div class="quill-tool">
+                                        </div>
+                                    </div>
+                                    <div id="quill-toolbar1">
+                                        <p>Virtual Digital Marketing Course every week on Monday, Wednesday and
+                                            Saturday.Virtual Digital Marketing Course every week on Monday</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer border-0">
+                                    <div class="d-flex flex-wrap align-items-ceter justify-content-end">
+                                        <div class="btn btn-primary mr-3" data-dismiss="modal">Cancel</div>
+                                        <div class="btn btn-outline-primary" data-dismiss="modal">Save</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<h1>Please login！</h1>
+{% endif %}
+{% endblock %}
