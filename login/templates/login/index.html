@@ -98,9 +98,9 @@
                                        href="#"><i class="las la-list-alt mr-0"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
-                                       data-original-title="Edit" data-target="#Edit-text"><i
+                                       data-original-title="Edit" data-target="#Edit-text{{ item.id }}"><i
                                             class="ri-pencil-line mr-0"></i></a>
-                                    <div class="modal fade" id="Edit-text" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="Edit-text{{ item.id }}" tabindex="-1" role="dialog"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -109,7 +109,7 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="/modify_fix_product/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
+                                                                <form class='form-addnewproduct'  data-toggle="validator" action="/modify_fix_product/{{ item.id }}" method="post" style="align-items: center;">
                                                                     <div class="row">
                                                                         {% csrf_token %}
                                                                         <div class="col-md-10">
@@ -127,7 +127,7 @@
                                                                     </div>
                                                                     <button type="reset" class="btn btn-danger">Reset</button>
                                                                     <button type="submit" class="btn btn-primary">
-                                                                         change
+                                                                        change
                                                                     </button>
                                                                     {% if message %}
                                                                         <div class="alert alert-warning">{{ message }}</div>
@@ -193,7 +193,7 @@
                                        href="#"><i class="las la-list-alt mr-0"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
-                                       data-original-title="Edit" data-target="#Edit-text_tp"><i
+                                       data-original-title="Edit" data-target="#Edit-text_tp" ><i
                                             class="ri-pencil-line mr-0"></i></a>
                                     <div class="modal fade" id="Edit-text_tp" tabindex="-1" role="dialog"
                                          aria-hidden="true">
@@ -204,7 +204,7 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="/modify_fix_product/{{ item.id }}" data-toggle="validator" method="post" style="align-items: center;">
+                                                                <form class='form-addnewproduct' data-toggle="validator" action="/modify_fix_product/{{ item.id }}" method="post" style="align-items: center;">
                                                                     <div class="row">
                                                                         {% csrf_token %}
                                                                         <div class="col-md-10">
@@ -221,7 +221,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <button type="reset" class="btn btn-danger">Reset</button>
-                                                                    <button type="submit" class="btn btn-primary">
+                                                                    <button type="submit" class="btn btn-primary" >
                                                                          Change
                                                                     </button>
                                                                     {% if message %}

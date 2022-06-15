@@ -56,7 +56,7 @@ def index(request):
     Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.all()
     FixTpDatabase = fix_tp_report.objects.all()
-    edit_form_fix = Modify_fix()
+    edit_form_fix = Modify_fix(request.GET)
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
@@ -101,7 +101,6 @@ def del_fix_tp_product(request,id):
     return redirect('/index/')
 
 def modify_fix_product(request,id):
-    print(request)
     if request.method == 'POST':
         product_record = request.POST.get('fixed_Record')
         product_state = request.POST.get('Fixed_State')
@@ -111,7 +110,7 @@ def modify_fix_product(request,id):
         models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
         return redirect('/index/')
     else:
-        return render(request, '/index/')
+        return render(request, '/index/',locals())
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
