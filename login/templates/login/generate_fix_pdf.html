@@ -7,14 +7,21 @@
     <script src="../static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
     <style>
         @page {
-            size: 21cm 29.7cm;
-            margin: 2cm
+            size: 20cm 28cm;
+            margin: 2cm;
         }
 
         @media print {
             html, body {
-                width: 210mm;
-                height: 297mm;
+                width: 200mm;
+                height: 280mm;
+                -webkit-print-color-adjust: exact;
+                -moz-print-color-adjust: exact;
+                -ms-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            #info{
+                background: #dddddd;
             }
 
             /* ... the rest of the rules ... */
@@ -61,13 +68,6 @@
                 <p>Email: ifo@t-power.com.au</p>
                 <p>Tel: 1300 772 678</p>
                 <p>Website: https://www.t-power.com.au</p>
-                {% else %}
-                <h4>Pranstek Pty Ltd.</h4>
-                <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
-                <p>ABN: 49 625 346 796</p>
-                <p>Email: ifo@pranstek.com.au</p>
-                <p>Tel: 1300 772 678</p>
-                <p>Website: https://www.pranstek.com.au</p>
                 {% endif %}
             </div>
             <div style="margin-top: 10px;">
@@ -81,7 +81,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="container-fluid" style="background: #dddddd; text-align: left;padding: 5px 5px 5px 5px;">
+            <div id="info" class="container-fluid"
+                 style="-webkit-print-color-adjust: exact; mso-print-color: yes; background: #dddddd; text-align: left;padding: 5px 5px 5px 5px;">
                 <p>Invoice No.: {{ Invoice_no }}</p>
                 <p>Invoice Date: {{ Invoice_date }}</p>
                 <p>Delivery Note No.: {{ Delivery_No }}</p>
@@ -99,8 +100,9 @@
     <div class="row" style="display: inline; margin-top: 3rem;">
         <table class="table table-striped">
             <tr>
-                <th>Product Code</th>
-                <th>Product Description</th>
+                <th>Fixed Product Code</th>
+                <th>Fixed Product Description</th>
+                <th>Fixed Detail</th>
                 <th>Unit</th>
                 <th>Quantity</th>
             </tr>
@@ -109,46 +111,35 @@
             {% for p in product_list %}
             <tr>
                 <td>{{ p.tr_product_id }}</td>
-                <td>{{ p.tr_product_name}}</td>
+                <td>{{ p.tr_product_description}}</td>
+                <td>{{ p.fixed_detail}}</td>
                 <td></td>
-                <td>{{ product_quantity|index:forloop.counter0 }}</td>
+                <td>1</td>
             </tr>
             {% endfor %}
             <tr style="border-top: 1px solid #7b7c88;">
                 <td><h4>Summary</h4></td>
                 <td></td>
                 <td></td>
-                <td><h4>{{ sum_quantity }}</h4></td>
+                <td></td>
+                <td><h4>{{ product_list|length }}</h4></td>
             </tr>
             {% elif company_id == "2" %}
             {% for p in product_list %}
             <tr>
                 <td>{{ p.tp_product_id }}</td>
-                <td>{{ p.tp_product_name}}</td>
+                <td>{{ p.tp_product_description }}</td>
+                <td>{{ p.fixed_detail }}</td>
                 <td></td>
-                <td>{{ product_quantity|index:forloop.counter0 }}</td>
+                <td>1</td>
             </tr>
             {% endfor %}
             <tr style="border-top: 1px solid #7b7c88;">
                 <td><h4>Summary</h4></td>
                 <td></td>
                 <td></td>
-                <td><h4>{{ sum_quantity }}</h4></td>
-            </tr>
-            {% else %}
-            {% for p in product_list %}
-            <tr>
-                <td>{{ p.pr_product_id }}</td>
-                <td>{{ p.pr_product_name}}</td>
                 <td></td>
-                <td>{{ product_quantity|index:forloop.counter0 }}</td>
-            </tr>
-            {% endfor %}
-            <tr style="border-top: 1px solid #7b7c88;">
-                <td><h4>Summary</h4></td>
-                <td></td>
-                <td></td>
-                <td><h4>{{ sum_quantity }}</h4></td>
+                <td><h4>{{ product_list|length }}</h4></td>
             </tr>
             {% endif %}
 

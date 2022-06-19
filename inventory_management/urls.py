@@ -14,7 +14,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django_pdfkit import PDFView
+from wkhtmltopdf.views import PDFTemplateView
 from login import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,6 +43,12 @@ urlpatterns = [
     path('generate_pdftp/', views.generatePDF_tp, name="generate_pdftp"),
     path('generate_pdfpr/', views.generatePDF_pr, name="generate_pdfpr"),
     path('TpProductList/',views.TpProductList,name="TpProductList"),
-    path('PrProductList/',views.PrProductList,name="PrProductList")
+    path('PrProductList/',views.PrProductList,name="PrProductList"),
+    path('TotalRepairList/',views.repair_list,name="TotalRepairList"),
+    path('TprepairList/',views.TpRepairList,name="TprepairList"),
+    path('TrrepairList/', views.TrRepairList, name="TrrepairList"),
+    path('TpRepairStockOut/',views.TpRepairStockOut, name="TpRepairStockOut"),
+    path('generate_fix_pdftp/',views.generatePDF_fix_tp,name="generate_fix_pdftp")
+    #path('generate_fix_pdftp/', PDFTemplateView.as_view(template_name='login/generate_fix_pdf.html',filename='deliverynote.pdf'), name='my-pdf')
 
 ]

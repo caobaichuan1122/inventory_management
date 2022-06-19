@@ -3,9 +3,18 @@ from django.shortcuts import render, redirect
 from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report,customer
-from reportlab.pdfgen import canvas
-from reportlab.lib.utils import ImageReader
+#from reportlab.pdfgen import canvas
 from datetime import datetime
+from io import StringIO
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.template import Context
+from html import escape
+import pdfkit
+from django_pdfkit import PDFView
+
+
+
 
 
 
@@ -57,6 +66,22 @@ def index(request):
     FixTpDatabase = fix_tp_report.objects.all()
     edit_form_fix = Modify_fix()
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
+
+def repair_list(request):
+    FixTrDatabase = fix_tr_report.objects.all()
+    FixTpDatabase = fix_tp_report.objects.all()
+    edit_form_fix = Modify_fix()
+    return render(request,'login/TotalRepairList.html',context={'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
+
+def TpRepairList(request):
+    FixTpDatabase = fix_tp_report.objects.all()
+    edit_form_fix = Modify_fix()
+    return render(request, 'login/TPrepairList.html',context={'FixTpDatabase': FixTpDatabase,'edit_form_fix': edit_form_fix})
+
+def TrRepairList(request):
+    FixTrDatabase = fix_tr_report.objects.all()
+    edit_form_fix = Modify_fix()
+    return render(request,'login/TRrepairList.html',context={'FixTrDatabase':FixTrDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
     if request.method == 'POST':
@@ -150,7 +175,12 @@ def TrProductStockOut(request):
 def TpProductStockOut(request):
     Tpdatabase = Tproduct.objects.all()
     Customerdatabase = customer.objects.all()
-    return render(request, 'login/TRproductOut.html',context={'Tpdatabase': Tpdatabase,'Customerdatabase':Customerdatabase})
+    return render(request, 'login/TPproductOut.html',context={'Tpdatabase': Tpdatabase,'Customerdatabase':Customerdatabase})
+
+def TpRepairStockOut(request):
+    TpFixdatabase = fix_tp_report.objects.all()
+    Customerdatabase = customer.objects.all()
+    return render(request, 'login/TpRepairOut.html',context={'TpFixdatabase': TpFixdatabase,'Customerdatabase':Customerdatabase})
 
 def PrProductStockOut(request):
     Prdatabase = Prproduct.objects.all()
@@ -253,3 +283,39 @@ def generatePDF_pr(request):
         return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
     else:
         return render(request, 'login/TPproductOut.html',context={'Prdatabase': Prdatabase, 'Customerdatabase': Customerdatabase})
+
+def generatePDF_fix_tp(request):
+    TpFixdatabase = fix_tp_report.objects.all()
+    Customerdatabase = customer.objects.all()
+    if request.method == "POST":
+        company_id = request.POST.get('company_id')
+        product_id = request.POST.getlist("check")
+        customerid = request.POST.get('customer')
+        Invoice_date = request.POST.get('Invoicedate')
+        Delivery_date = request.POST.get('Deliverydate')
+        Invoice_no = request.POST.get('invoice_no')
+        Note = request.POST.get('Note')
+        Delivery_No = request.POST.get('DeliveryNo')
+        Delivery_Term = request.POST.get('DeliveryTerm')
+        customer_info = customer.objects.filter(customer_id=customerid).values()
+        product_list = fix_tp_report.objects.filter(id__in=product_id).values()
+        template = get_template('login/generate_fix_pdf.html')
+        html = template.render({'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+        options = {
+            'page-size': 'A4',
+            'margin-top': '0in',
+            'margin-right': '0in',
+            'margin-bottom': '0in',
+            'margin-left': '0in',
+            'encoding': "UTF-8",
+            'no-outline': None
+        }
+        path_wkthmltopdf = '/Users/yangyijun/Library/Python/3.8/lib/python/site-packages/wkhtmltopdf/bin/wkhtmltopdf.exe'
+        config_1 = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+        pdf = pdfkit.from_string(html, False, options,config=config_1)
+        response = HttpResponse(pdf, content_type='application/pdf')
+        return response
+        #return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+    else:
+        return render(request, 'login/TpRepairOut.html',context={'TpFixdatabase': TpFixdatabase, 'Customerdatabase': Customerdatabase})
+
