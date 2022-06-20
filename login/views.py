@@ -72,11 +72,8 @@ def index(request):
     Trdatabase = Trproduct.objects.all()
     Tdatabase = Tproduct.objects.all()
     Prdatabase = Prproduct.objects.all()
-    FixTrDatabase = fix_tr_report.objects.all()
-    FixTpDatabase = fix_tp_report.objects.all()
-
-    edit_form_fix = Modify_fix(request.GET)
-
+    FixTrDatabase = fix_tr_report.objects.filter().exclude(fix_state='completed').all()
+    FixTpDatabase = fix_tp_report.objects.filter().exclude(fix_state='completed').all()
     edit_form_fix = Modify_fix()
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
@@ -96,7 +93,7 @@ def add_product(request):
                                             tr_product_time=Product_time)
             message = "add successful!"
         elif company == 'Tproduct':
-            models.Tpproduct.objects.create(tp_product_id=product_id, tp_product_name=product_name,
+            models.Tproduct.objects.create(tp_product_id=product_id, tp_product_name=product_name,
                                             tp_product_num=Product_no, tp_product_price=Product_Price,
                                             tp_product_time=Product_time)
             message = "add successful!"
@@ -136,11 +133,8 @@ def modify_fix_product(request,id):
     else:
         return render(request, '/index/',locals())
 
-def del_fix_tr_product(request,id):
+def del_fix_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
-    return redirect('/index/')
-
-def del_fix_tp_product(request,id):
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
 
@@ -161,16 +155,31 @@ def modify_product(request,id):
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
 
+def TpSubpage(request):
+    return render(request,'login/TPsubpage.html',locals())
+
+def PrSubpage(request):
+    return render(request,'login/PRSubpage.html',locals())
+
 def TrProductList(request):
     modify_form = Modify_Product()
     Trdatabase = Trproduct.objects.all()
     return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
 
+def TpProductList(request):
+    Tpdatabase = Tproduct.objects.all()
+    modify_form = Modify_Product()
+    return render(request,'login/TPproductList.html',context={'Tpdatabase':Tpdatabase,'modify_form':modify_form})
+
+def PrProductList(request):
+    Prdatabase = Prproduct.objects.all()
+    modify_form = Modify_Product()
+    return render(request,'login/PRproductList.html',context={'Prdatabase':Prdatabase,'modify_form':modify_form})
+
 
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
-
         #generatePDF(request,custom_info )
         #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
@@ -272,12 +281,25 @@ def completed(request,id):
     models.fix_tr_report.objects.filter(id=id).update(fix_state = 'Completed')
     models.fix_tp_report.objects.filter(id=id).update(fix_state = 'Completed')
     return redirect('/index/')
-
-
-
     Trdatabase = Trproduct.objects.all()
-    modify_form = Modify_Product
+    modify_form = Modify_Product()
     return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
+
+def repair_list(request):
+    FixTrDatabase = fix_tr_report.objects.all()
+    FixTpDatabase = fix_tp_report.objects.all()
+    edit_form_fix = Modify_fix()
+    return render(request,'login/TotalRepairList.html',context={'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
+
+def TpRepairList(request):
+    FixTpDatabase = fix_tp_report.objects.all()
+    edit_form_fix = Modify_fix()
+    return render(request, 'login/TPrepairList.html',context={'FixTpDatabase': FixTpDatabase,'edit_form_fix': edit_form_fix})
+
+def TrRepairList(request):
+    FixTrDatabase = fix_tr_report.objects.all()
+    edit_form_fix = Modify_fix()
+    return render(request,'login/TRrepairList.html',context={'FixTrDatabase':FixTrDatabase,'edit_form_fix':edit_form_fix})
 
 # def edit_fix(request,id):
 #     edit_form_fix = Modify_fix()
