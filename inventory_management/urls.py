@@ -40,4 +40,5 @@ urlpatterns = [
     path('completed/<int:id>',views.completed,name="completed"),
     # path('mypdf/', PDFView.as_view( template_name = 'login/addnewproduct.html' ), name='mypdf'),
 
+
 ]

@@ -1,6 +1,4 @@
-from django.contrib.admin.views.decorators import staff_member_required
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+
 from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report,customer
@@ -16,6 +14,17 @@ from datetime import datetime
 
 
 
+
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render,redirect
+from .froms import UserForm,AddNewProduct,Modify_fix,Modify_Product
+from . import models
+from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
+
+
+# def index(request):
+#     data = Trproduct.objects.all()
+#     return render(request,'login/index.html',context={'data':data})
 
 
 def login(request):
@@ -65,7 +74,10 @@ def index(request):
     Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.all()
     FixTpDatabase = fix_tp_report.objects.all()
+
     edit_form_fix = Modify_fix(request.GET)
+
+    edit_form_fix = Modify_fix()
     return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
@@ -123,6 +135,28 @@ def modify_fix_product(request,id):
         return redirect('/index/')
     else:
         return render(request, '/index/',locals())
+
+def del_fix_tr_product(request,id):
+    models.fix_tr_report.objects.filter(id=id).delete()
+    return redirect('/index/')
+
+def del_fix_tp_product(request,id):
+    models.fix_tp_report.objects.filter(id=id).delete()
+    return redirect('/index/')
+
+def modify_product(request,id):
+    produt_obj = models.Trproduct.objects.filter(id=id).first()
+    print(produt_obj)
+    if request.method == 'POST':
+        product_id = request.POST.get('tr product id')
+        product_name = request.POST.get('tr product name')
+        product_state = request.POST.get('tr product state')
+        if product_id == '' or product_name == '' or product_state == '':
+            return render(request, 'login/add.html', {'ret': 'error!'})
+        models.Trproduct.objects.filter(id=id).update(tp_product_id = product_id, tr_product_name = product_name, tr_product_description = product_state)
+        return redirect('/login/index.html')
+    else:
+        return render(request, '/login/index.html')
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
@@ -212,8 +246,6 @@ def addnewcustomer(request):
                                         customer_phone=customer_phone, customer_address=customer_address,
                                         customer_email=customer_email,customer_type=customer_type)
         message = "add successful!"
-    else:
-        message = "error!"
     customer_form = addNewCustomer()
     return render(request,'login/addnewcustomer.html',locals())
 
@@ -242,3 +274,11 @@ def completed(request,id):
     return redirect('/index/')
 
 
+
+    Trdatabase = Trproduct.objects.all()
+    modify_form = Modify_Product
+    return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
+
+# def edit_fix(request,id):
+#     edit_form_fix = Modify_fix()
+#     return render(request,'/login/index.html',locals())
