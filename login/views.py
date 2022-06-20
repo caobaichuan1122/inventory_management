@@ -1,11 +1,20 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report,customer
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
 from datetime import datetime
+
+# import pdfkit
+# def mypdf():
+#     path_wkhtmltopdf = r'D:\wf\wkhtmltopdf\bin\wkhtmltopdf.exe'
+#     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+#     pdfkit.from_url("http://google.com", "out.pdf", configuration=config)
+
+
 
 
 
@@ -92,13 +101,16 @@ def add_product(request):
     product_form = AddNewProduct()
     return render(request,'login/addnewproduct.html',locals())
 
-def del_fix_tr_product(request,id):
+def del_fix_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
-    return redirect('/index/')
-
-def del_fix_tp_product(request,id):
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
+
+def del_product(request,id):
+    models.Tproduct.objects.filter(id=id).delete()
+    models.Trproduct.objects.filter(id=id).delete()
+    models.Prproduct.objects.filter(id=id).delete()
+    return redirect('/TrProductList/')
 
 def modify_fix_product(request,id):
     if request.method == 'POST':
@@ -186,6 +198,22 @@ def addrepairproduct(request):
     return render(request, 'login/addrepairproduct.html', locals())
 
 def addnewcustomer(request):
+    if request.method == 'POST':
+        customer_id = request.POST.get('customer_id')
+        customer_name = request.POST.get('customer_name')
+        customer_phone = request.POST.get('customer_phone')
+        customer_address = request.POST.get('customer_address')
+        customer_email = request.POST.get('customer_email')
+        customer_type = request.POST.get('customer_type')
+        if customer_id == '' or customer_name =='' or customer_phone=='' or customer_address=='' or customer_email=='' or customer_type=='':
+            return render(request,'login/addnewcustomer.html',{'ret':'error!'})
+
+        models.customer.objects.create(customer_id=customer_id, customer_name=customer_name,
+                                        customer_phone=customer_phone, customer_address=customer_address,
+                                        customer_email=customer_email,customer_type=customer_type)
+        message = "add successful!"
+    else:
+        message = "error!"
     customer_form = addNewCustomer()
     return render(request,'login/addnewcustomer.html',locals())
 
@@ -207,3 +235,10 @@ def generatePDF(request):
     else:
         return render(request, 'login/TRproductOut.html',
                       context={'Trdatabase': Trdatabase, 'Customerdatabase': Customerdatabase})
+
+def completed(request,id):
+    models.fix_tr_report.objects.filter(id=id).update(fix_state = 'Completed')
+    models.fix_tp_report.objects.filter(id=id).update(fix_state = 'Completed')
+    return redirect('/index/')
+
+

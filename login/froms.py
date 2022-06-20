@@ -25,7 +25,7 @@ class AddNewProduct(forms.Form):
 class Modify_fix(forms.Form):
     Fixed_State = forms.CharField(label="Fixed State", max_length=256,
                                   widget=forms.TextInput(attrs={'class': 'form-control'}))
-    fixed_Record = forms.CharField(label="Fixed Record", max_length=256,
+    fixed_Record = forms.CharField(label="Fixed Record",
                                    widget=forms.Textarea(attrs={'class': 'form-control'}))
 
 

@@ -15,6 +15,7 @@
                     <div class="card-body">
                         <form class='form-addnewcustomer' action="/addnewcustomer/" data-toggle="validator" method="post" style="align-items: center;">
                             <div class="row">
+                                {% csrf_token %}
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         {{ customer_form.customer_id.label_tag }}
@@ -54,6 +55,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Add New Customer</button>
                             <button type="reset" class="btn btn-danger">Reset</button>
+                            {% if message %}
+                                <div class="alert alert-warning">{{ message }}</div>
+                            {% endif %}
                         </form>
                     </div>
                 </div>

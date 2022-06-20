@@ -15,23 +15,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from login import views
+from django_pdfkit import PDFView
+# import pdfkit
+# path_wkhtmltopdf = r'D:\wf\wkhtmltopdf\bin\wkhtmltopdf.exe'
+# config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+# pdfkit.from_url("login/addnewproduct.html", "123.pdf", configuration=config)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index, name='index'),
     path('', views.login, name='login'),
     path('login/', views.login, name='login'),
-    # path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('add_product/', views.add_product, name='add_product'),
-    path('del_fix_tr_product/<int:id>', views.del_fix_tr_product, name='del_fix_tr_product'),
-    path('del_fix_tp_product/<int:id>', views.del_fix_tp_product, name='del_fix_tp_product'),
+    path('del_fix_product/<int:id>', views.del_fix_product, name='del_fix_product'),
+    path('del_product/<int:id>', views.del_product, name='del_product'),
     path('modify_fix_product/<int:id>',views.modify_fix_product,name='modify_fix_product'),
     path('TrSubpage/', views.TrSubpage, name='TrSubpage'),
     path('TrProductList/', views.TrProductList, name='TrProductList'),
     path('TrProductStockOut/', views.TrProductStockOut, name='TrProductStockOut'),
     path('addrepairproduct/',views.addrepairproduct,name="addrepairproduct"),
-    path('add_new_customer/',views.addnewcustomer,name='add_new_customer'),
-    path('generate_pdf/',views.generatePDF,name="generate_pdf")
+    path('addnewcustomer/',views.addnewcustomer,name='addnewcustomer'),
+    path('generate_pdf/',views.generatePDF,name="generate_pdf"),
+    path('completed/<int:id>',views.completed,name="completed"),
+    # path('mypdf/', PDFView.as_view( template_name = 'login/addnewproduct.html' ), name='mypdf'),
 
 ]
