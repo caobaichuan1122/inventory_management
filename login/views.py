@@ -1,21 +1,28 @@
+from django.contrib.staticfiles import finders
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report,customer
-#from reportlab.pdfgen import canvas
+from reportlab.pdfgen import canvas
 from datetime import datetime
+# from weasyprint import HTML
+# from django.core.files.storage import FileSystemStorage
 from io import StringIO
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
 from html import escape
-import pdfkit
-from django_pdfkit import PDFView
+from django.utils.text import slugify
+from django.template.loader import render_to_string
+# import pdfkit
+# from django_pdfkit import PDFView
+# from easy_pdf.views import PDFTemplateView
 
 
+import os
 
-
+from django.conf import settings
 
 
 def login(request):
@@ -284,6 +291,13 @@ def generatePDF_pr(request):
     else:
         return render(request, 'login/TPproductOut.html',context={'Prdatabase': Prdatabase, 'Customerdatabase': Customerdatabase})
 
+
+def link_callback(uri, rel):
+    path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
+
+    return path
+
+
 def generatePDF_fix_tp(request):
     TpFixdatabase = fix_tp_report.objects.all()
     Customerdatabase = customer.objects.all()
@@ -299,23 +313,18 @@ def generatePDF_fix_tp(request):
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = fix_tp_report.objects.filter(id__in=product_id).values()
-        template = get_template('login/generate_fix_pdf.html')
-        html = template.render({'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
-        options = {
-            'page-size': 'A4',
-            'margin-top': '0in',
-            'margin-right': '0in',
-            'margin-bottom': '0in',
-            'margin-left': '0in',
-            'encoding': "UTF-8",
-            'no-outline': None
-        }
-        path_wkthmltopdf = '/Users/yangyijun/Library/Python/3.8/lib/python/site-packages/wkhtmltopdf/bin/wkhtmltopdf.exe'
-        config_1 = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-        pdf = pdfkit.from_string(html, False, options,config=config_1)
-        response = HttpResponse(pdf, content_type='application/pdf')
-        return response
-        #return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+
+        # response = HttpResponse(content_type='application/pdf')
+        # response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        # html_string = render_to_string('login/generate_fix_pdf.html',{'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+        # pdf_status = pisa.CreatePDF(html_string.encode("ISO-8859-1"),dest=response,link_callback=link_callback)
+        # #
+        #
+        # # return response
+        #
+        # return response
+
+        return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
     else:
         return render(request, 'login/TpRepairOut.html',context={'TpFixdatabase': TpFixdatabase, 'Customerdatabase': Customerdatabase})
 
