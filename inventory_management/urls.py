@@ -31,6 +31,7 @@ urlpatterns = [
     path('del_fix_product/<int:id>', views.del_fix_product, name='del_fix_product'),
     path('del_product/<int:id>', views.del_product, name='del_product'),
     path('modify_fix_product/<int:id>',views.modify_fix_product,name='modify_fix_product'),
+    path('modify_fix_tr_product/<int:id>',views.modify_fix_tr_product,name='modify_fix_tr_product'),
     path('modify_tr_product/<int:id>',views.modify_tr_product,name='modify_tr_product'),
     path('TrSubpage/', views.TrSubpage, name='TrSubpage'),
     path('TpSubpage/', views.TpSubpage, name='TpSubpage'),

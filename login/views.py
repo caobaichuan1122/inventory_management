@@ -72,8 +72,8 @@ def add_product(request):
             message = "add successful!"
         elif company == 'Tproduct':
             models.Tproduct.objects.create(tp_product_id=product_id, tp_product_name=product_name,
-                                            tp_product_num=Product_no, tp_product_price=Product_Price,
-                                            tp_product_time=Product_time)
+                                           tp_product_num=Product_no, tp_product_price=Product_Price,
+                                           tp_product_time=Product_time)
             message = "add successful!"
         elif company == 'Prproduct':
             models.Prproduct.objects.create(pr_product_id=product_id, pr_product_name=product_name,
@@ -105,6 +105,15 @@ def modify_fix_product(request,id):
         return redirect('/index/')
     else:
         return render(request, '/index/',locals())
+
+def modify_fix_tr_product(request,id):
+    if request.method == 'POST':
+        product_record = request.POST.get('fixed_Record')
+        product_state = request.POST.get('Fixed_State')
+        models.fix_tr_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
+        return redirect('/TrRepairList/')
+    else:
+        return render(request, '/TrRepairList/',locals())
 
 def modify_tr_product(request,id):
     if request.method == 'POST':
@@ -151,8 +160,8 @@ def PrProductList(request):
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
-        #generatePDF(request,custom_info )
-        #return redirect('/generate_pdf/', {'custom_info': custom_info})
+    #generatePDF(request,custom_info )
+    #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
 
 # def pdfdownload(request):
@@ -193,15 +202,15 @@ def addrepairproduct(request):
             return render(request,'login/addnewproduct.html',{'ret':'error!'})
         if company == 'fix_tr_report':
             models.fix_tr_report.objects.create(fixed_id=fix_id, tr_product_id=fix_product_id,
-                                            tr_product_name=fix_product_name, tr_product_description=fix_product_description,
-                                            fix_state=fix_state,fixed_detail=fix_detail)
+                                                tr_product_name=fix_product_name, tr_product_description=fix_product_description,
+                                                fix_state=fix_state,fixed_detail=fix_detail)
             message = "add successful!"
         elif company == 'fix_tp_report':
-                models.fix_tp_report.objects.create(fixed_id=fix_id, tp_product_id=fix_product_id,
-                                                    tp_product_name=fix_product_name,
-                                                    tp_product_description=fix_product_description,
-                                                    fix_state=fix_state, fixed_detail=fix_detail)
-                message = "add successful!"
+            models.fix_tp_report.objects.create(fixed_id=fix_id, tp_product_id=fix_product_id,
+                                                tp_product_name=fix_product_name,
+                                                tp_product_description=fix_product_description,
+                                                fix_state=fix_state, fixed_detail=fix_detail)
+            message = "add successful!"
         else:
             message = "error!"
     repair_form = addRepairProduct()
@@ -219,8 +228,8 @@ def addnewcustomer(request):
             return render(request,'login/addnewcustomer.html',{'ret':'error!'})
 
         models.customer.objects.create(customer_id=customer_id, customer_name=customer_name,
-                                        customer_phone=customer_phone, customer_address=customer_address,
-                                        customer_email=customer_email,customer_type=customer_type)
+                                       customer_phone=customer_phone, customer_address=customer_address,
+                                       customer_email=customer_email,customer_type=customer_type)
         message = "add successful!"
     customer_form = addNewCustomer()
     return render(request,'login/addnewcustomer.html',locals())
