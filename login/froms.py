@@ -29,7 +29,6 @@ class Modify_fix(forms.Form):
     fixed_Record = forms.CharField(label="Fixed Record",
                                    widget=forms.Textarea(attrs={'class': 'form-control'}))
 
-
 class Modify_Product(forms.Form):
     Product_id = forms.CharField(label="Product Code", max_length=256,
                                  widget=forms.TextInput(attrs={'class': 'form-control'}))

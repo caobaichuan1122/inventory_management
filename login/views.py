@@ -1,30 +1,11 @@
-
 from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCustomer, addRepairProduct
-from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report,customer
-from reportlab.pdfgen import canvas
-from reportlab.lib.utils import ImageReader
-from datetime import datetime
-
-# import pdfkit
-# def mypdf():
-#     path_wkhtmltopdf = r'D:\wf\wkhtmltopdf\bin\wkhtmltopdf.exe'
-#     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-#     pdfkit.from_url("http://google.com", "out.pdf", configuration=config)
-
-
-
-
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .froms import UserForm,AddNewProduct,Modify_fix,Modify_Product
 from . import models
 from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report
 
 
-# def index(request):
-#     data = Trproduct.objects.all()
-#     return render(request,'login/index.html',context={'data':data})
 
 
 def login(request):
@@ -69,13 +50,10 @@ def logout(request):
 
 
 def index(request):
-    Trdatabase = Trproduct.objects.all()
-    Tdatabase = Tproduct.objects.all()
-    Prdatabase = Prproduct.objects.all()
     FixTrDatabase = fix_tr_report.objects.filter().exclude(fix_state='completed').all()
     FixTpDatabase = fix_tp_report.objects.filter().exclude(fix_state='completed').all()
     edit_form_fix = Modify_fix()
-    return render(request,'login/index.html',context={'Trdatabase': Trdatabase ,'Tdatabase':Tdatabase,'Prdatabase':Prdatabase,'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
+    return render(request,'login/index.html',context={'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
 
 def add_product(request):
     if request.method == 'POST':
@@ -104,18 +82,15 @@ def add_product(request):
             message = "add successful!"
         else:
             message = "error!"
-    #     return redirect('/login/index.html')
-    # else:
-    #     return render(request, '/login/index.html')
     product_form = AddNewProduct()
     return render(request,'login/addnewproduct.html',locals())
 
-def del_fix_product(request,id):
+def del_fix_product(id):
     models.fix_tr_report.objects.filter(id=id).delete()
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
 
-def del_product(request,id):
+def del_product(id):
     models.Tproduct.objects.filter(id=id).delete()
     models.Trproduct.objects.filter(id=id).delete()
     models.Prproduct.objects.filter(id=id).delete()
@@ -125,32 +100,28 @@ def modify_fix_product(request,id):
     if request.method == 'POST':
         product_record = request.POST.get('fixed_Record')
         product_state = request.POST.get('Fixed_State')
-        if  product_record == '' or product_state == '':
-            return render(request, 'login/add.html', {'ret': 'error!'})
         models.fix_tr_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
         models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
         return redirect('/index/')
     else:
         return render(request, '/index/',locals())
 
-def del_fix_product(request,id):
+def modify_tr_product(request,id):
+    if request.method == 'POST':
+        product_id = request.POST.get('Product_id')
+        product_name = request.POST.get('Product_name')
+        Product_num = request.POST.get('Product_num')
+        Product_Price = request.POST.get('Product_Price')
+        Product_time = request.POST.get('Product_time')
+        models.Trproduct.objects.filter(id=id).update(tr_product_id = product_id, tr_product_name = product_name, tr_product_num = Product_num, tr_product_price = Product_Price, tr_product_time = Product_time)
+        return redirect('/TrProductList/')
+    else:
+        return render(request, '/TrProductList/',locals())
+
+def del_fix_product(id):
     models.fix_tr_report.objects.filter(id=id).delete()
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
-
-def modify_product(request,id):
-    produt_obj = models.Trproduct.objects.filter(id=id).first()
-    print(produt_obj)
-    if request.method == 'POST':
-        product_id = request.POST.get('tr product id')
-        product_name = request.POST.get('tr product name')
-        product_state = request.POST.get('tr product state')
-        if product_id == '' or product_name == '' or product_state == '':
-            return render(request, 'login/add.html', {'ret': 'error!'})
-        models.Trproduct.objects.filter(id=id).update(tp_product_id = product_id, tr_product_name = product_name, tr_product_description = product_state)
-        return redirect('/login/index.html')
-    else:
-        return render(request, '/login/index.html')
 
 def TrSubpage(request):
     return render(request,'login/TRsubpage.html',locals())
@@ -184,34 +155,30 @@ def TrProductStockOut(request):
         #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
 
-def pdfdownload(request):
-    # Create the HttpResponse object
-    response = HttpResponse(content_type='application/pdf')
-
-    # This line force a download
-    response['Content-Disposition'] = 'attachment; filename="1.pdf"'
-
-    # READ Optional GET param
-    get_param = request.GET.get('name', 'World')
-
-    # Generate unique timestamp
-    ts = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
-
-    p = canvas.Canvas(response)
-
-    # Write content on the PDF
-    p.drawString(100, 500, "Hello " + get_param + " (Dynamic PDF) - " + ts )
-
-    # Close the PDF object.
-    p.showPage()
-    p.save()
-
-    # Show the result to the user
-    return response
-
-# def edit_fix(request,id):
-#     edit_form_fix = Modify_fix()
-#     return render(request,'/login/index.html',locals())
+# def pdfdownload(request):
+#     # Create the HttpResponse object
+#     response = HttpResponse(content_type='application/pdf')
+#
+#     # This line force a download
+#     response['Content-Disposition'] = 'attachment; filename="1.pdf"'
+#
+#     # READ Optional GET param
+#     get_param = request.GET.get('name', 'World')
+#
+#     # Generate unique timestamp
+#     ts = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
+#
+#     p = canvas.Canvas(response)
+#
+#     # Write content on the PDF
+#     p.drawString(100, 500, "Hello " + get_param + " (Dynamic PDF) - " + ts )
+#
+#     # Close the PDF object.
+#     p.showPage()
+#     p.save()
+#
+#     # Show the result to the user
+#     return response
 
 def addrepairproduct(request):
     if request.method == 'POST':
@@ -301,6 +268,3 @@ def TrRepairList(request):
     edit_form_fix = Modify_fix()
     return render(request,'login/TRrepairList.html',context={'FixTrDatabase':FixTrDatabase,'edit_form_fix':edit_form_fix})
 
-# def edit_fix(request,id):
-#     edit_form_fix = Modify_fix()
-#     return render(request,'/login/index.html',locals())
