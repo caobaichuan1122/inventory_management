@@ -85,12 +85,12 @@ def add_product(request):
     product_form = AddNewProduct()
     return render(request,'login/addnewproduct.html',locals())
 
-def del_fix_product(id):
+def del_fix_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
 
-def del_product(id):
+def del_product(request,id):
     models.Tproduct.objects.filter(id=id).delete()
     models.Trproduct.objects.filter(id=id).delete()
     models.Prproduct.objects.filter(id=id).delete()
@@ -106,6 +106,16 @@ def modify_fix_product(request,id):
     else:
         return render(request, '/index/',locals())
 
+def modify_fix_list_product(request,id):
+    if request.method == 'POST':
+        product_record = request.POST.get('fixed_Record')
+        product_state = request.POST.get('Fixed_State')
+        models.fix_tr_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
+        models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
+        return redirect('/repair_list/')
+    else:
+        return render(request, '/repair_list/',locals())
+
 def modify_fix_tr_product(request,id):
     if request.method == 'POST':
         product_record = request.POST.get('fixed_Record')
@@ -114,6 +124,15 @@ def modify_fix_tr_product(request,id):
         return redirect('/TrRepairList/')
     else:
         return render(request, '/TrRepairList/',locals())
+
+def modify_fix_tp_product(request,id):
+    if request.method == 'POST':
+        product_record = request.POST.get('fixed_Record')
+        product_state = request.POST.get('Fixed_State')
+        models.fix_tp_report.objects.filter(id=id).update(fix_state = product_record, fixed_detail = product_state)
+        return redirect('/TpRepairList/')
+    else:
+        return render(request, '/TpRepairList/',locals())
 
 def modify_tr_product(request,id):
     if request.method == 'POST':
@@ -127,7 +146,31 @@ def modify_tr_product(request,id):
     else:
         return render(request, '/TrProductList/',locals())
 
-def del_fix_product(id):
+def modify_tp_product(request,id):
+    if request.method == 'POST':
+        product_id = request.POST.get('Product_id')
+        product_name = request.POST.get('Product_name')
+        Product_num = request.POST.get('Product_num')
+        Product_Price = request.POST.get('Product_Price')
+        Product_time = request.POST.get('Product_time')
+        models.Tproduct.objects.filter(id=id).update(tp_product_id = product_id, tp_product_name = product_name, tp_product_num = Product_num, tp_product_price = Product_Price, tp_product_time = Product_time)
+        return redirect('/TpProductList/')
+    else:
+        return render(request, '/TpProductList/',locals())
+
+def modify_pr_product(request,id):
+    if request.method == 'POST':
+        product_id = request.POST.get('Product_id')
+        product_name = request.POST.get('Product_name')
+        Product_num = request.POST.get('Product_num')
+        Product_Price = request.POST.get('Product_Price')
+        Product_time = request.POST.get('Product_time')
+        models.Prproduct.objects.filter(id=id).update(pr_product_id = product_id, pr_product_name = product_name, pr_product_num = Product_num, pr_product_price = Product_Price, pr_product_time = Product_time)
+        return redirect('/PrProductList/')
+    else:
+        return render(request, '/PrProductList/',locals())
+
+def del_fix_product(request,id):
     models.fix_tr_report.objects.filter(id=id).delete()
     models.fix_tp_report.objects.filter(id=id).delete()
     return redirect('/index/')
@@ -163,31 +206,6 @@ def TrProductStockOut(request):
     #generatePDF(request,custom_info )
     #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
-
-# def pdfdownload(request):
-#     # Create the HttpResponse object
-#     response = HttpResponse(content_type='application/pdf')
-#
-#     # This line force a download
-#     response['Content-Disposition'] = 'attachment; filename="1.pdf"'
-#
-#     # READ Optional GET param
-#     get_param = request.GET.get('name', 'World')
-#
-#     # Generate unique timestamp
-#     ts = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
-#
-#     p = canvas.Canvas(response)
-#
-#     # Write content on the PDF
-#     p.drawString(100, 500, "Hello " + get_param + " (Dynamic PDF) - " + ts )
-#
-#     # Close the PDF object.
-#     p.showPage()
-#     p.save()
-#
-#     # Show the result to the user
-#     return response
 
 def addrepairproduct(request):
     if request.method == 'POST':
@@ -257,9 +275,19 @@ def completed(request,id):
     models.fix_tr_report.objects.filter(id=id).update(fix_state = 'Completed')
     models.fix_tp_report.objects.filter(id=id).update(fix_state = 'Completed')
     return redirect('/index/')
-    Trdatabase = Trproduct.objects.all()
-    modify_form = Modify_Product()
-    return render(request,'login/TRproductList.html',context={'Trdatabase':Trdatabase,'modify_form':modify_form})
+
+def list_completed(request,id):
+    models.fix_tr_report.objects.filter(id=id).update(fix_state = 'Completed')
+    models.fix_tp_report.objects.filter(id=id).update(fix_state = 'Completed')
+    return redirect('/repair_list/')
+
+def tr_completed(request,id):
+    models.fix_tr_report.objects.filter(id=id).update(fix_state = 'Completed')
+    return redirect('/TrRepairList/')
+
+def tp_completed(request,id):
+    models.fix_tp_report.objects.filter(id=id).update(fix_state = 'Completed')
+    return redirect('/TpRepairList/')
 
 def repair_list(request):
     FixTrDatabase = fix_tr_report.objects.all()

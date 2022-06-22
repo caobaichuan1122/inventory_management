@@ -47,7 +47,7 @@
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Complete"
-                                       href="#"><i class="las la-check"></i></a>
+                                       href="/tr_completed/{{ item.id }}"><i class="las la-check"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
                                        data-original-title="Edit" data-target="#Edit-text{{ item.id }}"><i
@@ -85,9 +85,6 @@
                                                                     <button type="submit" class="btn btn-primary">
                                                                         change
                                                                     </button>
-                                                                    {% if message %}
-                                                                    <div class="alert alert-warning">{{ message }}</div>
-                                                                    {% endif %}
                                                                 </form>
                                                             </div>
                                                         </div>

@@ -46,7 +46,7 @@
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Complete"
-                                       href="#"><i class="las la-check"></i></a>
+                                       href="/tp_completed/{{ item.id }}"><i class="las la-check"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
                                        data-original-title="Edit" data-target="#Edit-text_tp{{item.id}}"><i
@@ -60,7 +60,7 @@
                                                         <h4 class="mb-3">Modify Detail</h4>
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
-                                                                <form class='form-addnewproduct' data-toggle="validator" action="/modify_fix_product/{{ item.id }}" method="post" style="align-items: center;">
+                                                                <form class='form-addnewproduct' data-toggle="validator" action="/modify_fix_tp_product/{{ item.id }}" method="post" style="align-items: center;">
                                                                     <div class="row"
                                                                          style="margin-left:6rem; margin-top:10px;">
                                                                         {% csrf_token %}
@@ -82,9 +82,6 @@
                                                                     <button type="submit" class="btn btn-primary">
                                                                         Change
                                                                     </button>
-                                                                    {% if message %}
-                                                                    <div class="alert alert-warning">{{ message }}</div>
-                                                                    {% endif %}
                                                                 </form>
                                                             </div>
                                                         </div>
