@@ -11,99 +11,96 @@
     <div class="container-fluid" style="margin-top:20px;">
         <div class="row">
             <div class="col-lg-12">
-                <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
-                    <div>
-                        <h4 class="mb-3">Product List</h4>
-                        <p class="mb-0">All product information showing in below</p>
+                <div class="card">
+                    <div class="card-header d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
+                        <div class="header-title">
+                            <h3 class="card-title">Top Rail Services Product List</h3>
+                            <p class="mb-0">All products will be presented in the list below.</p>
+                        </div>
+                        <a href="/TrProductStockOut/" class="btn btn-primary add-list"><i class="las la-truck-loading"></i>Stock Out</a>
                     </div>
-                    <a href="/TrProductStockOut/" class="btn btn-primary add-list"><i class="las la-truck-loading"></i>Stock Out</a>
-                </div>
-
-            </div>
-            <div class="col-lg-12">
-                <div class="table-responsive rounded mb-3">
-                    <table id="repair-table" class="data-table table table-striped mb-0 tbl-server-info"
-                           style="width:100%;">
-                        <thead class="bg-white text-uppercase">
-                        <tr class="ligth ligth-data">
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>Product Number</th>
-                            <th>Product Price</th>
-                            <th>Time</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody class="ligth-body">
-                        {% for item in Trdatabase %}
-                        <tr>
-                            <td>{{ item.tr_product_id}}</td>
-                            <td>{{ item.tr_product_name }}</td>
-                            <td>{{ item.tr_product_num }}</td>
-                            <td>{{ item.tr_product_price}}</td>
-                            <td>{{ item.tr_product_time}}</td>
-                            <td>
-                                <div class="d-flex align-items-center list-action">
-                                    <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"
-                                       title=""
-                                       data-original-title="Complete"
-                                       href="#"><i class="las la-list-alt mr-0"></i></a>
-                                    <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
-                                       title=""
-                                       data-original-title="Edit" data-target="#Edit-text"><i
-                                            class="ri-pencil-line mr-0"></i></a>
-                                    <div class="modal fade" id="Edit-text" tabindex="-1" role="dialog"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <div class="popup text-center">
-                                                        <h4 class="mb-3">Modify Detail</h4>
-                                                        <div class="content create-workform bg-body">
-                                                            <div class="pb-3">
-                                                                <form class='form-addnewproduct' action="#"
-                                                                      data-toggle="validator" method="post"
-                                                                      style="text-align:center; margin: 2rem; padding:2rem;">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                {{ modify_form.Product_id.label_tag }}
-                                                                                {{ modify_form.Product_id}}
+                    <div class="col-lg-12">
+                        <div class="table-responsive rounded mb-3">
+                            <table id="repair-table" class="data-table table table-striped mb-0 tbl-server-info"
+                                   style="width:100%;">
+                                <thead class="bg-white text-uppercase">
+                                <tr class="ligth ligth-data">
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Product Number</th>
+                                    <th>Product Price</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="ligth-body">
+                                {% for item in Trdatabase %}
+                                <tr>
+                                    <td>{{ item.tr_product_id}}</td>
+                                    <td>{{ item.tr_product_name }}</td>
+                                    <td>{{ item.tr_product_num }}</td>
+                                    <td>{{ item.tr_product_price}}</td>
+                                    <td>{{ item.tr_product_time}}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center list-action">
+                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"
+                                               title="" data-original-title="Complete" href="#"><i class="las la-check"></i></a>
+                                            <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
+                                               title="" data-original-title="Edit" data-target="#Edit-text"><i class="ri-pencil-line mr-0"></i></a>
+                                            <div class="modal fade" id="Edit-text" tabindex="-1" role="dialog"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <div class="popup text-center">
+                                                                <h4 class="mb-3">Modify Detail</h4>
+                                                                <div class="content create-workform bg-body">
+                                                                    <div class="pb-3">
+                                                                        <form class='form-addnewproduct' action="#"
+                                                                              data-toggle="validator" method="post"
+                                                                              style="text-align:center; margin: 2rem; padding:2rem;">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        {{ modify_form.Product_id.label_tag }}
+                                                                                        {{ modify_form.Product_id}}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        {{ modify_form.Product_name.label_tag }}
+                                                                                        {{ modify_form.Product_name}}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        {{ modify_form.Product_num.label_tag }}
+                                                                                        {{ modify_form.Product_num}}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        {{ modify_form.Product_Price.label_tag }}
+                                                                                        {{ modify_form.Product_Price}}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        {{ modify_form.Product_time.label_tag }}
+                                                                                        {{ modify_form.Product_time}}
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                {{ modify_form.Product_name.label_tag }}
-                                                                                {{ modify_form.Product_name}}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                {{ modify_form.Product_num.label_tag }}
-                                                                                {{ modify_form.Product_num}}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                {{ modify_form.Product_Price.label_tag }}
-                                                                                {{ modify_form.Product_Price}}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group">
-                                                                                {{ modify_form.Product_time.label_tag }}
-                                                                                {{ modify_form.Product_time}}
-                                                                            </div>
-                                                                        </div>
+                                                                        </form>
                                                                     </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="col-lg-12 mt-4">
-                                                                <div class="d-flex flex-wrap align-items-ceter justify-content-center">
-                                                                    <a class="btn btn-danger mr-4"
-                                                                       data-dismiss="modal">Cancel</a>
-                                                                    <div class="btn btn-primary mr-4"
-                                                                         href="#">Confirm
+                                                                    <div class="col-lg-12 mt-4">
+                                                                        <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                                                            <a class="btn btn-danger mr-4"
+                                                                               data-dismiss="modal">Cancel</a>
+                                                                            <div class="btn btn-primary mr-4"
+                                                                                 href="#">Confirm
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -111,18 +108,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <a class="badge bg-warning mr-2" data-placement="top" title=""
-                                       data-original-title="Hidden" data-toggle="modal" data-target="#ensure-del">
-                                        <i class="las la-eye-slash mr-0"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                                            <a class="badge bg-warning mr-2" data-placement="top" title=""
+                                               data-original-title="Hidden" data-toggle="modal"
+                                               data-target="#ensure-del"><i class="ri-delete-bin-line mr-0"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,3 +166,4 @@
 <h1>Please login!</h1>
 {% endif %}
 {% endblock %}
+

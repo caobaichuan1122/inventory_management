@@ -85,7 +85,16 @@
             font-size: 22px;
         }
 
-        #summary_line td{
+        #summary_line-1 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #summary_line-2 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        #summary_line-3 td {
             font-size: 26px;
             font-weight: bold;
         }
@@ -143,7 +152,7 @@
 				pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
 			}
 
-		    pdf.save("HTML-Document.pdf");
+		    pdf.save("Delivery-Note.pdf");
             });
 	    }
     </script>
@@ -238,12 +247,12 @@
                     <td>1</td>
                 </tr>
                 {% endfor %}
-                <tr style="border-top: 1px solid #7b7c88;">
-                    <td><h4>Summary</h4></td>
+                <tr id="summary_line-1" style="border-top: 1px solid #7b7c88;">
+                    <td>Summary</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><h4>{{ product_list|length }}</h4></td>
+                    <td>{{ product_list|length }}</td>
                 </tr>
                 {% elif company_id == "2" %}
                 {% for p in product_list %}
@@ -255,12 +264,12 @@
                     <td>1</td>
                 </tr>
                 {% endfor %}
-                <tr id="summary_line" style="border-top: 1px solid #7b7c88;">
-                    <td><h3>Summary</h3></td>
+                <tr id="summary_line-2" style="border-top: 1px solid #7b7c88;">
+                    <td>Summary</td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><h3>{{ product_list|length }}</h3></td>
+                    <td>{{ product_list|length }}</td>
                 </tr>
                 {% endif %}
 

@@ -82,9 +82,7 @@
                                     <td>{{ item.fix_state }}</td>
                                     <td>
                                         <div class="d-flex align-items-center list-action">
-                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"
-                                               title=""
-                                               data-original-title="Complete"
+                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Complete"
                                                href="#"><i class="las la-check"></i></a>
                                             <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                                title=""
@@ -110,17 +108,13 @@
                                                                                 {% csrf_token %}
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{
-                                                                                        edit_form_fix.Fixed_State.label_tag
-                                                                                        }}
+                                                                                        {{ edit_form_fix.Fixed_State.label_tag }}
                                                                                         {{ edit_form_fix.Fixed_State}}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{
-                                                                                        edit_form_fix.fixed_Record.label_tag
-                                                                                        }}
+                                                                                        {{ edit_form_fix.fixed_Record.label_tag }}
                                                                                         {{ edit_form_fix.fixed_Record}}
                                                                                     </div>
                                                                                 </div>
@@ -133,8 +127,7 @@
                                                                                 change
                                                                             </button>
                                                                             {% if message %}
-                                                                            <div class="alert alert-warning">{{ message
-                                                                                }}
+                                                                            <div class="alert alert-warning">{{ message }}
                                                                             </div>
                                                                             {% endif %}
                                                                         </form>
@@ -221,17 +214,13 @@
                                                                                 {% csrf_token %}
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{
-                                                                                        edit_form_fix.Fixed_State.label_tag
-                                                                                        }}
+                                                                                        {{ edit_form_fix.Fixed_State.label_tag }}
                                                                                         {{ edit_form_fix.Fixed_State}}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{
-                                                                                        edit_form_fix.fixed_Record.label_tag
-                                                                                        }}
+                                                                                        {{ edit_form_fix.fixed_Record.label_tag }}
                                                                                         {{ edit_form_fix.fixed_Record}}
                                                                                     </div>
                                                                                 </div>
@@ -244,8 +233,7 @@
                                                                                 Change
                                                                             </button>
                                                                             {% if message %}
-                                                                            <div class="alert alert-warning">{{ message
-                                                                                }}
+                                                                            <div class="alert alert-warning">{{ message }}
                                                                             </div>
                                                                             {% endif %}
                                                                         </form>
@@ -291,10 +279,7 @@
                                         </div>
                                     </td>
                                 </tr>
-
                                 {% endfor %}
-
-
                                 </tbody>
                             </table>
                         </div>

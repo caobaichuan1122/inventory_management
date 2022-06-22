@@ -175,8 +175,6 @@ def PrProductList(request):
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
-    #generatePDF(request,custom_info )
-    #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
 
 def TpProductStockOut(request):
@@ -189,35 +187,17 @@ def TpRepairStockOut(request):
     Customerdatabase = customer.objects.all()
     return render(request, 'login/TpRepairOut.html',context={'TpFixdatabase': TpFixdatabase,'Customerdatabase':Customerdatabase})
 
+def TrRepairStockOut(request):
+    TrFixdatabase = fix_tr_report.objects.all()
+    Customerdatabase = customer.objects.all()
+    return render(request, 'login/TrRepairOut.html',context={'TrFixdatabase': TrFixdatabase, 'Customerdatabase': Customerdatabase})
+
+
 def PrProductStockOut(request):
     Prdatabase = Prproduct.objects.all()
     Customerdatabase = customer.objects.all()
     return render(request, 'login/PRproductOut.html',context={'Prdatabase': Prdatabase,'Customerdatabase':Customerdatabase})
 
-def pdfdownload(request):
-    # Create the HttpResponse object
-    response = HttpResponse(content_type='application/pdf')
-
-    # This line force a download
-    response['Content-Disposition'] = 'attachment; filename="1.pdf"'
-
-    # READ Optional GET param
-    get_param = request.GET.get('name', 'World')
-
-    # Generate unique timestamp
-    ts = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S.%f')
-
-    p = canvas.Canvas(response)
-
-    # Write content on the PDF
-    p.drawString(100, 500, "Hello " + get_param + " (Dynamic PDF) - " + ts )
-
-    # Close the PDF object.
-    p.showPage()
-    p.save()
-
-    # Show the result to the user
-    return response
 
 
 def addrepairproduct(request):
@@ -292,11 +272,6 @@ def generatePDF_pr(request):
         return render(request, 'login/TPproductOut.html',context={'Prdatabase': Prdatabase, 'Customerdatabase': Customerdatabase})
 
 
-def link_callback(uri, rel):
-    path = os.path.join(settings.MEDIA_ROOT, uri.replace(settings.MEDIA_URL, ""))
-
-    return path
-
 
 def generatePDF_fix_tp(request):
     TpFixdatabase = fix_tp_report.objects.all()
@@ -313,18 +288,25 @@ def generatePDF_fix_tp(request):
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = fix_tp_report.objects.filter(id__in=product_id).values()
-
-        # response = HttpResponse(content_type='application/pdf')
-        # response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
-        # html_string = render_to_string('login/generate_fix_pdf.html',{'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
-        # pdf_status = pisa.CreatePDF(html_string.encode("ISO-8859-1"),dest=response,link_callback=link_callback)
-        # #
-        #
-        # # return response
-        #
-        # return response
-
         return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
     else:
         return render(request, 'login/TpRepairOut.html',context={'TpFixdatabase': TpFixdatabase, 'Customerdatabase': Customerdatabase})
 
+def generatePDF_fix_tr(request):
+    TrFixdatabase = fix_tr_report.objects.all()
+    Customerdatabase = customer.objects.all()
+    if request.method == "POST":
+        company_id = request.POST.get('company_id')
+        product_id = request.POST.getlist("check")
+        customerid = request.POST.get('customer')
+        Invoice_date = request.POST.get('Invoicedate')
+        Delivery_date = request.POST.get('Deliverydate')
+        Invoice_no = request.POST.get('invoice_no')
+        Note = request.POST.get('Note')
+        Delivery_No = request.POST.get('DeliveryNo')
+        Delivery_Term = request.POST.get('DeliveryTerm')
+        customer_info = customer.objects.filter(customer_id=customerid).values()
+        product_list = fix_tr_report.objects.filter(id__in=product_id).values()
+        return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+    else:
+        return render(request, 'login/TrRepairOut.html',context={'TrFixdatabase': TrFixdatabase, 'Customerdatabase': Customerdatabase})

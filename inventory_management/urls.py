@@ -48,7 +48,9 @@ urlpatterns = [
     path('TprepairList/',views.TpRepairList,name="TprepairList"),
     path('TrrepairList/', views.TrRepairList, name="TrrepairList"),
     path('TpRepairStockOut/',views.TpRepairStockOut, name="TpRepairStockOut"),
-    path('generate_fix_pdftp/',views.generatePDF_fix_tp,name="generate_fix_pdftp")
+    path('TrRepairStockOut/',views.TrRepairStockOut, name="TrRepairStockOut"),
+    path('generate_fix_pdftp/',views.generatePDF_fix_tp,name="generate_fix_pdftp"),
+    path('generate_fix_pdftr/',views.generatePDF_fix_tr,name="generate_fix_pdftr")
     #path('generate_fix_pdftp/', PDFTemplateView.as_view(template_name='login/generate_fix_pdf.html',filename='deliverynote.pdf'), name='my-pdf')
 
 ]
