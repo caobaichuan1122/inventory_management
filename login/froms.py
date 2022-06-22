@@ -43,6 +43,7 @@ class Modify_Product(forms.Form):
 
 class addRepairProduct(forms.Form):
     company_name=[('fix_tr_report','Toprail Services'),('fix_tp_report','T-Power')]
+    fix_states = [('Complete','Complete'),('Fixing','Fixing'),('Fixed','Fixed')]
     fix_id = forms.CharField(label="Fixed Code", max_length=256,
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
     fix_product_id = forms.CharField(label="Fixed Product Code", max_length=256,
@@ -51,8 +52,7 @@ class addRepairProduct(forms.Form):
                                        widget=forms.TextInput(attrs={'class': 'form-control'}))
     fix_product_description = forms.CharField(label="Product Description", max_length=256,
                                               widget=forms.TextInput(attrs={'class': 'form-control'}))
-    fix_state = forms.CharField(label="Fixed State", max_length=256,
-                                widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fix_state = forms.ChoiceField(choices=fix_states,help_text="There are Three different maintenance state: [Complete: maintenance done and product delivered],[Fixing: still in fixing],[Fixed: maintenance done but product not deliver]", widget=forms.Select(attrs={'class': 'form-control'}))
     fix_detail = forms.CharField(label="Fixed Record", max_length=256,
                                  widget=forms.Textarea(attrs={'class': 'form-control'}))
     Product_Company = forms.ChoiceField(choices=company_name, widget=forms.Select(attrs={'class': 'form-control'}))
