@@ -5,22 +5,113 @@
     <title>Delivery Note</title>
     <link href="../static/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="../static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <style>
+
         @page {
-            size: 20cm 28cm;
-            margin: 2cm;
+            size: a4 portrait;
+        }
+
+        table {
+            -pdf-keep-with-next: true;
+            -pdf-keep-in-frame-mode: shrink;
+        }
+
+        p {
+            margin: 0;
+            -pdf-keep-with-next: true;
+        }
+
+        p.separator {
+            -pdf-keep-with-next: false;
+            font-size: 6pt;
+        }
+        #main-field{
+            padding:30px;
+        }
+
+        .container-fluid{
+            padding:60px 60px 60px 60px;
+        }
+        .canvas_div_pdf h1{
+            font-size: 35px;
+        }
+        .company_info h4{
+            font-size:30px
+        }
+        .company_info p{
+            font-size:26px;
+        }
+
+        .customer_info{
+            margin-top: 40px;
+        }
+        .customer_info h3{
+            font-size:28px;
+        }
+
+        .customer_info h4{
+            font-size:30px;
+        }
+
+        .customer_info p{
+            font-size: 26px;
+        }
+
+        #info{
+            font-size:24px;
+        }
+
+        table th{
+            font-size:26px;
+        }
+
+        table td{
+            font-size: 22px;
+        }
+
+        #add_info{
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+
+        #add_info h3{
+            font-size: 26px;
+        }
+        #add_info p{
+            margin-top: 10px;
+            font-size: 22px;
+        }
+
+        #summary_line-1 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #summary_line-2 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        #summary_line-3 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #signature_field{
+            margin: 20px 20px 20px 20px;
+        }
+        #signature_field h3{
+            font-size: 28px;
+            font-weight: bold;
+        }
+        #signature_field p{
+            font-size: 24px;
         }
 
         @media print {
-            html, body {
-                width: 200mm;
-                height: 280mm;
-                -webkit-print-color-adjust: exact;
-                -moz-print-color-adjust: exact;
-                -ms-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            #info{
+            #info {
                 background: #dddddd;
             }
 
@@ -30,136 +121,174 @@
     </style>
     <script type="text/javascript">
         window.onload = function () {
-            window.print();
+            getPDF()
         };
+        function getPDF(){
+
+		var HTML_Width = $(".canvas_div_pdf").width();
+		var HTML_Height = $(".canvas_div_pdf").height();
+		var top_left_margin = 15;
+		var PDF_Width = HTML_Width+(top_left_margin*2);
+		var PDF_Height = (PDF_Width*1.5)+(top_left_margin*2);
+		var canvas_image_width = HTML_Width;
+		var canvas_image_height = HTML_Height;
+
+		var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+
+
+		html2canvas($(".canvas_div_pdf")[0],{allowTaint:true}).then(function(canvas) {
+			canvas.getContext('2d');
+
+			console.log(canvas.height+"  "+canvas.width);
+
+
+			var imgData = canvas.toDataURL("image/jpeg", 1.0);
+			var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+		    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+
+
+			for (var i = 1; i <= totalPDFPages; i++) {
+				pdf.addPage(PDF_Width, PDF_Height);
+				pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+			}
+
+		    pdf.save("Delivery-Note.pdf");
+            });
+	    }
     </script>
 </head>
-<body style="height:297mm;">
-<div class="container">
-    <div class="row" style="display:inline; height:100px;">
-        <div class="col-md-6" style="bottom: 0;">
-            <h1 style="font-size:400%;">Delivery Note</h1>
-        </div>
-        <div class="col-md-4" id="logo" style="float:right; ">
-            {% if company_id == '1' %}
-            <img src="../static/images/logo/trlogo.png" style="width:280px;height:100px;">
-            {% elif company_id == '2' %}
-            <img src="../static/images/logo/tplogo.png" style="width:280px;height:100px;">
-            {% else %}
-            <img src="../static/images/logo/prlogo.png" style="width:280px;height:100px;">
-            {% endif %}
-        </div>
-    </div>
-    <hr style="border: 2px solid lightskyblue;">
-    <div class="row" style="display: inline; height:40rem;">
-        <div class="col-md-6">
-            <div>
+<body>
+<div class="canvas_div_pdf">
+    <div class="container-fluid">
+        <div class="row" style="display:inline; height:100px;">
+            <div class="col-md-6" style="bottom: 0;">
+                <h1 style="font-size:400%;">Delivery Note</h1>
+            </div>
+            <div class="col-md-4" id="logo" style="float:right; ">
+                {% load static %}
                 {% if company_id == '1' %}
-                <h4>Top Rail Services Pty Ltd.</h4>
-                <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
-                <p>ABN: 90 167 745 575</p>
-                <p>Email: ifo@toprailservices.com.au</p>
-                <p>Tel: 1300 772 678</p>
-                <p>Website: https://toprailservices.com.au</p>
+                <img src="{% static '/images/logo/trlogo.png' %}" style="width:280px;height:100px;">
+                <!--            <img src="/images/logo/trlogo.png" style="width:280px;height:100px;">-->
                 {% elif company_id == '2' %}
-                <h4>T-Power Pty Ltd.</h4>
-                <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
-                <p>ABN: 65 651 645 948</p>
-                <p>Email: ifo@t-power.com.au</p>
-                <p>Tel: 1300 772 678</p>
-                <p>Website: https://www.t-power.com.au</p>
+                <img src="{% static '/images/logo/tplogo.png' %}" style="width:280px;height:100px;">
+                <!--            <img src="/images/logo/tplogo.png" style="width:280px;height:100px;">-->
+                {% else %}
+                <img src="{% static '/images/logo/prlogo.png' %}" style="width:280px;height:100px;">
+                <!--            <img src="/images/logo/prlogo.png" style="width:280px;height:100px;">-->
                 {% endif %}
             </div>
-            <div style="margin-top: 10px;">
-                <h3>To:</h3>
-                {% for ci in customer_info %}
-                <h4>{{ ci.customer_name }}</h4>
-                <p>Address: {{ ci.customer_address }}</p>
-                <p>Phone: {{ ci.customer_phone }} </p>
-                <p>Email: {{ ci.customer_email}}</p>
+        </div>
+        <hr style="border: 2px solid lightskyblue;">
+        <div class="row" style="display: inline; height:40rem;">
+            <div class="col-md-6">
+                <div class="company_info">
+                    {% if company_id == '1' %}
+                    <h4>Top Rail Services Pty Ltd.</h4>
+                    <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                    <p>ABN: 90 167 745 575</p>
+                    <p>Email: ifo@toprailservices.com.au</p>
+                    <p>Tel: 1300 772 678</p>
+                    <p>Website: https://toprailservices.com.au</p>
+                    {% elif company_id == '2' %}
+                    <h4>T-Power Pty Ltd.</h4>
+                    <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                    <p>ABN: 65 651 645 948</p>
+                    <p>Email: ifo@t-power.com.au</p>
+                    <p>Tel: 1300 772 678</p>
+                    <p>Website: https://www.t-power.com.au</p>
+                    {% endif %}
+                </div>
+                <div class="customer_info" style="margin-top: 10px;">
+                    <h3>To:</h3>
+                    {% for ci in customer_info %}
+                    <h4>{{ ci.customer_name }}</h4>
+                    <p>Address: {{ ci.customer_address }}</p>
+                    <p>Phone: {{ ci.customer_phone }} </p>
+                    <p>Email: {{ ci.customer_email}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+                <div id="info" class="container-fluid" style="-webkit-print-color-adjust: exact; mso-print-color: yes; background: #dddddd; text-align: left;padding: 10px 10px 10px 10px;">
+                    <p>Invoice No.: {{ Invoice_no }}</p>
+                    <p>Invoice Date: {{ Invoice_date }}</p>
+                    <p>Delivery Note No.: {{ Delivery_No }}</p>
+                    <p>Delivery Date: {{ Delivery_date }}</p>
+                    <p>Delivery Term: {{ Delivery_Term }}</p>
+                </div>
+            </div>
+
+        </div>
+        <div id="add_info" class="row" style="display: inline; margin-left: 20px;">
+            <h3>Additional Information</h3>
+            <p>{{ Note }}</p>
+        </div>
+        <hr style="border: 2px solid lightskyblue;">
+        <div class="row" style="display: inline; margin-top: 3rem;">
+            <table class="table table-striped">
+                <tr>
+                    <th>Fixed Product Code</th>
+                    <th>Fixed Product Description</th>
+                    <th>Fixed Detail</th>
+                    <th>Unit</th>
+                    <th>Quantity</th>
+                </tr>
+                {% load index %}
+                {% if company_id == "1" %}
+                {% for p in product_list %}
+                <tr>
+                    <td>{{ p.tr_product_id }}</td>
+                    <td>{{ p.tr_product_description}}</td>
+                    <td>{{ p.fixed_detail}}</td>
+                    <td></td>
+                    <td>1</td>
+                </tr>
                 {% endfor %}
+                <tr id="summary_line-1" style="border-top: 1px solid #7b7c88;">
+                    <td>Summary</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ product_list|length }}</td>
+                </tr>
+                {% elif company_id == "2" %}
+                {% for p in product_list %}
+                <tr>
+                    <td>{{ p.tp_product_id }}</td>
+                    <td>{{ p.tp_product_description }}</td>
+                    <td>{{ p.fixed_detail }}</td>
+                    <td></td>
+                    <td>1</td>
+                </tr>
+                {% endfor %}
+                <tr id="summary_line-2" style="border-top: 1px solid #7b7c88;">
+                    <td>Summary</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ product_list|length }}</td>
+                </tr>
+                {% endif %}
+
+            </table>
+        </div>
+    </div>
+    <footer class="fixed-footer" style="bottom: 0; margin-top: 20rem;">
+        <div id="signature_field" class="container-fluid" style="float:bottom;">
+            <h3>Goods received by:</h3>
+            <div class="row" style="display:inline;">
+                <div class="col-md-6">
+                    <p>Signature:</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Date:</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div id="info" class="container-fluid"
-                 style="-webkit-print-color-adjust: exact; mso-print-color: yes; background: #dddddd; text-align: left;padding: 5px 5px 5px 5px;">
-                <p>Invoice No.: {{ Invoice_no }}</p>
-                <p>Invoice Date: {{ Invoice_date }}</p>
-                <p>Delivery Note No.: {{ Delivery_No }}</p>
-                <p>Delivery Date: {{ Delivery_date }}</p>
-                <p>Delivery Term: {{ Delivery_Term }}</p>
-            </div>
-        </div>
-
-    </div>
-    <div class="row" style="display: inline;">
-        <h3>Additional Information</h3>
-        <p>{{ Note }}</p>
-    </div>
-    <hr style="border: 2px solid lightskyblue;">
-    <div class="row" style="display: inline; margin-top: 3rem;">
-        <table class="table table-striped">
-            <tr>
-                <th>Fixed Product Code</th>
-                <th>Fixed Product Description</th>
-                <th>Fixed Detail</th>
-                <th>Unit</th>
-                <th>Quantity</th>
-            </tr>
-            {% load index %}
-            {% if company_id == "1" %}
-            {% for p in product_list %}
-            <tr>
-                <td>{{ p.tr_product_id }}</td>
-                <td>{{ p.tr_product_description}}</td>
-                <td>{{ p.fixed_detail}}</td>
-                <td></td>
-                <td>1</td>
-            </tr>
-            {% endfor %}
-            <tr style="border-top: 1px solid #7b7c88;">
-                <td><h4>Summary</h4></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><h4>{{ product_list|length }}</h4></td>
-            </tr>
-            {% elif company_id == "2" %}
-            {% for p in product_list %}
-            <tr>
-                <td>{{ p.tp_product_id }}</td>
-                <td>{{ p.tp_product_description }}</td>
-                <td>{{ p.fixed_detail }}</td>
-                <td></td>
-                <td>1</td>
-            </tr>
-            {% endfor %}
-            <tr style="border-top: 1px solid #7b7c88;">
-                <td><h4>Summary</h4></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><h4>{{ product_list|length }}</h4></td>
-            </tr>
-            {% endif %}
-
-        </table>
-    </div>
+    </footer>
 </div>
-<footer style="bottom: 0; margin-top: 20rem;">
-    <div class="container" style="float:bottom;">
-        <h3>Good received by:</h3>
-        <div class="row" style="display:inline;">
-            <div class="col-md-6">
-                <p>Signature:</p>
-            </div>
-            <div class="col-md-6">
-                <p>Date:</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
 </body>
-
 </html>

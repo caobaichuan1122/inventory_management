@@ -9,6 +9,8 @@
 
     {% endblock %}
     <!-- stylesheet-->
+
+
     <link rel="shortcut icon" href="../static/images/favicon.ico"/>
 
     <link rel="stylesheet" href="../static/css/backend-plugin.min.css">
@@ -19,7 +21,7 @@
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">-->
+    <!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,96 +42,57 @@
     <div class="iq-sidebar  sidebar-default ">
         <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
             <a href="/index/" class="header-logo">
-                <img src="../static/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
-                <h5 class="logo-title light-logo ml-3">T-Power</h5>
+                <img src="../static/images/logo/logo_tpt.png" class="img-fluid rounded-normal light-logo " alt="logo"
+                     style="width:80px; height:35px;">
+                <h5 class="logo-title light-logo ml-3">T.P.T</h5>
             </a>
-            <div class="iq-menu-bt-sidebar ml-5">
+            <div class="iq-menu-bt-sidebar" style="float:right; margin-left: 4.4rem; ">
                 <i class="las la-bars wrapper-menu"></i>
             </div>
         </div>
+
         <div class="data-scrollbar" data-scroll="1">
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
                     <li class="">
                         <a href="/TrSubpage/" class="svg-icon">
-                            <svg class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
+                            <i class="las la-warehouse" style="font-size:26px;"></i>
                             <span class="ml-4">Toprail Services</span>
                         </a>
                     </li>
                     <li class=" ">
                         <a href="/TpSubpage/">
-                            <svg class="svg-icon" id="p-dash2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                            </svg>
+                            <i class="las la-box" style="font-size:26px;"></i>
                             <span class="ml-4">T-Power</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/PrSubpage/" >
-                            <svg class="svg-icon" id="p-dash3" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
+                        <a href="/PrSubpage/">
+                            <i class="las la-boxes" style="font-size:26px;"></i>
                             <span class="ml-4">Pranstek</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/repair_list/" >
-                            <svg class="svg-icon" id="p-dash4" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                                <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-                            </svg>
+                        <a href="/repair_list/">
+                            <i class="las la-wrench" style="font-size:26px;"></i>
                             <span class="ml-4">Repair List</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/add_product/" >
-                            <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                                <line x1="1" y1="10" x2="23" y2="10"></line>
-                            </svg>
+                        <a href="/add_product/">
+                            <i class="las la-plus-circle" style="font-size:26px;"></i>
                             <span class="ml-4">Add New Product</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/addrepairproduct/" >
-                            <svg class="svg-icon" id="p-dash6" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="4 14 10 14 10 20"></polyline>
-                                <polyline points="20 10 14 10 14 4"></polyline>
-                                <line x1="14" y1="10" x2="21" y2="3"></line>
-                                <line x1="3" y1="21" x2="10" y2="14"></line>
-                            </svg>
+                        <a href="/addrepairproduct/">
+                            <i class="las la-plus-circle" style="font-size:26px;"></i>
                             <span class="ml-4">Add Repair Products</span>
                         </a>
                     </li>
                     <li class=" ">
                         <a href="/addnewcustomer/">
-                            <svg class="svg-icon" id="p-dash8" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
+                            <i class="las la-plus-circle" style="font-size:26px;"></i>
                             <span class="ml-4">Add New Customer</span>
                         </a>
                     </li>
@@ -144,15 +107,17 @@
                 <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                     <i class="ri-menu-line wrapper-menu"></i>
                     <a href="/index/" class="header-logo">
-                        <img src="../static/images/logo.png" class="img-fluid rounded-normal" alt="logo">
-                        <h5 class="logo-title ml-3">T-Power</h5>
+                        <img src="../static/images/logo/logo_tpt.png" class="img-fluid rounded-normal light-logo"
+                             alt="logo" style="width:80px; height:35px;">
+                        <h5 class="logo-title ml-3"></h5>
                     </a>
                 </div>
+
                 <div class="iq-search-bar device-search">
-                    <form action="#" class="searchbox">
-                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                        <input type="text" class="text search-input" placeholder="Search here...">
-                    </form>
+<!--                    <form action="#" class="searchbox">-->
+<!--                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>-->
+<!--                        <input type="text" class="text search-input" placeholder="Search here...">-->
+<!--                    </form>-->
                 </div>
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -184,30 +149,32 @@
                             </li>
                             <li class="nav-item nav-icon dropdown caption-content">
                                 <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user" style="margin-left:25rem;">
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user"
+                                         style="margin-left:25rem;">
                                 </a>
-<!--                                <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton4">-->
-<!--                                    <div class="card shadow-none m-0">-->
-<!--                                        <div class="card-body p-0 text-center">-->
-<!--                                            <div class="media-body profile-detail text-center" >-->
-<!--                                                <img src="../static/images/page-img/profile-bg.jpg" alt="profile-bg" class="rounded-top img-fluid mb-4" >-->
-<!--                                                <img src="../static/images/user/1.png" alt="profile-img" class="rounded profile-img img-fluid avatar-70">-->
-<!--                                            </div>-->
-<!--                                            <div class="p-3">-->
-<!--                                                <h5 class="mb-1"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5ffdad4dbf1c0daf5c5c7dac5d0c7c1cc9bd6dad8">User: {{ request.session.user_name }}</a></h5>-->
-<!--                                                <div class="d-flex align-items-center justify-content-center mt-3">-->
-<!--                                                    <a href="/logout/" class="btn border">Sign Out</a>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <!--                                <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton4">-->
+                                <!--                                    <div class="card shadow-none m-0">-->
+                                <!--                                        <div class="card-body p-0 text-center">-->
+                                <!--                                            <div class="media-body profile-detail text-center" >-->
+                                <!--                                                <img src="../static/images/page-img/profile-bg.jpg" alt="profile-bg" class="rounded-top img-fluid mb-4" >-->
+                                <!--                                                <img src="../static/images/user/1.png" alt="profile-img" class="rounded profile-img img-fluid avatar-70">-->
+                                <!--                                            </div>-->
+                                <!--                                            <div class="p-3">-->
+                                <!--                                                <h5 class="mb-1"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5ffdad4dbf1c0daf5c5c7dac5d0c7c1cc9bd6dad8">User: {{ request.session.user_name }}</a></h5>-->
+                                <!--                                                <div class="d-flex align-items-center justify-content-center mt-3">-->
+                                <!--                                                    <a href="/logout/" class="btn border">Sign Out</a>-->
+                                <!--                                                </div>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                             </li>
-                            <li>
+                            <li style="text-align: right; float:right;"  class="justify-content-end">
                                 <div class="col">
-                                    <h5 >User: {{ request.session.user_name }}</h5>
-                                    <a href="/logout/">Sign Out</a>
+                                    <p style="font-size: 16px;">User: {{ request.session.user_name }}</p>
+                                    <a href="/logout/" style="font-size: 16px;"><i class="las la-sign-out-alt" style="font-size: 18px;"></i>
+                                        Logout</a>
                                 </div>
                             </li>
                         </ul>

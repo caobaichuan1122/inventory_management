@@ -49,5 +49,14 @@ urlpatterns = [
     path('repair_list/',views.repair_list,name="repair_list"),
     path('TpRepairList/',views.TpRepairList,name="TpRepairList"),
     path('TrRepairList/',views.TrRepairList,name="TrRepairList"),
-
+    path('generate_pdf/', views.generatePDF, name="generate_pdf"),
+    path('generate_pdftp/', views.generatePDF_tp, name="generate_pdftp"),
+    path('generate_pdfpr/', views.generatePDF_pr, name="generate_pdfpr"),
+    path('generate_fix_pdftp/', views.generatePDF_fix_tp, name="generate_fix_pdftp"),
+    path('generate_fix_pdftr/', views.generatePDF_fix_tr, name="generate_fix_pdftr"),
+    path('TrProductStockOut/', views.TrProductStockOut, name='TrProductStockOut'),
+    path('TpProductStockOut/', views.TpProductStockOut, name='TpProductStockOut'),
+    path('PrProductStockOut/', views.PrProductStockOut, name='PrProductStockOut'),
+    path('TpRepairStockOut/', views.TpRepairStockOut, name="TpRepairStockOut"),
+    path('TrRepairStockOut/', views.TrRepairStockOut, name="TrRepairStockOut"),
 ]

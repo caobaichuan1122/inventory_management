@@ -46,7 +46,7 @@
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Complete"
-                                       href="/list_completed/{{ item.id }}"><i class="las la-check"></i></a>
+                                       href="#"><i class="las la-check"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
                                        data-original-title="Edit" data-target="#Edit-text{{ item.id }}"><i
@@ -61,7 +61,7 @@
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
                                                                 <form class='form-addnewproduct' data-toggle="validator"
-                                                                      action="/modify_fix_list_product/{{ item.id }}"
+                                                                      action="/modify_fix_product/{{ item.id }}"
                                                                       method="post" style="align-items: center; ">
                                                                     <div class="row"
                                                                          style="margin-left:6rem; margin-top:10px;">
@@ -69,13 +69,13 @@
                                                                         <div class="col-md-10">
                                                                             <div class="form-group">
                                                                                 {{ edit_form_fix.Fixed_State.label_tag }}
-                                                                                {{ edit_form_fix.Fixed_State }}
+                                                                                {{ edit_form_fix.Fixed_State}}
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-10">
                                                                             <div class="form-group">
                                                                                 {{ edit_form_fix.fixed_Record.label_tag }}
-                                                                                {{ edit_form_fix.fixed_Record }}
+                                                                                {{ edit_form_fix.fixed_Record}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -117,7 +117,7 @@
                                                                          data-dismiss="modal">Cancel
                                                                     </div>
                                                                     <a class="btn btn-danger mr-4"
-                                                                       href="">Delete</a>
+                                                                       href="/del_fix_tr_product/{{ item.id }}">Delete</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -144,7 +144,7 @@
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Complete"
-                                       href="/list_completed/{{ item.id }}"><i class="las la-check"></i></a>
+                                       href="#"><i class="las la-check"></i></a>
                                     <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                        title=""
                                        data-original-title="Edit" data-target="#Edit-text_tp{{item.id}}"><i
@@ -159,21 +159,23 @@
                                                         <div class="content create-workform bg-body">
                                                             <div class="pb-3">
                                                                 <form class='form-addnewproduct' data-toggle="validator"
-                                                                      action="/modify_fix_list_product/{{ item.id }}"
+                                                                      action="/modify_fix_product/{{ item.id }}"
                                                                       method="post" style="align-items: center;">
                                                                     <div class="row"
                                                                          style="margin-left:6rem; margin-top:10px;">
                                                                         {% csrf_token %}
                                                                         <div class="col-md-10">
                                                                             <div class="form-group">
-                                                                                {{ edit_form_fix.Fixed_State.label_tag }}
-                                                                                {{ edit_form_fix.Fixed_State }}
+                                                                                {{ edit_form_fix.Fixed_State.label_tag
+                                                                                }}
+                                                                                {{ edit_form_fix.Fixed_State}}
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-10">
                                                                             <div class="form-group">
-                                                                                {{ edit_form_fix.fixed_Record.label_tag }}
-                                                                                {{ edit_form_fix.fixed_Record }}
+                                                                                {{ edit_form_fix.fixed_Record.label_tag
+                                                                                }}
+                                                                                {{ edit_form_fix.fixed_Record}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -215,7 +217,7 @@
                                                                          data-dismiss="modal">Cancel
                                                                     </div>
                                                                     <a class="btn btn-danger mr-4"
-                                                                       href="">Delete</a>
+                                                                       href="/del_fix_tp_product/{{ item.id }}">Delete</a>
                                                                 </div>
                                                             </div>
                                                         </div>
