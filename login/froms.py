@@ -24,7 +24,7 @@ class AddNewProduct(forms.Form):
 
 class Modify_fix(forms.Form):
     state_list =[('Complete','Complete'),('Repairing','Repairing'),('Urgent repair','Urgent repair')]
-    Fixed_State = forms.ChoiceField(choices=state_list, widget=forms.Select(attrs={'class': 'form-control'}))
+    fixed_State = forms.ChoiceField(choices=state_list, widget=forms.Select(attrs={'class': 'form-control'}))
     fixed_Record = forms.CharField(label="Fixed Record",widget=forms.Textarea(attrs={'class': 'form-control'}))
 
 
@@ -50,11 +50,9 @@ class addRepairProduct(forms.Form):
                                      widget=forms.TextInput(attrs={'class': 'form-control'}))
     fix_product_name = forms.CharField(label="Product Name", max_length=256,
                                        widget=forms.TextInput(attrs={'class': 'form-control'}))
-    fix_product_description = forms.CharField(label="Product Description", max_length=256,
-                                              widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fix_product_description = forms.CharField(label="Product Description",widget=forms.TextInput(attrs={'class': 'form-control'}))
     fix_state = forms.ChoiceField(choices=fix_states,help_text="There are Three different maintenance state: [Complete: maintenance done and product delivered],[Fixing: still in fixing],[Fixed: maintenance done but product not deliver]", widget=forms.Select(attrs={'class': 'form-control'}))
-    fix_detail = forms.CharField(label="Fixed Record", max_length=256,
-                                 widget=forms.Textarea(attrs={'class': 'form-control'}))
+    fix_detail = forms.CharField(label="Fixed Record",widget=forms.Textarea(attrs={'class': 'form-control'}))
     Product_Company = forms.ChoiceField(choices=company_name, widget=forms.Select(attrs={'class': 'form-control'}))
 
 

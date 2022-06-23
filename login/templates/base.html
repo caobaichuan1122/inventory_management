@@ -42,10 +42,11 @@
     <div class="iq-sidebar  sidebar-default ">
         <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
             <a href="/index/" class="header-logo">
-                <img src="../static/images/logo/logo_tpt.png" class="img-fluid rounded-normal light-logo" alt="logo"
+                <img src="../static/images/logo/logo_tpt.png" class="img-fluid rounded-normal light-logo " alt="logo"
                      style="width:80px; height:35px;">
+                <h5 class="logo-title light-logo ml-3">T.P.T</h5>
             </a>
-            <div class="iq-menu-bt-sidebar ml-5">
+            <div class="iq-menu-bt-sidebar" style="float:right; margin-left: 4.4rem; ">
                 <i class="las la-bars wrapper-menu"></i>
             </div>
         </div>
@@ -105,14 +106,16 @@
                 <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                     <i class="ri-menu-line wrapper-menu"></i>
                     <a href="/index/" class="header-logo">
-                        <img src="../static/images/logo/logo_tpt.png" class="img-fluid rounded-normal light-logo" alt="logo" style="width:80px; height:35px;">
+                        <img src="../static/images/logo/logo_tpt.png" class="img-fluid rounded-normal light-logo"
+                             alt="logo" style="width:80px; height:35px;">
+                        <h5 class="logo-title ml-3"></h5>
                     </a>
                 </div>
                 <div class="iq-search-bar device-search">
-                    <form action="#" class="searchbox">
-                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                        <input type="text" class="text search-input" placeholder="Search here...">
-                    </form>
+                    <!--                    <form action="#" class="searchbox">-->
+                    <!--                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>-->
+                    <!--                        <input type="text" class="text search-input" placeholder="Search here...">-->
+                    <!--                    </form>-->
                 </div>
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -142,11 +145,10 @@
                             <li class="nav-item nav-icon dropdown"></li>
                             <li>
                             </li>
-                            <li class="nav-item nav-icon dropdown caption-content">
+                            <li class="nav-item nav-icon dropdown caption-content" style="text-align: right;">
                                 <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user"
-                                         style="margin-left:25rem;">
+                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user" style="margin-left:25rem;">
                                 </a>
                                 <!--                                <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton4">-->
                                 <!--                                    <div class="card shadow-none m-0">-->
@@ -165,10 +167,11 @@
                                 <!--                                    </div>-->
                                 <!--                                </div>-->
                             </li>
-                            <li>
+                            <li style="text-align: right; float:right;"  class="justify-content-end">
                                 <div class="col">
-                                    <h5>User: {{ request.session.user_name }}</h5>
-                                    <a href="/logout/">Sign Out</a>
+                                    <p style="font-size: 16px;">User: {{ request.session.user_name }}</p>
+                                    <a href="/logout/" style="font-size: 16px;"><i class="las la-sign-out-alt" style="font-size: 18px;"></i>
+                                        Logout</a>
                                 </div>
                             </li>
                         </ul>
