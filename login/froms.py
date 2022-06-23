@@ -24,7 +24,7 @@ class AddNewProduct(forms.Form):
 
 class Modify_fix(forms.Form):
     state_list =[('Complete','Complete'),('Repairing','Repairing'),('Urgent repair','Urgent repair')]
-    fixed_State = forms.ChoiceField(choices=state_list, widget=forms.Select(attrs={'class': 'form-control'}))
+    Fixed_State = forms.ChoiceField(choices=state_list, widget=forms.Select(attrs={'class': 'form-control'}))
     fixed_Record = forms.CharField(label="Fixed Record",widget=forms.Textarea(attrs={'class': 'form-control'}))
 
 
