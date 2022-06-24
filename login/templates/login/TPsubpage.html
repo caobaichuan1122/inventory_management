@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-lg-12 col-md-12" style="margin-top: 30px;">
                          <div class="grid-item" style=" top: 50%; left: 50%; transform: translate(-50%, -50%); width:95%; height:350px;">
-                            <a class="wrapping-link" href="/TpRepairList/"></a>
+                            <a class="wrapping-link" href="/TprepairList/"></a>
                             <div class="grid-item-wrapper" style="border:1px solid #9ca3b1; box-shadow: 2px 2px 2px 2px #dddddd;">
                                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                     <img src="../static/images/logo/tplogo.png" style=" width: 45rem; height:14rem;">
@@ -72,6 +72,8 @@
     </div>
 </div>
 {% else %}
-<h1>Please login！</h1>
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
 {% endif %}
 {% endblock %}

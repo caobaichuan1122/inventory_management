@@ -41,18 +41,18 @@
                                     <td>{{ item.pr_product_name }}</td>
                                     <td>{{ item.pr_product_num }}</td>
                                     <td>{{ item.pr_product_price}}</td>
-                                    <td>{{ item.pr_product_time|date:"d-m-Y" }}</td>
+                                    <td>{{ item.pr_product_time}}</td>
                                     <td>
                                         <div class="d-flex align-items-center list-action">
-<!--                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"-->
-<!--                                               title=""-->
-<!--                                               data-original-title="Complete"-->
-<!--                                               href="#"><i class="las la-check"></i></a>-->
+                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"
+                                               title=""
+                                               data-original-title="Complete"
+                                               href="#"><i class="las la-check"></i></a>
                                             <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                                title=""
-                                               data-original-title="Edit" data-target="#Edit-text{{ item.id }}"><i
+                                               data-original-title="Edit" data-target="#Edit-text"><i
                                                     class="ri-pencil-line mr-0"></i></a>
-                                            <div class="modal fade" id="Edit-text{{ item.id }}" tabindex="-1" role="dialog"
+                                            <div class="modal fade" id="Edit-text" tabindex="-1" role="dialog"
                                                  aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -61,11 +61,10 @@
                                                                 <h4 class="mb-3">Modify Detail</h4>
                                                                 <div class="content create-workform bg-body">
                                                                     <div class="pb-3">
-                                                                        <form class='form-addnewproduct' action="/modify_pr_product/{{ item.id }}"
+                                                                        <form class='form-addnewproduct' action="#"
                                                                               data-toggle="validator" method="post"
                                                                               style="text-align:center; margin: 2rem; padding:2rem;">
                                                                             <div class="row">
-                                                                                {% csrf_token %}
                                                                                 <div class="col-md-12">
                                                                                     <div class="form-group">
                                                                                         {{ modify_form.Product_id.label_tag }}
@@ -97,13 +96,15 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <button type="reset" class="btn btn-danger">
-                                                                                Reset
-                                                                            </button>
-                                                                            <button type="submit" class="btn btn-primary">
-                                                                                change
-                                                                            </button>
                                                                         </form>
+                                                                    </div>
+                                                                    <div class="col-lg-12 mt-4">
+                                                                        <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                                                            <a class="btn btn-danger mr-4"
+                                                                               data-dismiss="modal">Cancel</a>
+                                                                            <div class="btn btn-primary mr-4"
+                                                                                 href="#">Confirm</div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -166,6 +167,8 @@
     </div>
 </div>
 {% else %}
-<h1>Please login!</h1>
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
 {% endif %}
 {% endblock %}
