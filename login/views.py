@@ -437,3 +437,6 @@ def PrProductStockOut(request):
     Customerdatabase = customer.objects.all()
     return render(request, 'login/PRproductOut.html',
                   context={'Prdatabase': Prdatabase, 'Customerdatabase': Customerdatabase})
+
+def please_login(request):
+    return render(request,'login/pleaselogin.html')
