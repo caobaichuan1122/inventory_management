@@ -13,7 +13,8 @@
             <div class="col-lg-12">
                 <div class="row" style="margin-top: 8rem; height:200px;">
                     <div class="col-lg-4 col-md-4">
-                        <div class="grid-item" style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #5b9dd9 40%, #5b9dd9 100%);">
+                        <div class="grid-item"
+                             style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #5b9dd9 40%, #5b9dd9 100%);">
                             <a class="wrapping-link" href="/TrSubpage/"></a>
                             <div class="grid-item-wrapper">
                                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -24,7 +25,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                        <div class="grid-item" style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #4fa96e 40%, #4fa96e 100%);">
+                        <div class="grid-item"
+                             style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #4fa96e 40%, #4fa96e 100%);">
                             <a class="wrapping-link" href="/TpSubpage/"></a>
                             <div class="grid-item-wrapper">
                                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -35,7 +37,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
-                        <div class="grid-item" style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #e38d13 40%,  #e38d13 100%);">
+                        <div class="grid-item"
+                             style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #e38d13 40%,  #e38d13 100%);">
                             <a class="wrapping-link" href="/PrSubpage/"></a>
                             <div class="grid-item-wrapper">
                                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -82,7 +85,8 @@
                                     <td>{{ item.fix_state }}</td>
                                     <td>
                                         <div class="d-flex align-items-center list-action">
-                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Complete"
+                                            <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"
+                                               title="" data-original-title="Complete"
                                                href="#"><i class="las la-check"></i></a>
                                             <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                                title=""
@@ -108,13 +112,17 @@
                                                                                 {% csrf_token %}
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{ edit_form_fix.Fixed_State.label_tag }}
+                                                                                        {{
+                                                                                        edit_form_fix.Fixed_State.label_tag
+                                                                                        }}
                                                                                         {{ edit_form_fix.Fixed_State}}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{ edit_form_fix.fixed_Record.label_tag }}
+                                                                                        {{
+                                                                                        edit_form_fix.fixed_Record.label_tag
+                                                                                        }}
                                                                                         {{ edit_form_fix.fixed_Record}}
                                                                                     </div>
                                                                                 </div>
@@ -127,7 +135,8 @@
                                                                                 change
                                                                             </button>
                                                                             {% if message %}
-                                                                            <div class="alert alert-warning">{{ message }}
+                                                                            <div class="alert alert-warning">{{ message
+                                                                                }}
                                                                             </div>
                                                                             {% endif %}
                                                                         </form>
@@ -214,13 +223,17 @@
                                                                                 {% csrf_token %}
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{ edit_form_fix.Fixed_State.label_tag }}
+                                                                                        {{
+                                                                                        edit_form_fix.Fixed_State.label_tag
+                                                                                        }}
                                                                                         {{ edit_form_fix.Fixed_State}}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-10">
                                                                                     <div class="form-group">
-                                                                                        {{ edit_form_fix.fixed_Record.label_tag }}
+                                                                                        {{
+                                                                                        edit_form_fix.fixed_Record.label_tag
+                                                                                        }}
                                                                                         {{ edit_form_fix.fixed_Record}}
                                                                                     </div>
                                                                                 </div>
@@ -233,7 +246,8 @@
                                                                                 Change
                                                                             </button>
                                                                             {% if message %}
-                                                                            <div class="alert alert-warning">{{ message }}
+                                                                            <div class="alert alert-warning">{{ message
+                                                                                }}
                                                                             </div>
                                                                             {% endif %}
                                                                         </form>
@@ -325,7 +339,10 @@
             </div>
         </div>
     </div>
-    {% else %}
-    <h1>Please login!</h1>
-    {% endif %}
-    {% endblock %}
+</div>
+{% else %}
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
+{% endif %}
+{% endblock %}

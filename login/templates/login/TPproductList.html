@@ -167,8 +167,10 @@
             </div>
         </div>
     </div>
-    {% else %}
-    <h1>Please login!</h1>
-    {% endif %}
-    {% endblock %}
 </div>
+{% else %}
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
+{% endif %}
+{% endblock %}
