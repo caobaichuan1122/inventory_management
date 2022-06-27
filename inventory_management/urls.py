@@ -59,4 +59,5 @@ urlpatterns = [
     path('PrProductStockOut/', views.PrProductStockOut, name='PrProductStockOut'),
     path('TpRepairStockOut/', views.TpRepairStockOut, name="TpRepairStockOut"),
     path('TrRepairStockOut/', views.TrRepairStockOut, name="TrRepairStockOut"),
+    path('please_login/',views.please_login,name="please_login"),
 ]
