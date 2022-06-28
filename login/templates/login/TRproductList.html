@@ -27,8 +27,9 @@
                                 <tr class="ligth ligth-data">
                                     <th>Product ID</th>
                                     <th>Product Name</th>
-                                    <th>Product Number</th>
+                                    <th>Product Quantity</th>
                                     <th>Product Price</th>
+                                    <th>Product Cost</th>
                                     <th>Time</th>
                                     <th>Action</th>
                                 </tr>
@@ -40,6 +41,7 @@
                                     <td>{{ item.tr_product_name }}</td>
                                     <td>{{ item.tr_product_num }}</td>
                                     <td>{{ item.tr_product_price}}</td>
+                                    <td>{{ item.tr_product_cost}}</td>
                                     <td>{{ item.tr_product_time|date:"d-m-Y" }}</td>
                                     <td>
                                         <div class="d-flex align-items-center list-action">
@@ -83,6 +85,12 @@
                                                                                     <div class="form-group">
                                                                                         {{ modify_form.Product_Price.label_tag }}
                                                                                         {{ modify_form.Product_Price}}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        {{ modify_form.Product_Cost.label_tag }}
+                                                                                        {{ modify_form.Product_Cost}}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-12">

@@ -52,8 +52,28 @@ def logout(request):
 def index(request):
     FixTrDatabase = fix_tr_report.objects.filter().exclude(fix_state='completed').all()
     FixTpDatabase = fix_tp_report.objects.filter().exclude(fix_state='completed').all()
+    tr_que = Trproduct.objects.values_list('tr_product_num', flat=True)
+    tr_que = list(map(int,tr_que))
+    tr_price = Trproduct.objects.values_list('tr_product_price', flat=True)
+    tr_price = list(map(int,tr_price))
+
+    tp_que = Tproduct.objects.values_list('tp_product_num', flat=True)
+    tp_que = list(map(int,tp_que))
+    tp_price = Tproduct.objects.values_list('tp_product_price', flat=True)
+    tp_price = list(map(int,tp_price))
+
+    pr_que = Prproduct.objects.values_list('pr_product_num', flat=True)
+    pr_que = list(map(int,pr_que))
+    pr_price = Prproduct.objects.values_list('pr_product_price', flat=True)
+    pr_price = list(map(int,pr_price))
+
+    sum_tr = sum([x * y for x, y in zip(tr_que,tr_price)])
+    sum_tp = sum([x * y for x, y in zip(tp_que, tp_price)])
+    sum_pr = sum([x * y for x, y in zip(pr_que, pr_price)])
     edit_form_fix = Modify_fix()
-    return render(request,'login/index.html',context={'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,'edit_form_fix':edit_form_fix})
+    return render(request,'login/index.html',context={'FixTrDatabase':FixTrDatabase,'FixTpDatabase':FixTpDatabase,
+                                                      'sum_tr':sum_tr,'sum_tp':sum_tp,'sum_pr':sum_pr,'edit_form_fix':edit_form_fix})
+
 
 def add_product(request):
     if request.method == 'POST':
@@ -61,24 +81,25 @@ def add_product(request):
         product_name = request.POST.get('Product_name')
         Product_no = request.POST.get('Product_no')
         Product_Price = request.POST.get('Product_Price')
+        Product_Cost = request.POST.get('Product_Cost')
         Product_time = request.POST.get('Product_time')
         company = request.POST.get('Product_Company')
-        if product_id == '' or product_name =='' or Product_no=='' or Product_Price=='' or Product_time=='':
+        if product_id == '' or product_name =='' or Product_no=='' or Product_Price=='' or Product_time=='' or Product_Cost=='':
             return render(request,'login/addnewproduct.html',{'ret':'error!'})
         if company == 'Trproduct':
             models.Trproduct.objects.create(tr_product_id=product_id, tr_product_name=product_name,
                                             tr_product_num=Product_no, tr_product_price=Product_Price,
-                                            tr_product_time=Product_time)
+                                            tr_product_cost=Product_Cost,tr_product_time=Product_time)
             message = "add successful!"
         elif company == 'Tproduct':
             models.Tproduct.objects.create(tp_product_id=product_id, tp_product_name=product_name,
                                            tp_product_num=Product_no, tp_product_price=Product_Price,
-                                           tp_product_time=Product_time)
+                                           tp_product_cost=Product_Cost,tp_product_time=Product_time)
             message = "add successful!"
         elif company == 'Prproduct':
             models.Prproduct.objects.create(pr_product_id=product_id, pr_product_name=product_name,
                                             pr_product_num=Product_no, pr_product_price=Product_Price,
-                                            pr_product_time=Product_time)
+                                            pr_product_cost=Product_Cost,pr_product_time=Product_time)
             message = "add successful!"
         else:
             message = "error!"
@@ -140,8 +161,11 @@ def modify_tr_product(request,id):
         product_name = request.POST.get('Product_name')
         Product_num = request.POST.get('Product_num')
         Product_Price = request.POST.get('Product_Price')
+        Product_Cost = request.POST.get('Product_Cost')
         Product_time = request.POST.get('Product_time')
-        models.Trproduct.objects.filter(id=id).update(tr_product_id = product_id, tr_product_name = product_name, tr_product_num = Product_num, tr_product_price = Product_Price, tr_product_time = Product_time)
+        models.Trproduct.objects.filter(id=id).update(tr_product_id = product_id, tr_product_name = product_name,
+                                                      tr_product_num = Product_num, tr_product_price = Product_Price,
+                                                      tr_product_cost = Product_Cost, tr_product_time = Product_time)
         return redirect('/TrProductList/')
     else:
         return render(request, '/TrProductList/',locals())
@@ -152,8 +176,11 @@ def modify_tp_product(request,id):
         product_name = request.POST.get('Product_name')
         Product_num = request.POST.get('Product_num')
         Product_Price = request.POST.get('Product_Price')
+        Product_Cost = request.POST.get('Product_Cost')
         Product_time = request.POST.get('Product_time')
-        models.Tproduct.objects.filter(id=id).update(tp_product_id = product_id, tp_product_name = product_name, tp_product_num = Product_num, tp_product_price = Product_Price, tp_product_time = Product_time)
+        models.Tproduct.objects.filter(id=id).update(tp_product_id = product_id, tp_product_name = product_name,
+                                                     tp_product_num = Product_num, tp_product_price = Product_Price,
+                                                     tp_product_cost = Product_Cost, tp_product_time = Product_time)
         return redirect('/TpProductList/')
     else:
         return render(request, '/TpProductList/',locals())
@@ -164,8 +191,11 @@ def modify_pr_product(request,id):
         product_name = request.POST.get('Product_name')
         Product_num = request.POST.get('Product_num')
         Product_Price = request.POST.get('Product_Price')
+        Product_Cost = request.POST.get('Product_Cost')
         Product_time = request.POST.get('Product_time')
-        models.Prproduct.objects.filter(id=id).update(pr_product_id = product_id, pr_product_name = product_name, pr_product_num = Product_num, pr_product_price = Product_Price, pr_product_time = Product_time)
+        models.Prproduct.objects.filter(id=id).update(pr_product_id = product_id, pr_product_name = product_name,
+                                                      pr_product_num = Product_num, pr_product_price = Product_Price,
+                                                      pr_product_cost = Product_Cost, pr_product_time = Product_time)
         return redirect('/PrProductList/')
     else:
         return render(request, '/PrProductList/',locals())
@@ -203,8 +233,6 @@ def PrProductList(request):
 def TrProductStockOut(request):
     Trdatabase = Trproduct.objects.all()
     Customerdatabase = customer.objects.all()
-    #generatePDF(request,custom_info )
-    #return redirect('/generate_pdf/', {'custom_info': custom_info})
     return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase,'Customerdatabase':Customerdatabase})
 
 def addrepairproduct(request):
@@ -266,7 +294,13 @@ def generatePDF(request):
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = Trproduct.objects.filter(id__in=product_id).values()
         print(product_quantity)
-        return render(request,'login/generate_pdf.html',context={'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+        return render(request,'login/generate_pdf.html',context={'product_list':product_list,
+                                                                 'product_quantity':product_quantity,
+                                                                 'customer_info':customer_info,
+                                                                 'Invoice_date':Invoice_date,
+                                                                 'Delivery_date':Delivery_date,
+                                                                 'Invoice_no':Invoice_no,
+                                                                 'Note':Note})
     else:
         return render(request, 'login/TRproductOut.html',
                       context={'Trdatabase': Trdatabase, 'Customerdatabase': Customerdatabase})
@@ -322,7 +356,9 @@ def generatePDF(request):
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = Trproduct.objects.filter(id__in=product_id).values()
         sum_quantity = str(sum([int(n) for n in product_quantity]))
-        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
+        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,
+                                                                 'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,
+                                                                 'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
     else:
         return render(request, 'login/TRproductOut.html',context={'Trdatabase': Trdatabase, 'Customerdatabase': Customerdatabase})
 
@@ -343,7 +379,11 @@ def generatePDF_tp(request):
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = Tproduct.objects.filter(id__in=product_id).values()
         sum_quantity = str(sum([int(n) for n in product_quantity]))
-        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
+        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,
+                                                                 'Delivery_Term':Delivery_Term,'product_list':product_list,
+                                                                 'product_quantity':product_quantity,'customer_info':customer_info,
+                                                                 'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,
+                                                                 'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
     else:
         return render(request, 'login/TPproductOut.html',context={'Tpdatabase': Tpdatabase, 'Customerdatabase': Customerdatabase})
 
@@ -364,7 +404,11 @@ def generatePDF_pr(request):
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = Prproduct.objects.filter(id__in=product_id).values()
         sum_quantity = str(sum([int(n) for n in product_quantity]))
-        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'product_quantity':product_quantity,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
+        return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,
+                                                                 'Delivery_Term':Delivery_Term,'product_list':product_list,
+                                                                 'product_quantity':product_quantity,'customer_info':customer_info,
+                                                                 'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,
+                                                                 'Invoice_no':Invoice_no,'Note':Note,'sum_quantity':sum_quantity})
     else:
         return render(request, 'login/TPproductOut.html',context={'Prdatabase': Prdatabase, 'Customerdatabase': Customerdatabase})
 
@@ -385,7 +429,11 @@ def generatePDF_fix_tp(request):
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = fix_tp_report.objects.filter(id__in=product_id).values()
-        return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+        return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,
+                                                                     'Delivery_Term':Delivery_Term,'product_list':product_list,
+                                                                     'customer_info':customer_info,'Invoice_date':Invoice_date,
+                                                                     'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,
+                                                                     'Note':Note})
     else:
         return render(request, 'login/TpRepairOut.html',context={'TpFixdatabase': TpFixdatabase, 'Customerdatabase': Customerdatabase})
 
@@ -404,7 +452,11 @@ def generatePDF_fix_tr(request):
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = fix_tr_report.objects.filter(id__in=product_id).values()
-        return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,'Delivery_Term':Delivery_Term,'product_list':product_list,'customer_info':customer_info,'Invoice_date':Invoice_date,'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,'Note':Note})
+        return render(request,'login/generate_fix_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,
+                                                                     'Delivery_Term':Delivery_Term,'product_list':product_list,
+                                                                     'customer_info':customer_info,'Invoice_date':Invoice_date,
+                                                                     'Delivery_date':Delivery_date,'Invoice_no':Invoice_no,
+                                                                     'Note':Note})
     else:
         return render(request, 'login/TrRepairOut.html',context={'TrFixdatabase': TrFixdatabase, 'Customerdatabase': Customerdatabase})
 

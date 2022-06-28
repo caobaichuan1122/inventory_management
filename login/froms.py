@@ -17,6 +17,8 @@ class AddNewProduct(forms.Form):
                                     widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_Price = forms.DecimalField(label="Product Price ($AU) ", max_digits=2, help_text="Enter Number",
                                        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    Product_Cost = forms.DecimalField(label="Product Cost ($AU) ", max_digits=2, help_text="Enter Number",
+                                       widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_time = forms.DateTimeField(label="Time",
                                        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'date'}))
     Product_Company = forms.ChoiceField(choices=company_name, widget=forms.Select(attrs={'class': 'form-control'}))
@@ -36,6 +38,8 @@ class Modify_Product(forms.Form):
     Product_num = forms.IntegerField(label="Product Number", help_text="Enter Number",
                                      widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_Price = forms.DecimalField(label="Product Price ($AU) ", max_digits=2, help_text="Enter Number",
+                                       widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    Product_Cost = forms.DecimalField(label="Product Cost ($AU) ", max_digits=2, help_text="Enter Number",
                                        widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_time = forms.DateTimeField(label="Time",
                                        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))

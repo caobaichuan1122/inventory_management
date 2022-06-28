@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-#wsn6lo8!)y9nuh4&!jp!w_9w4r+qa=g!(@s00ce-t#9xt0&@i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['49.176.154.111', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -139,4 +139,3 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['49.176.154.111', 'localhost', '127.0.0.1']

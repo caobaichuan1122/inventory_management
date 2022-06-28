@@ -33,28 +33,35 @@ class fix_tp_report(models.Model):
     fix_state = models.CharField(max_length=256)
     fixed_detail = models.CharField(max_length=256)
 
-class Send_product(models.Model):
-    send_id = models.CharField(max_length=256)
-    product_id = models.CharField(max_length=256)
-    product_id = models.CharField(max_length=256)
-    product_name = models.CharField(max_length=256)
-    product_num = models.CharField(max_length=256)
-    line_num = models.CharField(max_length=256)
-    product_price = models.CharField(max_length=256)
-
-# class Send_fix_product(models.Model):
+# class tr_order(models.Model):
 #     send_id = models.CharField(max_length=256)
 #     product_id = models.CharField(max_length=256)
-#     tr_product_id = models.CharField(max_length=256)
-#     tr_product_name = models.CharField(max_length=256)
-#     tr_product_num = models.CharField(max_length=256)
-#     tr_product_price = models.CharField(max_length=256)
+#     product_name = models.CharField(max_length=256)
+#     product_num = models.CharField(max_length=256)
+#     line_num = models.CharField(max_length=256)
+#     product_price = models.CharField(max_length=256)
+#
+# class Send_product(models.Model):
+#     send_id = models.CharField(max_length=256)
+#     product_id = models.CharField(max_length=256)
+#     product_name = models.CharField(max_length=256)
+#     product_num = models.CharField(max_length=256)
+#     line_num = models.CharField(max_length=256)
+#     product_price = models.CharField(max_length=256)
+#
+# class Send_product(models.Model):
+#     send_id = models.CharField(max_length=256)
+#     product_id = models.CharField(max_length=256)
+#     product_name = models.CharField(max_length=256)
+#     product_num = models.CharField(max_length=256)
+#     line_num = models.CharField(max_length=256)
+#     product_price = models.CharField(max_length=256)
 
 class Prproduct(models.Model):
     pr_product_id = models.CharField(max_length=256)
     pr_product_name = models.CharField(max_length=256)
     pr_product_num = models.CharField(max_length=256)
-    # pr_product_cost = models.CharField(max_length=256)
+    pr_product_cost = models.CharField(max_length=256,default='100')
     pr_product_price = models.CharField(max_length=256)
     pr_product_time = models.DateField(max_length=6)
 
@@ -62,7 +69,7 @@ class Tproduct(models.Model):
     tp_product_id = models.CharField(max_length=256)
     tp_product_name = models.CharField(max_length=256)
     tp_product_num = models.CharField(max_length=256)
-    # tp_product_cost = models.CharField(max_length=256)
+    tp_product_cost = models.CharField(max_length=256,default='100')
     tp_product_price = models.CharField(max_length=256)
     tp_product_time = models.DateField(max_length=6)
 
@@ -70,7 +77,7 @@ class Trproduct(models.Model):
     tr_product_id = models.CharField(max_length=256)
     tr_product_name = models.CharField(max_length=256)
     tr_product_num = models.CharField(max_length=256)
-    # tr_product_cost = models.CharField(max_length=256)
+    tr_product_cost = models.CharField(max_length=256,default='100')
     tr_product_price = models.CharField(max_length=256)
     tr_product_time = models.DateField(max_length=6)
 

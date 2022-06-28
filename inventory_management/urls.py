@@ -60,4 +60,5 @@ urlpatterns = [
     path('TpRepairStockOut/', views.TpRepairStockOut, name="TpRepairStockOut"),
     path('TrRepairStockOut/', views.TrRepairStockOut, name="TrRepairStockOut"),
     path('please_login/',views.please_login,name="please_login"),
+    # path('sum/',views.sum,name="sum"),
 ]
