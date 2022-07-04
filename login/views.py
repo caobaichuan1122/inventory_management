@@ -406,6 +406,9 @@ def generatePDF_pr(request):
         customer_info = customer.objects.filter(customer_id=customerid).values()
         product_list = Prproduct.objects.filter(id__in=product_id).values()
         sum_quantity = str(sum([int(n) for n in product_quantity]))
+        for x,y in zip(product_id,product_quantity):
+            total_quantity = models.Prproduct.objects.filter(id=x).values('pr_product_num')
+            models.Prproduct.objects.filter(id=x).update(pr_product_num = int(total_quantity[0]["pr_product_num"])-int(y))
         return render(request,'login/generate_pdf.html',context={'company_id':company_id,'Delivery_No':Delivery_No,
                                                                  'Delivery_Term':Delivery_Term,'product_list':product_list,
                                                                  'product_quantity':product_quantity,'customer_info':customer_info,
