@@ -50,23 +50,25 @@ def logout(request):
 
 
 def index(request):
+    # hiddle the completed
     FixTrDatabase = fix_tr_report.objects.filter().exclude(fix_state='completed').all()
     FixTpDatabase = fix_tp_report.objects.filter().exclude(fix_state='completed').all()
+    # get tr data
     tr_que = Trproduct.objects.values_list('tr_product_num', flat=True)
-    tr_que = list(map(int,tr_que))
+    tr_que = list(map(float,tr_que))
     tr_price = Trproduct.objects.values_list('tr_product_price', flat=True)
-    tr_price = list(map(int,tr_price))
-
+    tr_price = list(map(float,tr_price))
+    # get tp data
     tp_que = Tproduct.objects.values_list('tp_product_num', flat=True)
-    tp_que = list(map(int,tp_que))
+    tp_que = list(map(float,tp_que))
     tp_price = Tproduct.objects.values_list('tp_product_price', flat=True)
-    tp_price = list(map(int,tp_price))
-
+    tp_price = list(map(float,tp_price))
+    # get pr data
     pr_que = Prproduct.objects.values_list('pr_product_num', flat=True)
-    pr_que = list(map(int,pr_que))
+    pr_que = list(map(float,pr_que))
     pr_price = Prproduct.objects.values_list('pr_product_price', flat=True)
-    pr_price = list(map(int,pr_price))
-
+    pr_price = list(map(float,pr_price))
+    # calulate the total price
     sum_tr = sum([x * y for x, y in zip(tr_que,tr_price)])
     sum_tp = sum([x * y for x, y in zip(tp_que, tp_price)])
     sum_pr = sum([x * y for x, y in zip(pr_que, pr_price)])
@@ -492,3 +494,36 @@ def PrProductStockOut(request):
 
 def please_login(request):
     return render(request,'login/pleaselogin.html')
+
+
+def add_product_quantity(request):
+    id = request.POST.get("AddProduct")
+    id_list_tr = Trproduct.objects.values_list('tr_product_id', flat=True)
+    id_list_tp = Tproduct.objects.values_list('tp_product_id', flat=True)
+    id_list_pr = Prproduct.objects.values_list('pr_product_id', flat=True)
+    if request.method == "POST":
+        if id in id_list_tr:
+            quantity = models.Trproduct.objects.filter(tr_product_id=id).values('tr_product_num')
+            models.Trproduct.objects.filter(tr_product_id=id).update(tr_product_num = quantity[0]["tr_product_num"] + 1)
+        elif id in id_list_tp:
+            quantity = models.Tproduct.objects.filter(tp_product_id=id).values('tp_product_num')
+            models.Tproduct.objects.filter(tp_product_id=id).update(tp_product_num = quantity[0]["tp_product_num"] + 1)
+        elif id in id_list_pr:
+            quantity = models.Prproduct.objects.filter(pr_product_id=id).values('pr_product_num')
+            models.Prproduct.objects.filter(pr_product_id=id).update(pr_product_num = quantity[0]["pr_product_num"] + 1)
+        else:
+            print(123)
+            message = "ID does not exist, please re-enter!"
+            render(request, 'login/Add_products.html')
+    return render(request,'login/Add_products.html')
+
+def invoicePDF(request):
+    return render(request,'login/InvoicePDF.html')
+
+def QuotePDF(request):
+    return render(request,'login/QuotePDF.html')
+
+def tr_order(request):
+    return render(request,'login/tr_order_list.html')
+
+

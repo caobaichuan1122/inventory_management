@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quote</title>
+    <link href="../static/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <style>
+
+        @page {
+            size: a4 portrait;
+        }
+
+        table {
+            -pdf-keep-with-next: true;
+            -pdf-keep-in-frame-mode: shrink;
+        }
+
+        p {
+            margin: 0;
+            -pdf-keep-with-next: true;
+        }
+
+        p.separator {
+            -pdf-keep-with-next: false;
+            font-size: 6pt;
+        }
+
+        #main-field {
+            padding: 30px;
+        }
+
+        .container-fluid {
+            padding: 60px 60px 60px 60px;
+        }
+
+        .canvas_div_pdf h1 {
+            font-size: 35px;
+        }
+
+        .company_info h4 {
+            font-size: 30px
+        }
+
+        .company_info p {
+            font-size: 26px;
+        }
+
+        .customer_info {
+            margin-top: 40px;
+        }
+
+        .customer_info h3 {
+            font-size: 28px;
+        }
+
+        .customer_info h4 {
+            font-size: 30px;
+        }
+
+        .customer_info p {
+            font-size: 26px;
+        }
+
+        #info {
+            font-size: 24px;
+        }
+
+        table th {
+            font-size: 26px;
+        }
+
+        table td {
+            font-size: 22px;
+        }
+
+        #add_info {
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+
+        #add_info h3 {
+            font-size: 26px;
+        }
+
+        #add_info p {
+            margin-top: 10px;
+            font-size: 22px;
+        }
+
+        #summary_line-1-4 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #summary_line-2-4 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #summary_line-3-4 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #signature_field {
+            margin: 20px 20px 20px 20px;
+        }
+
+        #signature_field h3 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #signature_field p {
+            font-size: 24px;
+        }
+
+        @media print {
+            #info {
+                background: #dddddd;
+            }
+
+            /* ... the rest of the rules ... */
+        }
+
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            getPDF()
+        };
+
+        function getPDF() {
+
+            var HTML_Width = $(".canvas_div_pdf").width();
+            var HTML_Height = $(".canvas_div_pdf").height();
+            var top_left_margin = 15;
+            var PDF_Width = HTML_Width + (top_left_margin * 2);
+            var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+
+            var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+
+            html2canvas($(".canvas_div_pdf")[0], {allowTaint: true}).then(function (canvas) {
+                canvas.getContext('2d');
+
+                console.log(canvas.height + "  " + canvas.width);
+
+
+                var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+
+                for (var i = 1; i <= totalPDFPages; i++) {
+                    pdf.addPage(PDF_Width, PDF_Height);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+                }
+
+                pdf.save("Delivery-Note.pdf");
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="canvas_div_pdf">
+    <div class="container-fluid">
+        <div class="row" style="display:inline; height:100px;">
+            <div class="col-md-6" id="logo" style="float:left; ">
+                {% load static %}
+                {% if company_id == '1' %}
+                <img src="{% static '/images/logo/trlogo.png' %}" style="width:350px;height:100px;">
+                <!--            <img src="/images/logo/trlogo.png" style="width:280px;height:100px;">-->
+                {% elif company_id == '2' %}
+                <img src="{% static '/images/logo/tplogo.png' %}" style="width:350px;height:100px;">
+                <!--            <img src="/images/logo/tplogo.png" style="width:280px;height:100px;">-->
+                {% else %}
+                <img src="{% static '/images/logo/prlogo.png' %}" style="width:350px;height:100px;">
+                <!--            <img src="/images/logo/prlogo.png" style="width:280px;height:100px;">-->
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <div class="company_info">
+                    {% if company_id == '1' %}
+                    <h4>Top Rail Services Pty Ltd.</h4>
+                    <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                    <p>ABN: 90 167 745 575</p>
+                    <p>Email: ifo@toprailservices.com.au</p>
+                    <p>Tel: 1300 772 678</p>
+                    <p>Website: https://toprailservices.com.au</p>
+                    {% elif company_id == '2' %}
+                    <h4>T-Power Pty Ltd.</h4>
+                    <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                    <p>ABN: 65 651 645 948</p>
+                    <p>Email: ifo@t-power.com.au</p>
+                    <p>Tel: 1300 772 678</p>
+                    <p>Website: https://www.t-power.com.au</p>
+                    {% else %}
+                    <h4>Pranstek Pty Ltd.</h4>
+                    <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                    <p>ABN: 49 625 346 796</p>
+                    <p>Email: ifo@pranstek.com.au</p>
+                    <p>Tel: 1300 772 678</p>
+                    <p>Website: https://www.pranstek.com.au</p>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+        <div class="row" style="display: inline; height:40rem; margin-top:50px; font-size:26px;">
+            <div class="col-md-6">
+                <h1>Quote</h1>
+            </div>
+            <div class="col-md-2">
+                <p>Quote Number</p>
+                <p>{{ Invoice_no }}</p>
+            </div>
+            <div class="col-md-2">
+                <p>Issue Date</p>
+                <p>{{ Invoice_date }}</p>
+            </div>
+            <div class="col-md-2" style="background: #dddddd;">
+                <p>Expiry Date</p>
+                <p>{{ Delivery_date }}</p>
+            </div>
+        </div>
+        <div class="row" style="display: inline; height:40rem; margin-top:30px;">
+            <div class="col-md-6">
+                <div class="customer_info" style="margin-top: 10px;">
+                    <h3>Bill To:</h3>
+                    {% for ci in customer_info %}
+                    <h4>{{ ci.customer_name }}</h4>
+                    <p>Address: {{ ci.customer_address }}</p>
+                    <p>Phone: {{ ci.customer_phone }} </p>
+                    <p>Email: {{ ci.customer_email}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display: inline; margin-top: 100px;">
+            <table class="table table-striped">
+                <tr>
+                    <th>Item</th>
+                    <th>Product Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>GST</th>
+                    <th>Total</th>
+                </tr>
+                {% load index %}
+                {% if company_id == "1" %}
+                {% for p in product_list %}
+                <tr>
+                    <td>{{ p.tr_product_id }}</td>
+                    <td>{{ p.tr_product_name}}</td>
+                    <td>{{ product_quantity|index:forloop.counter0 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+                {% elif company_id == "2" %}
+                {% for p in product_list %}
+                <tr>
+                    <td>{{ p.tp_product_id }}</td>
+                    <td>{{ p.tp_product_name}}</td>
+                    <td>{{ product_quantity|index:forloop.counter0 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                {% for p in product_list %}
+                <tr>
+                    <td>{{ p.pr_product_id }}</td>
+                    <td>{{ p.pr_product_name}}</td>
+                    <td>{{ product_quantity|index:forloop.counter0 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <ul style="list-style: none; font-size: 24px;">
+                        <li>Sub-Total (ex GST):</li>
+                        <li>GST:</li>
+                        <li><hr style="border: 2px solid lightskyblue;"></li>
+                        <li style="background-color: #dddddd;">
+                            <p style="font-size: 28px; font-weight: bold;">Total amount:</p>
+                            <p style="font-size: 14px;">including GST</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

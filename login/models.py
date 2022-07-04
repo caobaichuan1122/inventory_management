@@ -33,14 +33,6 @@ class fix_tp_report(models.Model):
     fix_state = models.CharField(max_length=256)
     fixed_detail = models.CharField(max_length=256)
 
-# class tr_order(models.Model):
-#     send_id = models.CharField(max_length=256)
-#     product_id = models.CharField(max_length=256)
-#     product_name = models.CharField(max_length=256)
-#     product_num = models.CharField(max_length=256)
-#     line_num = models.CharField(max_length=256)
-#     product_price = models.CharField(max_length=256)
-#
 # class Send_product(models.Model):
 #     send_id = models.CharField(max_length=256)
 #     product_id = models.CharField(max_length=256)
@@ -57,10 +49,40 @@ class fix_tp_report(models.Model):
 #     line_num = models.CharField(max_length=256)
 #     product_price = models.CharField(max_length=256)
 
+class tr_order_list(models.Model):
+    order_id = models.CharField(max_length=256)
+    delivery_note = models.CharField(max_length=256)
+    delivery_term = models.CharField(max_length=256)
+    custormer = models.CharField(max_length=256)
+    issue_date = models.DateField(max_length=6)
+    due_date = models.DateField(max_length=6)
+    invoice_number = models.CharField(max_length=256)
+    GST = models.FloatField(default=0.1)
+
+# class tp_order_list(models.Model):
+#     order_id = models.CharField(max_length=256)
+#     delivery_note = models.CharField(max_length=256)
+#     delivery_term = models.CharField(max_length=256)
+#     custormer = models.CharField(max_length=256)
+#     issue_date = models.DateField(max_length=6)
+#     due_date = models.DateField(max_length=6)
+#     invoice_number = models.CharField(max_length=256)
+#     GST = models.FloatField(default=0.1)
+
+# class pr_order_list(models.Model):
+#     order_id = models.CharField(max_length=256)
+#     delivery_note = models.CharField(max_length=256)
+#     delivery_term = models.CharField(max_length=256)
+#     custormer = models.CharField(max_length=256)
+#     issue_date = models.DateField(max_length=6)
+#     due_date = models.DateField(max_length=6)
+#     invoice_number = models.CharField(max_length=256)
+#     GST = models.FloatField(default=0.1)
+
 class Prproduct(models.Model):
     pr_product_id = models.CharField(max_length=256)
     pr_product_name = models.CharField(max_length=256)
-    pr_product_num = models.CharField(max_length=256)
+    pr_product_num = models.IntegerField()
     pr_product_cost = models.CharField(max_length=256,default='100')
     pr_product_price = models.CharField(max_length=256)
     pr_product_time = models.DateField(max_length=6)
@@ -68,7 +90,7 @@ class Prproduct(models.Model):
 class Tproduct(models.Model):
     tp_product_id = models.CharField(max_length=256)
     tp_product_name = models.CharField(max_length=256)
-    tp_product_num = models.CharField(max_length=256)
+    tp_product_num = models.IntegerField()
     tp_product_cost = models.CharField(max_length=256,default='100')
     tp_product_price = models.CharField(max_length=256)
     tp_product_time = models.DateField(max_length=6)
@@ -76,10 +98,11 @@ class Tproduct(models.Model):
 class Trproduct(models.Model):
     tr_product_id = models.CharField(max_length=256)
     tr_product_name = models.CharField(max_length=256)
-    tr_product_num = models.CharField(max_length=256)
+    tr_product_num = models.IntegerField()
     tr_product_cost = models.CharField(max_length=256,default='100')
     tr_product_price = models.CharField(max_length=256)
     tr_product_time = models.DateField(max_length=6)
+    tr_order_list_fk = models.ForeignKey('tr_order_list', on_delete=models.CASCADE,null=True)
 
 class customer(models.Model):
     customer_id = models.CharField(max_length=256)
