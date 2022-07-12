@@ -46,12 +46,7 @@
                                         {{ repair_form.fix_state}}
                                     </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        {{ repair_form.fix_detail.label_tag }}
-                                        {{ repair_form.fix_detail}}
-                                    </div>
-                                </div>
+
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         {{ repair_form.Product_Company.label_tag }}
@@ -74,6 +69,8 @@
 </div>
 
 {% else %}
-<h1>Please login</h1>
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
 {% endif %}
 {% endblock %}

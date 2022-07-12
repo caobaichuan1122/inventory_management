@@ -29,8 +29,10 @@
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.9/standard/ckeditor.js"></script>
 </head>
 <body>
 <div id="loading">
@@ -50,6 +52,7 @@
                 <i class="las la-bars wrapper-menu"></i>
             </div>
         </div>
+
         <div class="data-scrollbar" data-scroll="1">
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
@@ -72,9 +75,15 @@
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/TotalRepairList/">
+                        <a href="/repair_list/">
                             <i class="las la-wrench" style="font-size:26px;"></i>
                             <span class="ml-4">Repair List</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="/add_product_quantity/">
+                            <i class="las la-plus-circle" style="font-size:26px;"></i>
+                            <span class="ml-4">Add Product Quantity</span>
                         </a>
                     </li>
                     <li class=" ">
@@ -84,13 +93,13 @@
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/add_repair_product/">
+                        <a href="/addrepairproduct/">
                             <i class="las la-plus-circle" style="font-size:26px;"></i>
                             <span class="ml-4">Add Repair Products</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="/add_new_customer/">
+                        <a href="/addnewcustomer/">
                             <i class="las la-plus-circle" style="font-size:26px;"></i>
                             <span class="ml-4">Add New Customer</span>
                         </a>
@@ -111,11 +120,12 @@
                         <h5 class="logo-title ml-3"></h5>
                     </a>
                 </div>
+
                 <div class="iq-search-bar device-search">
-                    <!--                    <form action="#" class="searchbox">-->
-                    <!--                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>-->
-                    <!--                        <input type="text" class="text search-input" placeholder="Search here...">-->
-                    <!--                    </form>-->
+<!--                    <form action="#" class="searchbox">-->
+<!--                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>-->
+<!--                        <input type="text" class="text search-input" placeholder="Search here...">-->
+<!--                    </form>-->
                 </div>
                 <div class="d-flex align-items-center">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -145,10 +155,11 @@
                             <li class="nav-item nav-icon dropdown"></li>
                             <li>
                             </li>
-                            <li class="nav-item nav-icon dropdown caption-content" style="text-align: right;">
+                            <li class="nav-item nav-icon dropdown caption-content">
                                 <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user" style="margin-left:25rem;">
+                                    <img src="../static/images/user/1.png" class="img-fluid rounded" alt="user"
+                                         style="margin-left:25rem;">
                                 </a>
                                 <!--                                <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton4">-->
                                 <!--                                    <div class="card shadow-none m-0">-->

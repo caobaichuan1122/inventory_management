@@ -18,18 +18,7 @@
                             <div class="grid-item-wrapper">
                                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                     <img src="../static/images/logo/trlogo.png" style=" width: 26rem; height:6rem;">
-                                    <h4 style="text-align: center; margin-top: 30px; margin-right: 14px;">$4598</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="grid-item" style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #4fa96e 40%, #4fa96e 100%);">
-                            <a class="wrapping-link" href="/TpSubpage/"></a>
-                            <div class="grid-item-wrapper">
-                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                                    <img src="../static/images/logo/tplogo.png" style=" width: 26rem; height:6rem;">
-                                    <h4 style="text-align: center; margin-top: 30px; margin-right: 14px;">$4598</h4>
+                                    <h3 style="text-align: center; margin-top: 30px; margin-right: 14px; font-weight:bold;">$Sum</h3>
                                 </div>
                             </div>
                         </div>
@@ -40,11 +29,23 @@
                             <div class="grid-item-wrapper">
                                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                     <img src="../static/images/logo/prlogo.png" style=" width: 30rem; height:8rem;">
-                                    <h4 style="text-align: center; margin-top: 20px; margin-right: 14px;">$4598</h4>
+                                    <h3 style="text-align: center; margin-top: 20px; margin-right: 14px; font-weight:bold;">$Sum</h3>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="grid-item" style=" background: linear-gradient(to bottom right, #fff 0%, #fff 60%, #4fa96e 40%, #4fa96e 100%);">
+                            <a class="wrapping-link" href="/TpSubpage/"></a>
+                            <div class="grid-item-wrapper">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                    <img src="../static/images/logo/tplogo.png" style=" width: 26rem; height:6rem;">
+                                    <h3 style="text-align: center; margin-top: 30px; margin-right: 14px;font-weight:bold;">$Sum</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col-lg-12" style="margin-top: 20px;">
@@ -83,7 +84,7 @@
                                     <td>
                                         <div class="d-flex align-items-center list-action">
                                             <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Complete"
-                                               href="#"><i class="las la-check"></i></a>
+                                               href="/completed/{{ item.id }}"><i class="las la-check"></i></a>
                                             <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                                title=""
                                                data-original-title="Edit" data-target="#Edit-text{{ item.id }}"><i
@@ -161,7 +162,7 @@
                                                                                  data-dismiss="modal">Cancel
                                                                             </div>
                                                                             <a class="btn btn-danger mr-4"
-                                                                               href="/del_fix_tr_product/{{ item.id }}">Delete</a>
+                                                                               href="">Delete</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -189,7 +190,7 @@
                                             <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top"
                                                title=""
                                                data-original-title="Complete"
-                                               href="#"><i class="las la-check"></i></a>
+                                               href="/completed/{{ item.id }}"><i class="las la-check"></i></a>
                                             <a class="badge bg-success mr-2" data-toggle="modal" data-placement="top"
                                                title=""
                                                data-original-title="Edit" data-target="#Edit-text_tp{{item.id}}"><i
@@ -267,7 +268,7 @@
                                                                                  data-dismiss="modal">Cancel
                                                                             </div>
                                                                             <a class="btn btn-danger mr-4"
-                                                                               href="/del_fix_tp_product/{{ item.id }}">Delete</a>
+                                                                               href="">Delete</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -326,6 +327,8 @@
         </div>
     </div>
     {% else %}
-    <h1>Please login!</h1>
+    <script type="text/javascript">
+        window.location.href = "/please_login/";
+    </script>
     {% endif %}
     {% endblock %}

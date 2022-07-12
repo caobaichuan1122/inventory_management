@@ -42,6 +42,12 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="form-group">
+                                        {{ product_form.Product_Cost.label_tag }}
+                                        {{ product_form.Product_Cost}}
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
                                         {{ product_form.Product_time.label_tag }}
                                         {{ product_form.Product_time}}
                                     </div>
@@ -70,6 +76,8 @@
 </div>
 
 {% else %}
-<h1>Please login</h1>
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
 {% endif %}
 {% endblock %}

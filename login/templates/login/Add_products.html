@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Add New Product{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid add-form-list">
+        <div class="row" style="margin-top: 5rem;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Add Products</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class='form-add-product' action="/add_product_quantity/" data-toggle="validator" method="post" style="align-items: center;">
+                            <div class="row">
+                                {% csrf_token %}
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="AddProduct">Product Code: </label>
+                                        <input style="width:60rem;" name="AddProduct" type="text" id="AddProduct" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                 Add Product
+                            </button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                            {% if message %}
+                                <div class="alert alert-warning">{{ message }}</div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end  -->
+    </div>
+</div>
+{% else %}
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
+{% endif %}
+{% endblock %}

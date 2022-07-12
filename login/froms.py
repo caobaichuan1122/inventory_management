@@ -17,6 +17,8 @@ class AddNewProduct(forms.Form):
                                     widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_Price = forms.DecimalField(label="Product Price ($AU) ", max_digits=2, help_text="Enter Number",
                                        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    Product_Cost = forms.DecimalField(label="Product Cost ($AU) ", max_digits=2, help_text="Enter Number",
+                                       widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_time = forms.DateTimeField(label="Time",
                                        widget=forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'date'}))
     Product_Company = forms.ChoiceField(choices=company_name, widget=forms.Select(attrs={'class': 'form-control'}))
@@ -37,6 +39,8 @@ class Modify_Product(forms.Form):
                                      widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_Price = forms.DecimalField(label="Product Price ($AU) ", max_digits=2, help_text="Enter Number",
                                        widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    Product_Cost = forms.DecimalField(label="Product Cost ($AU) ", max_digits=2, help_text="Enter Number",
+                                       widget=forms.NumberInput(attrs={'class': 'form-control'}))
     Product_time = forms.DateTimeField(label="Time",
                                        widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
 
@@ -50,10 +54,12 @@ class addRepairProduct(forms.Form):
                                      widget=forms.TextInput(attrs={'class': 'form-control'}))
     fix_product_name = forms.CharField(label="Product Name", max_length=256,
                                        widget=forms.TextInput(attrs={'class': 'form-control'}))
-    fix_product_description = forms.CharField(label="Product Description",widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fix_product_description = forms.CharField(label="Product Issue Description",widget=forms.Textarea(attrs={'class': 'form-control'}))
     fix_state = forms.ChoiceField(choices=fix_states,help_text="There are Three different maintenance state: [Complete: maintenance done and product delivered],[Fixing: still in fixing],[Fixed: maintenance done but product not deliver]", widget=forms.Select(attrs={'class': 'form-control'}))
+
     fix_detail = forms.CharField(label="Fixed Record",widget=forms.Textarea(attrs={'class': 'form-control'}))
     Product_Company = forms.ChoiceField(choices=company_name, widget=forms.Select(attrs={'class': 'form-control'}))
+
 
 
 class addNewCustomer(forms.Form):
@@ -69,3 +75,7 @@ class addNewCustomer(forms.Form):
                                      widget=forms.TextInput(attrs={'class': 'form-control'}))
     customer_type = forms.CharField(label="Customer Type", max_length=256,
                                     widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+
+

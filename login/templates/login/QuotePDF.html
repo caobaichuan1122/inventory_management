@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delivery Note</title>
+    <title>Quote</title>
     <link href="../static/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="../static/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -91,16 +91,17 @@
             font-size: 22px;
         }
 
-        #summary_line-1 td {
-            font-size: 26px;
-            font-weight: bold;
-        }
-        #summary_line-2 td {
+        #summary_line-1-4 td {
             font-size: 26px;
             font-weight: bold;
         }
 
-        #summary_line-3 td {
+        #summary_line-2-4 td {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        #summary_line-3-4 td {
             font-size: 26px;
             font-weight: bold;
         }
@@ -170,25 +171,22 @@
 <div class="canvas_div_pdf">
     <div class="container-fluid">
         <div class="row" style="display:inline; height:100px;">
-            <div class="col-md-6" style="bottom: 0;">
-                <h1 style="font-size:400%;">Delivery Note</h1>
-            </div>
-            <div class="col-md-4" id="logo" style="float:right; ">
+            <div class="col-md-6" id="logo" style="float:left; ">
                 {% load static %}
                 {% if company_id == '1' %}
-                <img src="{% static '/images/logo/trlogo.png' %}" style="width:280px;height:100px;">
+                <img src="{% static '/images/logo/trlogo.png' %}" style="width:350px;height:100px;">
                 <!--            <img src="/images/logo/trlogo.png" style="width:280px;height:100px;">-->
                 {% elif company_id == '2' %}
-                <img src="{% static '/images/logo/tplogo.png' %}" style="width:280px;height:100px;">
+                <img src="{% static '/images/logo/tplogo.png' %}" style="width:350px;height:100px;">
                 <!--            <img src="/images/logo/tplogo.png" style="width:280px;height:100px;">-->
                 {% else %}
-                <img src="{% static '/images/logo/prlogo.png' %}" style="width:280px;height:100px;">
+                <img src="{% static '/images/logo/prlogo.png' %}" style="width:350px;height:100px;">
+                <!--            <img src="/images/logo/prlogo.png" style="width:280px;height:100px;">-->
                 {% endif %}
             </div>
-        </div>
-        <hr style="border: 2px solid lightskyblue;">
-        <div class="row" style="display: inline; height:40rem;">
-            <div class="col-md-6">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
                 <div class="company_info">
                     {% if company_id == '1' %}
                     <h4>Top Rail Services Pty Ltd.</h4>
@@ -204,10 +202,39 @@
                     <p>Email: ifo@t-power.com.au</p>
                     <p>Tel: 1300 772 678</p>
                     <p>Website: https://www.t-power.com.au</p>
+                    {% else %}
+                    <h4>Pranstek Pty Ltd.</h4>
+                    <p>Factory 1, 7 Technology Circuit, Hallam, VIC 3803 Australia</p>
+                    <p>ABN: 49 625 346 796</p>
+                    <p>Email: ifo@pranstek.com.au</p>
+                    <p>Tel: 1300 772 678</p>
+                    <p>Website: https://www.pranstek.com.au</p>
                     {% endif %}
                 </div>
+
+            </div>
+        </div>
+        <div class="row" style="display: inline; height:40rem; margin-top:50px; font-size:26px;">
+            <div class="col-md-6">
+                <h1>Quote</h1>
+            </div>
+            <div class="col-md-2">
+                <p>Quote Number</p>
+                <p>{{ Invoice_no }}</p>
+            </div>
+            <div class="col-md-2">
+                <p>Issue Date</p>
+                <p>{{ Invoice_date }}</p>
+            </div>
+            <div class="col-md-2" style="background: #dddddd;">
+                <p>Expiry Date</p>
+                <p>{{ Delivery_date }}</p>
+            </div>
+        </div>
+        <div class="row" style="display: inline; height:40rem; margin-top:30px;">
+            <div class="col-md-6">
                 <div class="customer_info" style="margin-top: 10px;">
-                    <h3>To:</h3>
+                    <h3>Bill To:</h3>
                     {% for ci in customer_info %}
                     <h4>{{ ci.customer_name }}</h4>
                     <p>Address: {{ ci.customer_address }}</p>
@@ -216,33 +243,16 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-2">
-
-            </div>
-            <div class="col-md-4">
-                <div id="info" class="container-fluid" style="-webkit-print-color-adjust: exact; mso-print-color: yes; background: #dddddd; text-align: left;padding: 10px 10px 10px 10px;">
-                    <p>Invoice No.: {{ Invoice_no }}</p>
-                    <p>Invoice Date: {{ Invoice_date }}</p>
-                    <p>Delivery Note No.: {{ Delivery_No }}</p>
-                    <p>Delivery Date: {{ Delivery_date }}</p>
-                    <p>Delivery Term: {{ Delivery_Term }}</p>
-                </div>
-            </div>
-
         </div>
-        <div id="add_info" class="row" style="display: inline; margin-left: 20px;">
-            <h3>Additional Information</h3>
-            <p>{{ Note }}</p>
-        </div>
-        <hr style="border: 2px solid lightskyblue;">
-        <div class="row" style="display: inline; margin-top: 3rem;">
+        <div class="row" style="display: inline; margin-top: 100px;">
             <table class="table table-striped">
                 <tr>
-                    <th>Product Code</th>
+                    <th>Item</th>
                     <th>Product Description</th>
-                    <th>Product SN</th>
-                    <th>Unit</th>
                     <th>Quantity</th>
+                    <th>Price</th>
+                    <th>GST</th>
+                    <th>Total</th>
                 </tr>
                 {% load index %}
                 {% if company_id == "1" %}
@@ -250,69 +260,54 @@
                 <tr>
                     <td>{{ p.tr_product_id }}</td>
                     <td>{{ p.tr_product_name}}</td>
-                    <td>{{ p.tr_product_sn }}</td>
+                    <td>{{ product_quantity|index:forloop.counter0 }}</td>
                     <td></td>
-                    <td>1</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 {% endfor %}
-                <tr id="summary_line-1" style="border-top: 1px solid #7b7c88;">
-                    <td>Summary</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{ sum_quantity }}</td>
-                </tr>
                 {% elif company_id == "2" %}
                 {% for p in product_list %}
                 <tr>
                     <td>{{ p.tp_product_id }}</td>
                     <td>{{ p.tp_product_name}}</td>
-                    <td>{{ p.tp_product_sn }}</td>
+                    <td>{{ product_quantity|index:forloop.counter0 }}</td>
                     <td></td>
-                    <td>1</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 {% endfor %}
-                <tr id="summary_line-2" style="border-top: 1px solid #7b7c88;">
-                    <td>Summary</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{ sum_quantity }}</td>
-                </tr>
                 {% else %}
                 {% for p in product_list %}
                 <tr>
                     <td>{{ p.pr_product_id }}</td>
                     <td>{{ p.pr_product_name}}</td>
-                    <td>{{ p.pr_product_sn }}</td>
+                    <td>{{ product_quantity|index:forloop.counter0 }}</td>
                     <td></td>
-                    <td>1</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 {% endfor %}
-                <tr id="summary_line-3" style="border-top: 1px solid #7b7c88;">
-                    <td>Summary</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{ sum_quantity }}</td>
-                </tr>
                 {% endif %}
             </table>
         </div>
-    </div>
-    <footer class="fixed-footer" style="bottom: 0; margin-top: 20rem;">
-        <div id="signature_field" class="container-fluid" style="float:bottom;">
-            <h3>Goods received by:</h3>
-            <div class="row" style="display:inline;">
-                <div class="col-md-6">
-                    <p>Signature:</p>
-                </div>
-                <div class="col-md-6">
-                    <p>Date:</p>
+        <div>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <ul style="list-style: none; font-size: 24px;">
+                        <li>Sub-Total (ex GST):</li>
+                        <li>GST:</li>
+                        <li><hr style="border: 2px solid lightskyblue;"></li>
+                        <li style="background-color: #dddddd;">
+                            <p style="font-size: 28px; font-weight: bold;">Total amount:</p>
+                            <p style="font-size: 14px;">including GST</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
 </div>
 </body>
 

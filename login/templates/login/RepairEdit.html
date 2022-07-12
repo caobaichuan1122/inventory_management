@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block title %}Add Repair Products{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+<div class="content-page">
+    <div class="container-fluid add-form-list">
+        <div class="row" style="margin-top: 5rem;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Edit Fix Product Detail</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class='form-EditFixedProduct' action="/modify_fix_tr_product/{{ item_id }}" data-toggle="validator" method="post" style="align-items: center;">
+                            <div class="row">
+                                {% csrf_token %}
+                                {% if company_id == "1" %}
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="fixed_id">Fixed ID: </label>
+                                        <input name="fixed_id" type="text" id="fixed_id" placeholder="{{ Value_change.fixed_id }}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_id">Fixed Product ID:  </label>
+                                        <input name="product_id" type="text" id="product_id" placeholder="{{ Value_change.tr_product_id }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_Name">Fixed Product Name: </label>
+                                        <input name="product_Name" type="text" id="product_Name" placeholder="{{ Value_change.tr_product_name }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_Issue">Fixed Product Issue: </label>
+                                        <input name="product_Issue" type="text" id="product_Issue" placeholder="{{ Value_change.tr_product_description }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="FixedState">Choose a fixed States:</label>
+                                        <select name="FixedState" id="FixedState" class="form-control">
+                                            {% if Value_change.fix_state == "Completed" %}
+                                                <option value="Completed" selected>Complete</option>
+                                                <option value="Fixing">Fixing</option>
+                                                <option value="Fixed">Fixed</option>
+                                            {% elif Value_change.fix_state == "Fixing" %}
+                                                <option value="Completed">Complete</option>
+                                                <option value="Fixing" selected>Fixing</option>
+                                                <option value="Fixed">Fixed</option>
+                                            {% elif Value_change.fix_state == "Fixed" %}
+                                                <option value="Completed">Complete</option>
+                                                <option value="Fixing">Fixing</option>
+                                                <option value="Fixed" selected>Fixed</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_fixed_record">Fixed Product Record: </label>
+                                        <textarea name="editor1" id="product_fixed_record" rows="10" cols="40"></textarea>
+                                        <script>
+                                            CKEDITOR.replace( 'editor1' , {uiColor: '#9AB8F3'});
+                                        </script>
+<!--                                        <label for="product_fixed_record">Fixed Product Record: </label>-->
+<!--                                        <textarea name="product_fixed_record" class="form-control" type="text" id="product_fixed_record" rows="10" cols="40"></textarea>-->
+                                    </div>
+                                </div>
+                                {% elif company_id == "2" %}
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="fixed_id_tp">Fixed ID: </label>
+                                        <input name="fixed_id" type="text" id="fixed_id_tp" placeholder="{{ Value_change.fixed_id }}" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_id_tp">Fixed Product ID:  </label>
+                                        <input name="product_id" type="text" id="product_id_tp" placeholder="{{ Value_change.tp_product_id }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_Name_tp">Fixed Product Name: </label>
+                                        <input name="product_Name" type="text" id="product_Name_tp" placeholder="{{ Value_change.tp_product_name }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_Issue_tp">Fixed Product Issue: </label>
+                                        <input name="product_Issue" type="text" id="product_Issue_tp" placeholder="{{ Value_change.tp_product_description }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="FixedState_tp">Choose a fixed States:</label>
+                                        <select name="FixedState" id="FixedState_tp" class="form-control">
+                                            {% if Value_change.fix_state == "Completed" %}
+                                                <option value="Completed" selected>Complete</option>
+                                                <option value="Fixing">Fixing</option>
+                                                <option value="Fixed">Fixed</option>
+                                            {% elif Value_change.fix_state == "Fixing" %}
+                                                <option value="Completed">Complete</option>
+                                                <option value="Fixing" selected>Fixing</option>
+                                                <option value="Fixed">Fixed</option>
+                                            {% elif Value_change.fix_state == "Fixed" %}
+                                                <option value="Completed">Complete</option>
+                                                <option value="Fixing">Fixing</option>
+                                                <option value="Fixed" selected>Fixed</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label for="product_fixed_record_tp">Fixed Product Record: </label>
+                                        <textarea name="editor1" id="product_fixed_record_tp" rows="10" cols="40"></textarea>
+                                        <script>
+                                            CKEDITOR.replace( 'editor1' , {uiColor: '#9AB8F3'});
+                                        </script>
+<!--                                        <label for="product_fixed_record">Fixed Product Record: </label>-->
+<!--                                        <textarea name="product_fixed_record" class="form-control" type="text" id="product_fixed_record" rows="10" cols="40"></textarea>-->
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Edit</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                            {% if message %}
+                                <div class="alert alert-warning">{{ message }}</div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
+{% endif %}
+{% endblock %}

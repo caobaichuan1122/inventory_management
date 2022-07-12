@@ -53,10 +53,11 @@
                                         <th>Choose</th>
                                         <th>Product ID</th>
                                         <th>Product Name</th>
-                                        <th>Product Quantity</th>
-                                        <th>Product Price</th>
+                                        <th>Product Cost ($AUD)</th>
+                                        <th>Product Price ($AUD)</th>
                                         <th>Time</th>
-                                        <th>Out Quantity</th>
+                                        <th>Line Number</th>
+<!--                                        <th>Out Quantity</th>-->
                                     </tr>
                                     </thead>
                                     <tbody class="ligth-body">
@@ -64,25 +65,25 @@
                                     {% for item in Tpdatabase %}
                                     <tr>
                                         <td>
-                                            <div class="checkbox d-inline-block form-group">
-                                                <input type="checkbox" value="{{ item.id }}" class="checkbox-input"
-                                                       name="check"
-                                                       id="checkbox-{{ item.id }}">
-                                                <label for="checkbox-{{ item.id }}" class="mb-0"></label>
+                                            <div class="form-group" style="text-align: center; margin-left: 2.5rem;">
+                                                <input type="checkbox" value="{{ item.id }}" class="checkbox-input form-control" name="check" id="checkbox-{{ item.id }}">
                                             </div>
                                         </td>
-                                        <td>{{ item.tp_product_id}}</td>
+                                        <td>{{ item.tp_product_id }}</td>
                                         <td>{{ item.tp_product_name }}</td>
-                                        <td>{{ item.tp_product_num }}</td>
-                                        <td>{{ item.tp_product_price}}</td>
-                                        <td>{{ item.tp_product_time}}</td>
+                                        <td>{{ item.tp_product_cost }}</td>
+                                        <td>{{ item.tp_product_price }}</td>
+                                        <td>{{ item.tp_product_time }}</td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" id="number-{{ item.id }}" min="0"
-                                                       max="{{ item.tr_product_num }}" name="quantity" size=100>
-                                                <label for="number-{{ item.id }}"></label>
+                                                <input type="text" id="LineNumber-{{ item.id }}" name="LineNumber" class="form-control">
                                             </div>
                                         </td>
+<!--                                        <td>-->
+<!--                                            <div class="form-group">-->
+<!--                                                <input type="number" id="number-{{ item.id }}" min="1" max="{{ item.tp_product_num }}" class="form-control" name="quantity" size=100 oninput="if(value>{{ item.tp_product_num }})value={{ item.tp_product_num }}" style="width:100px;">-->
+<!--                                            </div>-->
+<!--                                        </td>-->
                                     </tr>
                                     {% endfor %}
 
@@ -184,6 +185,8 @@
     </div>
 </div>
 {% else %}
-<h1>Please login!</h1>
+<script type="text/javascript">
+    window.location.href = "/please_login/";
+</script>
 {% endif %}
 {% endblock %}
