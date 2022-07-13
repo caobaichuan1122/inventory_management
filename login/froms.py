@@ -63,6 +63,7 @@ class addRepairProduct(forms.Form):
 
 
 class addNewCustomer(forms.Form):
+    company_name = [('Tr', 'Toprail Services'), ('Tp', 'T-Power'), ('Pr', 'Pranstek')]
     customer_id = forms.CharField(label="Customer ID", max_length=256,
                                   widget=forms.TextInput(attrs={'class': 'form-control'}))
     customer_name = forms.CharField(label="Customer Name", max_length=256,
@@ -73,8 +74,7 @@ class addNewCustomer(forms.Form):
                                        widget=forms.TextInput(attrs={'class': 'form-control'}))
     customer_email = forms.CharField(label="Customer Email", max_length=256,
                                      widget=forms.TextInput(attrs={'class': 'form-control'}))
-    customer_type = forms.CharField(label="Customer Type", max_length=256,
-                                    widget=forms.TextInput(attrs={'class': 'form-control'}))
+    customer_company = forms.ChoiceField(choices=company_name, widget=forms.Select(attrs={'class': 'form-control'}))
 
 
 

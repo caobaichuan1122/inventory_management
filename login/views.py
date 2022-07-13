@@ -282,7 +282,7 @@ def addnewcustomer(request):
         customer_phone = request.POST.get('customer_phone')
         customer_address = request.POST.get('customer_address')
         customer_email = request.POST.get('customer_email')
-        customer_type = request.POST.get('customer_type')
+        customer_type = request.POST.get('customer_company')
         if customer_id == '' or customer_name =='' or customer_phone=='' or customer_address=='' or customer_email=='' or customer_type=='':
             return render(request,'login/addnewcustomer.html',{'ret':'error!'})
 
