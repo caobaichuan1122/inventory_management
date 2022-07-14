@@ -68,7 +68,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-group" style="text-align: center; margin-left: 2.5rem;">
-                                                <input type="checkbox" value="{{ item.id }}" class="checkbox-input form-control" name="check" id="checkbox-{{ item.id }}">
+                                                <input type="checkbox" value="{{ item.id }}" class="checkbox-input form-control" name="check" id="checkbox-{{ item.id }}" style="width:70%; height:70%;">
                                             </div>
                                         </td>
                                         <td>{{ item.pr_product_id}}</td>
@@ -97,9 +97,7 @@
                                 <div style="text-align: center;">
                                     <h3>Further Information</h3>
                                 </div>
-                                <div class="container-fluid"
-                                     style="margin-top:30px; margin-left:40px; text-align: left; padding:10px 10px 10px 10px;"
-                                >
+                                <div class="container-fluid" style="margin-top:30px; margin-left:40px; text-align: left; padding:10px 10px 10px 10px;">
                                     <div id="form-1">
                                         <div class="form-group">
                                             <label for="customer">Choose a Customer:</label>
@@ -129,6 +127,13 @@
                                         <div class="form-group">
                                             <label for="invoice_no">Enter Invoice Number: </label>
                                             <input type="text" id="invoice_no" name="invoice_no" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="GST">Enter GST: </label>
+                                            <select id="GST" name="GST" class="form-control">
+                                                <option>0.1</option>
+                                                <option>1</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="Note" style="float:top;">Enter Some Note: </label>

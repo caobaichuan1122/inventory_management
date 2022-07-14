@@ -65,6 +65,8 @@ urlpatterns = [
     path('invoicePDF_tr/<int:id>',views.invoicePDF_tr,name="invoicePDF_tr"),
     path('invoicePDF_pr/<int:id>',views.invoicePDF_pr,name="invoicePDF_pr"),
     path('QuotePDF_tp/<int:id>',views.QuotePDF_tp,name="QuotePDF_tp"),
+    path('QuotePDF_tr/<int:id>',views.QuotePDF_tr,name="QuotePDF_tr"),
+    path('QuotePDF_pr/<int:id>',views.QuotePDF_pr,name="QuotePDF_pr"),
     path('tr_order/', views.tr_order, name="tr_order"),
     path('tp_order/', views.tp_order, name="tp_order"),
     path('pr_order/', views.pr_order, name="pr_order"),
@@ -72,5 +74,8 @@ urlpatterns = [
     path('repair_edit_tp/<int:id>',views.repair_record_edit_tp,name="repair_edit_tp"),
     path('repair_tr_report/<int:id>',views.repair_tr_report,name="repair_tr_report"),
     path('repair_tp_report/<int:id>',views.repair_tp_report,name="repair_tp_report"),
+    path('delivery_note_tr/<int:id>',views.delivery_note_tr,name="delivery_note_tr"),
+    path('delivery_note_tp/<int:id>',views.delivery_note_tp,name="delivery_note_tp"),
+    path('delivery_note_pr/<int:id>',views.delivery_note_pr,name="delivery_note_pr"),
     # path('sum/',views.sum,name="sum"),
 ]

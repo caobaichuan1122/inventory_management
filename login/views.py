@@ -2,7 +2,7 @@ from .froms import UserForm, AddNewProduct, Modify_fix, Modify_Product, addNewCu
 from django.shortcuts import render,redirect
 from .froms import UserForm,AddNewProduct,Modify_fix,Modify_Product
 from . import models
-from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report, tr_order_list,tp_order_list,customer
+from .models import Trproduct, Tproduct, Prproduct, fix_tr_report, fix_tp_report, tr_order_list,tp_order_list,customer,pr_order_list
 
 
 
@@ -363,6 +363,7 @@ def generatePDF(request):
         Delivery_date = request.POST.get('Deliverydate')
         Invoice_no = request.POST.get('invoice_no')
         Note = request.POST.get('Note')
+        GST = request.POST.get('GST')
         Delivery_No = request.POST.get('DeliveryNo')
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
@@ -385,6 +386,7 @@ def generatePDF_tp(request):
         Delivery_date = request.POST.get('Deliverydate')
         Invoice_no = request.POST.get('invoice_no')
         Note = request.POST.get('Note')
+        GST = request.POST.get('GST')
         Delivery_No = request.POST.get('DeliveryNo')
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
@@ -408,6 +410,7 @@ def generatePDF_pr(request):
         Delivery_date = request.POST.get('Deliverydate')
         Invoice_no = request.POST.get('invoice_no')
         Note = request.POST.get('Note')
+        GST = request.POST.get('GST')
         Delivery_No = request.POST.get('DeliveryNo')
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
@@ -433,6 +436,7 @@ def generatePDF_fix_tp(request):
         Delivery_date = request.POST.get('Deliverydate')
         Invoice_no = request.POST.get('invoice_no')
         Note = request.POST.get('Note')
+        GST = request.POST.get('GST')
         Delivery_No = request.POST.get('DeliveryNo')
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
@@ -456,6 +460,7 @@ def generatePDF_fix_tr(request):
         Delivery_date = request.POST.get('Deliverydate')
         Invoice_no = request.POST.get('invoice_no')
         Note = request.POST.get('Note')
+        GST = request.POST.get('GST')
         Delivery_No = request.POST.get('DeliveryNo')
         Delivery_Term = request.POST.get('DeliveryTerm')
         customer_info = customer.objects.filter(customer_id=customerid).values()
@@ -527,7 +532,7 @@ def invoicePDF_tp(request,id):
     order_data = tp_order_list.objects.filter(id=id).values()
     customer_data = customer.objects.filter(customer_name=order_data[0]['custormer']).values()
     company_id="2"
-    return render(request,'login/InvoicePDF.html',context={"order_data":order_data[0],"customer_data":customer_data[0],"company_id":company_id})
+    return render(request,'login/InvoicePDF.html',context={"order_data":order_data[0],"customer_data":customer_data,"company_id":company_id})
 
 def invoicePDF_tr(request,id):
     order_data = tr_order_list.objects.filter(id=id).values()
@@ -542,7 +547,16 @@ def invoicePDF_pr(request,id):
     return render(request,'login/InvoicePDF.html',context={"order_data":order_data[0],"customer_data":customer_data[0],"company_id":company_id})
 
 def QuotePDF_tp(request,id):
-    return render(request,'login/QuotePDF.html')
+    company_id = "2"
+    return render(request,'login/QuotePDF.html',context={'company_id':company_id})
+
+def QuotePDF_tr(request,id):
+    company_id = "1"
+    return render(request,'login/QuotePDF.html',context={'company_id':company_id})
+
+def QuotePDF_pr(request,id):
+    company_id = "3"
+    return render(request,'login/QuotePDF.html',context={'company_id':company_id})
 
 def tr_order(request):
     tr_list = tr_order_list.objects.all()
@@ -586,3 +600,27 @@ def repair_tp_report(request,id):
     database_value = fix_tp_report.objects.filter(id=id).values()
     company_id = "2"
     return render(request,'login/repair_report.html',context={"database_value":database_value[0],"company_id":company_id})
+
+def delivery_note_tr(request,id):
+    order_data = tr_order_list.objects.filter(id=id).values()
+    product_list = Trproduct.objects.filter(tr_order_list_fk_id=order_data[0]['id']).values()
+    customer_data = customer.objects.filter(customer_name=order_data[0]['custormer']).values()
+    company_id="1"
+    sum_quantity = str(len(product_list))
+    return render(request,'login/delivery_note.html',context={"order_data":order_data[0],"customer_data":customer_data[0],"company_id":company_id,'product_list':product_list,'sum_quantity':sum_quantity})
+
+def delivery_note_tp(request,id):
+    order_data = tp_order_list.objects.filter(id=id).values()
+    product_list = Tproduct.objects.filter(tp_order_list_fk_id=order_data[0]['id']).values()
+    customer_data = customer.objects.filter(customer_name=order_data[0]['custormer']).values()
+    company_id="2"
+    sum_quantity = str(len(product_list))
+    return render(request,'login/delivery_note.html',context={"order_data":order_data[0],"customer_data":customer_data[0],"company_id":company_id,'product_list':product_list,'sum_quantity':sum_quantity})
+
+def delivery_note_pr(request,id):
+    order_data = pr_order_list.objects.filter(id=id).values()
+    product_list = Prproduct.objects.filter(pr_order_list_fk_id=order_data[0]['id']).values()
+    customer_data = customer.objects.filter(customer_name=order_data[0]['custormer']).values()
+    company_id="3"
+    sum_quantity = str(len(product_list))
+    return render(request,'login/delivery_note.html',context={"order_data":order_data[0],"customer_data":customer_data[0],"company_id":company_id,'product_list':product_list,'sum_quantity':sum_quantity})
