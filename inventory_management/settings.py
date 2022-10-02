@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'inventory_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'inventory_management',
+        'NAME': '',
         'USER': 'root',
-        'PASSWORD': 'Pass.crrc.2019',
-        'HOST': '49.176.154.111',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '3306',
     }
 }
@@ -139,4 +139,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['49.176.154.111', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['']
